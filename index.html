@@ -40,6 +40,8 @@
       font-family: 'Noto Sans KR', sans-serif;
       color: var(--text-dark);
       background: var(--bg-main);
+      word-break: keep-all;
+      overflow-wrap: break-word;
     }
 
     /* ───── NAV ───── */
@@ -806,6 +808,10 @@
       .greeting-box blockquote { font-size: 16px; }
       .cta-box { padding: 40px 24px; }
       .cta-box h2 { font-size: 26px; }
+
+      table.data-table { min-width: 0; }
+      table.data-table th, table.data-table td { padding: 10px 8px; font-size: 12.5px; }
+      table.daily-table th, .daily-col table.daily-table td { padding: 12px 14px; font-size: 12.5px; }
 
       section { padding: 64px 20px; }
     }
