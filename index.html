@@ -307,6 +307,9 @@
       font-size: 15px;
       color: var(--text-mid);
       line-height: 1.9;
+      margin-bottom: 14px;
+    }
+    .about-text > p:last-of-type {
       margin-bottom: 32px;
     }
     .info-grid {
@@ -397,12 +400,14 @@
       box-shadow: var(--shadow-sm);
     }
     .philo-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
       gap: 18px;
       margin-bottom: 40px;
     }
     .philo-card {
+      flex: 0 1 220px;
       background: var(--white);
       border-radius: 20px;
       padding: 26px 18px;
@@ -495,6 +500,11 @@
       font-size: 14.5px;
       color: var(--text-mid);
       font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .class-footnote.quote {
+      font-weight: 700;
+      color: var(--peach-dark);
       margin-bottom: 36px;
     }
 
@@ -782,7 +792,6 @@
       .about-text h2 { font-size: 26px; }
 
       .purpose-grid { grid-template-columns: 1fr; }
-      .philo-grid { grid-template-columns: repeat(2, 1fr); }
       .prog-grid  { grid-template-columns: 1fr; }
       .care-grid { grid-template-columns: 1fr; }
       .daily-grid { grid-template-columns: 1fr; }
@@ -807,7 +816,6 @@
       .hero-btns .btn { width: 100%; justify-content: center; }
 
       .info-grid { grid-template-columns: 1fr; }
-      .philo-grid { grid-template-columns: 1fr 1fr; }
       .gallery-grid { grid-template-columns: repeat(2, 1fr); }
 
       .cta-btns .btn { width: 100%; justify-content: center; }
@@ -880,7 +888,8 @@
       <div class="about-text">
         <div class="badge">우리 어린이집 소개</div>
         <h2>국공립 서신어린이집에<br>오신 것을 환영합니다</h2>
-        <p>국공립 서신어린이집은 전북 전주시 완산구에 위치한 국공립 어린이집으로, 1994년 인가 이후 2015년부터 지금까지 안전하고 따뜻한 환경 속에서 아이들의 건강한 성장을 지원해 왔습니다. 지상 2층, 실내 460.15㎡ · 실외 144㎡ 규모에 보육실 5개, 강당 등을 갖추고 있으며, 앞으로도 "더 서신답게, 더 또렷하게"라는 마음으로 아이들 곁을 지키겠습니다.</p>
+        <p>국공립 서신어린이집은 전북 전주시 완산구에 위치한 국공립 어린이집입니다. 1994년 인가 이후 2015년부터 지금까지, 안전하고 따뜻한 환경 속에서 아이들의 건강한 성장을 지원해 왔습니다.</p>
+        <p>지상 2층, 실내 460.15㎡ · 실외 144㎡ 규모에 보육실 5개와 강당을 갖추고 있으며, 앞으로도 "더 서신답게, 더 또렷하게"라는 마음으로 아이들 곁을 지키겠습니다.</p>
         <div class="info-grid">
           <div class="info-card">
             <div class="ic">🕐</div>
@@ -917,8 +926,7 @@
     </div>
     <div class="greeting-box">
       <blockquote>
-        "우리 서신 친구들의 하루하루가 설렘으로 가득 피어나기를 바랍니다.<br>
-        지난 10년, 서신어린이집이 쌓아온 보육의 결을 더 다정하게 채워가며<br>
+        "지난 10년, 서신어린이집이 쌓아온 보육의 결을 더 다정하게 채워가며<br>
         앞으로도 서신답게, 더 또렷하게 걸어가겠습니다."
       </blockquote>
       <cite>— 국공립 서신어린이집 원장 이은혜</cite>
@@ -949,7 +957,7 @@
     <div class="section-head">
       <div class="badge">보육목표</div>
       <h2>놀자 신나게, 배우자 즐겁게<br>서신어린이집 보육목표</h2>
-      <p>아이들이 놀이 속에서 스스로 배우고 성장할 수 있도록, 법정 기준보다 낮춘 교사 대 아동비율로 한 명 한 명에 더 집중합니다.</p>
+      <p>아이들이 놀이 속에서 스스로 배우며 갖추게 될 '미래를 위한 7가지 능력'입니다.<br>법정 기준보다 낮춘 교사 대 아동비율로, 한 명 한 명에 더 집중합니다.</p>
     </div>
     <div class="keyword-chips">
       <span>놀자 신나게</span>
@@ -966,7 +974,6 @@
       <div class="philo-card"><span class="philo-emoji">🤝</span><h3>사회성 발달과<br>관계형성능력</h3></div>
       <div class="philo-card"><span class="philo-emoji">🎯</span><h3>집중력과<br>동기부여능력</h3></div>
       <div class="philo-card"><span class="philo-emoji">🌿</span><h3>도덕성 발달과<br>더불어 사는 능력</h3></div>
-      <div class="philo-card"><span class="philo-emoji">✨</span><h3>미래를 위한<br>7가지 능력</h3></div>
     </div>
     <div class="quote-block">
       <p>"강제적인 상태에서 배워지는 것은 아무것도 마음에 남지 않으니, 어린이에게 무엇을 강제적으로 시키지 말고 놀이를 통해서 하도록 유도해야 한다."</p>
@@ -1048,7 +1055,9 @@
         </tbody>
       </table>
     </div>
-    <p class="class-footnote">🏫 지상 2층 · 실내 460.15㎡ · 실외 144㎡ · 보육실 5개, 강당 보유 &nbsp;|&nbsp; 👩‍🏫 교직원 총 20명 — "서신의 가장 핵심 콘텐츠는 바로 선생님입니다."</p>
+    <p class="class-footnote">🏫 지상 2층 · 실내 460.15㎡ · 실외 144㎡ · 보육실 5개, 강당 보유</p>
+    <p class="class-footnote">👩‍🏫 교직원 총 20명</p>
+    <p class="class-footnote quote">"서신의 가장 핵심 콘텐츠는 바로 선생님입니다."</p>
   </div>
 </section>
 
