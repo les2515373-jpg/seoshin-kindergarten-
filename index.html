@@ -9,6 +9,9 @@
   <meta name="robots" content="index, follow">
   <meta name="theme-color" content="#A8E6CF">
 
+  <!-- 검색엔진 사이트 소유확인 -->
+  <meta name="naver-site-verification" content="ee8ef4af77a577c9a5a3c0a56bb810d22e27e288" />
+
   <!-- 카카오톡·페이스북 등으로 공유할 때 보이는 미리보기 -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="국공립 서신어린이집">
@@ -694,72 +697,21 @@
 
     /* ───── NOTICE (공지사항·가정통신문) ───── */
     #notice { background: var(--white); }
-    .notice-list {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      max-width: 860px;
-      margin: 0 auto;
-    }
-    .notice-item {
-      display: flex;
-      gap: 22px;
-      align-items: flex-start;
-      background: var(--white);
-      border: var(--border);
-      border-radius: 20px;
-      padding: 24px 28px;
-      box-shadow: var(--shadow-sm);
-      text-decoration: none;
-      color: inherit;
-      transition: transform .2s, box-shadow .2s;
-    }
-    .notice-item:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
-    .notice-date {
-      flex-shrink: 0;
-      text-align: center;
-      min-width: 54px;
-      padding-top: 2px;
-    }
-    .notice-date .nd-day {
-      display: block;
-      font-size: 24px;
-      font-weight: 800;
-      color: var(--mint-dark);
-      line-height: 1.05;
-    }
-    .notice-date .nd-ym {
-      display: block;
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--text-light);
-      margin-top: 3px;
-    }
-    .notice-tag {
-      display: inline-block;
-      font-size: 11px;
-      font-weight: 700;
-      padding: 4px 11px;
-      border-radius: 50px;
-      margin-bottom: 9px;
-    }
-    .tag-notice { background: var(--mint-light); color: var(--mint-dark); }
-    .tag-letter { background: var(--peach-light); color: var(--peach-dark); }
-    .tag-event  { background: var(--lavender-light); color: var(--lavender-dark); }
-    .notice-body h3 { font-size: 16.5px; font-weight: 700; line-height: 1.5; margin-bottom: 7px; }
-    .notice-body p { font-size: 14px; color: var(--text-mid); line-height: 1.75; }
     .notice-more { text-align: center; margin-top: 30px; }
 
     /* 가정통신문 목록 */
-    .letter-head { text-align: center; margin: 58px 0 26px; }
-    .letter-head h3 {
-      font-family: 'Gowun Dodum', 'Noto Sans KR', sans-serif;
-      font-size: 23px;
-      font-weight: 700;
-      margin-bottom: 8px;
-    }
-    .letter-head p { font-size: 14px; color: var(--text-mid); }
     .letter-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+    .letter-month {
+      grid-column: 1 / -1;
+      font-family: 'Gowun Dodum', 'Noto Sans KR', sans-serif;
+      font-size: 19px;
+      font-weight: 700;
+      color: var(--mint-dark);
+      padding: 18px 4px 2px;
+      border-bottom: var(--border);
+      margin-bottom: 4px;
+    }
+    .letter-grid > .letter-month:first-child { padding-top: 0; }
     .letter-card {
       background: var(--white);
       border: var(--border);
@@ -1069,7 +1021,7 @@
       <li><a href="#program">프로그램</a></li>
       <li><a href="#classes">학급안내</a></li>
       <li><a href="#care">급식·안전</a></li>
-      <li><a href="#notice">공지사항</a></li>
+      <li><a href="#notice">소식</a></li>
       <li><a href="#gallery">갤러리</a></li>
       <li><a href="#admission" class="nav-hl">입소안내</a></li>
       <li><a href="#map">오시는 길</a></li>
@@ -1087,7 +1039,7 @@
   <a href="#program"    onclick="closeMenu()">프로그램</a>
   <a href="#classes"    onclick="closeMenu()">학급안내</a>
   <a href="#care"       onclick="closeMenu()">급식·안전</a>
-  <a href="#notice"     onclick="closeMenu()">공지사항</a>
+  <a href="#notice"     onclick="closeMenu()">서신의 소식</a>
   <a href="#gallery"    onclick="closeMenu()">갤러리</a>
   <a href="#admission"  onclick="closeMenu()">입소안내</a>
   <a href="#map"        onclick="closeMenu()">오시는 길</a>
@@ -1345,48 +1297,8 @@
   <div class="container">
     <div class="section-head">
       <div class="badge">서신 소식</div>
-      <h2>공지사항 ·<br>가정통신문</h2>
-      <p>어린이집의 새로운 소식을 전해 드립니다.</p>
-    </div>
-
-    <div class="notice-list">
-
-      <a href="#admission" class="notice-item">
-        <div class="notice-date">
-          <span class="nd-day">28</span>
-          <span class="nd-ym">2026.07</span>
-        </div>
-        <div class="notice-body">
-          <span class="notice-tag tag-notice">공지</span>
-          <h3>입소대기 신청 안내</h3>
-          <p>서신어린이집 입소를 원하시는 가정은 '아이사랑'에서 온라인으로 입소대기를 신청하실 수 있습니다. 신청 방법을 아래에서 확인해 주세요.</p>
-        </div>
-      </a>
-
-      <a href="#letters" class="notice-item">
-        <div class="notice-date">
-          <span class="nd-day">27</span>
-          <span class="nd-ym">2026.07</span>
-        </div>
-        <div class="notice-body">
-          <span class="notice-tag tag-notice">공지</span>
-          <h3>여름 자율등원기간 안내 (7/29 ~ 8/5)</h3>
-          <p>7월 29일(수)부터 8월 5일(수)까지 여름 자율등원기간입니다. 기간 중 놀이터 바닥재와 시설을 안전하게 교체하며, 8월 6일(목)에 다시 만나요.</p>
-        </div>
-      </a>
-
-      <a href="#letters" class="notice-item">
-        <div class="notice-date">
-          <span class="nd-day">28</span>
-          <span class="nd-ym">2026.07</span>
-        </div>
-        <div class="notice-body">
-          <span class="notice-tag tag-letter">가정통신문</span>
-          <h3>주간 가정통신물을 홈페이지에서 보실 수 있어요</h3>
-          <p>매주 발행되는 서신어린이집 가정통신문 「GOOD DAY, SEO SHIN」을 아래에서 바로 확인하실 수 있습니다.</p>
-        </div>
-      </a>
-
+      <h2>서신의 소식</h2>
+      <p>매주 발행하는 가정통신문 「GOOD DAY, SEO SHIN」으로<br>어린이집의 한 주를 전해 드립니다. 표지를 누르면 크게 보실 수 있어요.</p>
     </div>
 
     <!--
@@ -1397,12 +1309,7 @@
       │  이미지는 images/letters/ 폴더에 넣어주세요.              │
       └─────────────────────────────────────────────────────────┘
     -->
-    <div id="letters" class="letter-head">
-      <h3>📬 주간 가정통신문</h3>
-      <p>서신어린이집의 한 주 이야기를 담았습니다. 표지를 누르면 크게 보실 수 있어요.</p>
-    </div>
-
-    <div class="letter-grid">
+    <div id="letters" class="letter-grid">
 
       <div class="letter-card">
         <a href="images/letters/letter-2026-07-w5-1.jpg" target="_blank" rel="noopener noreferrer" class="letter-thumb">
