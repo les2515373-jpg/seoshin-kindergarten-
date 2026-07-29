@@ -31,6 +31,72 @@
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 
   <!-- 검색엔진이 어린이집 정보를 정확히 읽도록 돕는 구조화 데이터 -->
+  <!-- 자주 묻는 질문 구조화 데이터 (검색 결과에 질문·답변이 함께 노출될 수 있습니다) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "서신어린이집 입소대기는 어떻게 신청하나요?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "아이사랑(www.childcare.go.kr) 또는 아이사랑 앱에서 온라인으로 신청합니다. 지역을 전북 전주시 완산구로 선택하고 '서신'으로 검색하면 국공립 서신어린이집이 나옵니다. 대기 순번도 아이사랑에서 조회할 수 있으며, 결원 발생 시 입소순위와 대기 순서를 고려해 연락드립니다."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "운영 시간이 어떻게 되나요?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "월~금 07:30~19:30, 토요일 07:30~15:30 운영합니다. 기본보육은 09:00~16:00이며 담임 교사가 함께합니다. 연장보육은 16:00~19:30, 야간연장보육은 19:30~21:20까지 운영합니다."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "통학차량을 운행하나요?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "서신동 인근 지역에 한해 통학차량을 운행합니다. 등원 차량은 08:20~10:00, 하원 차량은 16:00~18:00입니다. 2026년도 차량 운행 비용은 어린이집에서 지원하므로 학부모 부담이 없습니다."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "매달 부모가 부담하는 비용이 얼마인가요?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "보육료는 국공립어린이집 표준단가가 적용되며 정부지원으로 아이행복카드로 결제합니다. 부모부담금은 만 2세가 월 45,000원(영어·유아음악·유아체육 포함)이며, 만 1세와 만 3~5세는 부모부담금이 없습니다. 행사비와 현장학습비, 특성화 프로그램은 운영비 지원 또는 정부지원으로 진행됩니다."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "적응 기간은 얼마나 걸리나요?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "연령에 따라 1~4주의 적응 기간을 갖습니다. 부모와 함께하는 적응활동을 포함한 신입원아 적응프로그램을 운영하며, 아이의 경험과 기질에 따라 개별적으로 진행합니다."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "아이가 아플 때 약을 먹여주시나요?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "투약의뢰서를 작성해 주시면 투약합니다. 1회분 용량만 보내주시고 약병에 아이 이름을 적어주세요. 의사 처방으로 조제된 약만 투약하며, 투약 후 결과를 알려드립니다. 원내에서 갑자기 열이 나면 보호자와 유선 연락 후 동의를 얻어 조치합니다."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "급식은 어떻게 준비되나요?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "모든 음식을 원내에서 직접 조리하며, 인스턴트를 쓰지 않는 자연주의 식단입니다. 급·간식 식재료는 매일 아침 풀무원에서 납품받습니다. 식품알레르기 사전조사 후 대체식·제거식을 제공합니다."
+        }
+      }
+    ]
+  }
+  </script>
+
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -640,6 +706,70 @@
     .policy-box p + p { margin-top: 12px; }
     .policy-box strong { color: var(--text-dark); font-weight: 700; }
 
+    /* ───── 자주 묻는 질문 ───── */
+    #faq { background: var(--white); }
+    .faq-cat { margin-bottom: 34px; }
+    .faq-cat > h3 {
+      font-family: 'Gowun Dodum', 'Noto Sans KR', sans-serif;
+      font-size: 19px; font-weight: 700; color: var(--mint-dark);
+      padding-bottom: 12px; margin-bottom: 14px;
+      border-bottom: 2px solid var(--mint-light);
+    }
+    .faq-item {
+      background: var(--bg-main);
+      border: var(--border);
+      border-radius: 16px;
+      margin-bottom: 10px;
+      overflow: hidden;
+      transition: box-shadow .2s;
+    }
+    .faq-item[open] { box-shadow: var(--shadow-sm); background: var(--white); }
+    .faq-item summary {
+      cursor: pointer;
+      list-style: none;
+      padding: 18px 52px 18px 22px;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-dark);
+      position: relative;
+      line-height: 1.55;
+      transition: color .2s;
+    }
+    .faq-item summary::-webkit-details-marker { display: none; }
+    .faq-item summary:hover { color: var(--mint-dark); }
+    .faq-item summary::after {
+      content: '+';
+      position: absolute;
+      right: 20px; top: 50%; transform: translateY(-50%);
+      font-size: 22px; font-weight: 400; color: var(--mint-dark);
+      transition: transform .2s;
+      line-height: 1;
+    }
+    .faq-item[open] summary::after { content: '−'; }
+    .faq-answer {
+      padding: 0 22px 20px;
+      font-size: 14px;
+      color: var(--text-mid);
+      line-height: 1.85;
+    }
+    .faq-answer p + p { margin-top: 10px; }
+    .faq-answer strong { color: var(--text-dark); font-weight: 700; }
+    .faq-answer ul { margin: 9px 0 0 18px; }
+    .faq-answer li { margin-bottom: 5px; }
+    .faq-answer .fa-note {
+      display: block; margin-top: 12px; font-size: 12.5px; color: var(--text-light);
+    }
+    .faq-tail {
+      background: linear-gradient(145deg, var(--mint-light), var(--peach-light));
+      border-radius: 22px;
+      padding: 32px 28px;
+      text-align: center;
+      margin-top: 34px;
+    }
+    .faq-tail h3 { font-size: 18px; font-weight: 800; margin-bottom: 8px; }
+    .faq-tail p { font-size: 14px; color: var(--text-mid); line-height: 1.75; margin-bottom: 20px; }
+    .faq-tail .cta-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
     /* ───── 자격 · 근속연수 ───── */
     .qual-tenure { display: grid; grid-template-columns: 300px 1fr; gap: 22px; align-items: start; }
     .qual-box, .tenure-box {
@@ -1104,6 +1234,13 @@
       .policy-box { padding: 18px 20px; }
       .policy-box p { font-size: 13px; }
 
+      .faq-cat > h3 { font-size: 17px; }
+      .faq-item summary { padding: 15px 44px 15px 17px; font-size: 14px; }
+      .faq-item summary::after { right: 16px; font-size: 20px; }
+      .faq-answer { padding: 0 17px 17px; font-size: 13.5px; }
+      .faq-tail { padding: 26px 20px; }
+      .faq-tail h3 { font-size: 16.5px; }
+
       section { padding: 64px 20px; }
     }
 
@@ -1138,6 +1275,7 @@
       <li><a href="#notice">소식</a></li>
       <li><a href="#gallery">갤러리</a></li>
       <li><a href="#admission" class="nav-hl">입소안내</a></li>
+      <li><a href="#faq">FAQ</a></li>
       <li><a href="#map">오시는 길</a></li>
       <li><a href="#contact">문의</a></li>
     </ul>
@@ -1156,6 +1294,7 @@
   <a href="#notice"     onclick="closeMenu()">서신의 소식</a>
   <a href="#gallery"    onclick="closeMenu()">갤러리</a>
   <a href="#admission"  onclick="closeMenu()">입소안내</a>
+  <a href="#faq"        onclick="closeMenu()">자주 묻는 질문</a>
   <a href="#map"        onclick="closeMenu()">오시는 길</a>
   <a href="#contact"    onclick="closeMenu()">문의</a>
   <a href="https://open.kakao.com/me/seo_shin_2015" target="_blank" rel="noopener noreferrer" onclick="closeMenu()">💬 카카오톡 문의</a>
@@ -1777,6 +1916,243 @@
       <a href="https://www.childcare.go.kr" target="_blank" rel="noopener noreferrer" class="btn btn-mint">🖥 아이사랑 바로가기</a>
       <a href="tel:063-251-5373" class="btn btn-phone">📞 입소 상담 전화</a>
       <a href="https://open.kakao.com/me/seo_shin_2015" target="_blank" rel="noopener noreferrer" class="btn btn-kakao">💬 카카오톡 문의</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ FAQ (자주 묻는 질문) ══════════════ -->
+<section id="faq">
+  <div class="container">
+    <div class="section-head">
+      <div class="badge">자주 묻는 질문</div>
+      <h2>궁금한 점이<br>있으신가요?</h2>
+      <p>학부모님들께서 가장 많이 물어보시는 내용을 모았습니다.<br>질문을 누르면 답변이 열립니다.</p>
+    </div>
+
+    <div class="faq-cat">
+      <h3>🍼 입소 · 적응</h3>
+
+      <details class="faq-item">
+        <summary>입소대기는 어떻게 신청하고, 순번은 어떻게 확인하나요?</summary>
+        <div class="faq-answer">
+          <p><strong>아이사랑</strong>(www.childcare.go.kr) 또는 아이사랑 앱에서 온라인으로 신청하실 수 있습니다.
+            지역을 <strong>전북 전주시 완산구</strong>로 선택하고 '<strong>서신</strong>'으로 검색하시면 국공립 서신어린이집이 나옵니다.</p>
+          <p>대기 순번도 아이사랑에서 직접 조회하실 수 있습니다. 결원이 생기면 <strong>입소순위와 대기 순서를 고려해</strong> 어린이집에서 연락드립니다.</p>
+          <p>맞벌이·다자녀·한부모 등 입소순위 점수에 해당하시면 <strong>증빙서류를 정확히 제출</strong>해 주셔야 순위에 반영됩니다.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>적응 기간은 얼마나 걸리나요?</summary>
+        <div class="faq-answer">
+          <p>연령에 따라 <strong>1~4주</strong>의 적응 기간을 갖습니다. 처음부터 종일 있는 것이 아니라 조금씩 시간을 늘려가는 방식입니다.</p>
+          <p>서신어린이집은 <strong>부모님과 함께하는 적응활동</strong>을 포함한 신입원아 적응프로그램을 운영합니다.
+            적응 기간은 아이의 경험·기질·상황에 따라 개별적으로 다르기 때문에, 아이의 속도에 맞춰 진행합니다.</p>
+          <p class="fa-note">※ 학기 중에 입소하는 아이도 동일한 적응프로그램과 부모 오리엔테이션을 받습니다.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>입소가 확정되면 무엇을 준비해야 하나요?</summary>
+        <div class="faq-answer">
+          <p><strong>제출서류</strong></p>
+          <ul>
+            <li>부모동의 및 조사서</li>
+            <li>생활기록부</li>
+            <li>운영계획 수립을 위한 수요조사서</li>
+            <li>건강검진서류 (소아과 검진 · 치과 구강검진)</li>
+            <li>입소순위 증빙서류 (재직증명서, 4대보험 가입, 급여 관련 서류 등)</li>
+          </ul>
+          <p class="fa-note">※ 앞의 세 가지 서류는 어린이집에서 양식을 드립니다.</p>
+          <p><strong>준비물품</strong></p>
+          <ul>
+            <li><strong>낮잠 자는 연령(1~3세)</strong> — 여벌 상하의, 개인 이불(덮개·깔개·베개), 유아용 치약, 개인 칫솔(월 1개 이상), 로션</li>
+            <li><strong>유아반(4~5세)</strong> — 유아용 치약, 개인 칫솔(월 1개 이상), 로션 / 견학 시 개인 물병, 비옷</li>
+          </ul>
+          <p class="fa-note">※ 보육료 전환신청이 필요합니다 (복지로 또는 주민센터).</p>
+        </div>
+      </details>
+    </div>
+
+    <div class="faq-cat">
+      <h3>🕐 등하원 · 차량</h3>
+
+      <details class="faq-item">
+        <summary>운영 시간이 어떻게 되나요? 늦게까지 봐주시나요?</summary>
+        <div class="faq-answer">
+          <p><strong>월~금 07:30 ~ 19:30</strong> / <strong>토요일 07:30 ~ 15:30</strong> 운영합니다.</p>
+          <ul>
+            <li><strong>오전 통합보육</strong> 07:30 ~ 09:00</li>
+            <li><strong>기본보육</strong> 09:00 ~ 16:00 — 담임 선생님이 함께합니다</li>
+            <li><strong>연장보육</strong> 16:00 ~ 19:30 — 연장보육 선생님이 담당합니다</li>
+            <li><strong>야간연장보육</strong> 19:30 ~ 21:20</li>
+          </ul>
+          <p>야간까지 필요하신 가정을 위해 야간연장반을 별도로 운영하고 있습니다.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>통학차량을 운행하나요? 비용이 드나요?</summary>
+        <div class="faq-answer">
+          <p>네, 운행합니다. <strong>서신동 인근 지역</strong>에 한해 운행하며,
+            <strong>2026년도 차량 운행 비용은 어린이집에서 지원</strong>하므로 학부모 부담이 없습니다.</p>
+          <ul>
+            <li><strong>등원 차량</strong> 08:20 ~ 10:00</li>
+            <li><strong>하원 차량</strong> 16:00 ~ 18:00</li>
+          </ul>
+          <p>결석하시거나 보호자와 함께 등하원하실 때는 <strong>미리 연락</strong>해 주세요.
+            아이 혼자 승하차 장소에서 기다리지 않도록 해주시고, 차량이 완전히 멈출 때까지 안전한 곳에서 기다려 주세요.</p>
+        </div>
+      </details>
+    </div>
+
+    <div class="faq-cat">
+      <h3>🍽️ 급식 · 건강</h3>
+
+      <details class="faq-item">
+        <summary>급식은 어떻게 준비되나요?</summary>
+        <div class="faq-answer">
+          <p><strong>모든 음식을 원내에서 직접 조리</strong>합니다. 인스턴트를 쓰지 않는 자연주의 식단이며,
+            급·간식 식재료는 <strong>매일 아침 풀무원에서 납품</strong>받습니다.</p>
+          <p>오전·오후 간식 각 1회와 점심 1회를 제공하고, <strong>주 2회 이상 제철 과일·채소</strong>를 함께 냅니다.
+            식단표는 매월 가정으로 안내해 드립니다.</p>
+          <p class="fa-note">2025년 「all바른 급식소 우수 어린이집 · 우수 조리사」에 선정되었습니다.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>아이에게 알레르기가 있는데 괜찮을까요?</summary>
+        <div class="faq-answer">
+          <p>입소 시 <strong>식품알레르기 사전조사</strong>를 진행합니다. 조사 결과에 따라
+            <strong>대체식 또는 제거식</strong>을 제공하며, 응급상황에 대비한 대응체계를 갖추고 있습니다.</p>
+          <p>알레르기 종류와 정도를 상세히 알려주시면 담임 선생님, 조리 선생님과 공유하여 준비하겠습니다.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>아이가 아프면 어떻게 하나요? 약을 먹여주시나요?</summary>
+        <div class="faq-answer">
+          <p><strong>투약을 원하시면 투약의뢰서를 꼭 작성</strong>해 주세요. 원내에 양식이 준비되어 있습니다.</p>
+          <ul>
+            <li><strong>1회분 용량만</strong> 보내주시고, 약병에 <strong>아이 이름</strong>을 적어주세요</li>
+            <li>약물 오남용 방지를 위해 <strong>의사 처방으로 조제된 약</strong>만 투약합니다</li>
+            <li>투약 후에는 투약명·시간·용량·투약자를 기록하고 <strong>결과를 알려드립니다</strong></li>
+          </ul>
+          <p>원내에서 갑자기 열이 나면 <strong>보호자와 유선 연락 후 동의를 얻어</strong> 해열제 투약 등 필요한 조치를 하고,
+            처치 후 알림장·문자로 보고드립니다.</p>
+          <p>등원 시 건강체크를 하며, <strong>38.5도 이상 발열 시</strong>에는 안정을 취한 뒤 귀가 조치를 안내드립니다.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>감염병에 걸리면 언제까지 등원하면 안 되나요?</summary>
+        <div class="faq-answer">
+          <p>감염병은 종류마다 격리 기간이 다릅니다. 어린이집은 <strong>질병관리청 기준에 따른 격리 기준</strong>을 두고 운영하며,
+            감염병이 의심되거나 아픈 아이가 생기면 <strong>즉시 다른 아이들과 분리</strong>해 보호합니다.</p>
+          <p>진단을 받으셨다면 <strong>병명과 진단일을 담임 선생님께 알려주세요.</strong>
+            해당 감염병의 등원 가능 시점을 정확히 안내해 드리겠습니다.</p>
+        </div>
+      </details>
+    </div>
+
+    <div class="faq-cat">
+      <h3>💰 비용</h3>
+
+      <details class="faq-item">
+        <summary>매달 얼마를 내야 하나요?</summary>
+        <div class="faq-answer">
+          <p>보육료는 <strong>국공립어린이집 표준단가</strong>가 적용되며 <strong>정부지원</strong>으로 결제됩니다.
+            <strong>아이행복카드</strong>로 결제하시므로, 입소 전에 카드를 꼭 발급받아 주세요.</p>
+          <p>부모님이 실제로 부담하시는 금액은 다음과 같습니다.</p>
+          <ul>
+            <li><strong>만 2세</strong> — 월 <strong>45,000원</strong> (주 1회 영어·교재비, 주 1회 유아음악, 주 1회 유아체육)</li>
+            <li><strong>만 1세 · 만 3~5세</strong> — <strong>부모부담금 없음</strong></li>
+          </ul>
+          <p>행사비, 현장학습비, 특성화 프로그램은 <strong>운영비 지원 또는 정부지원</strong>으로 진행되어 별도로 받지 않습니다.</p>
+          <p class="fa-note">※ 전북특별자치도는 2026년도에 만 3~5세 누리과정 유아에게 무상보육을 실시합니다.<br>
+            ※ 2026년도 차량 운행 비용은 어린이집에서 지원합니다.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>입소할 때 따로 내는 비용이 있나요?</summary>
+        <div class="faq-answer">
+          <p><strong>새학년 준비금</strong>이 있습니다. 영아(만 1·2세) 기준 <strong>60,000원</strong>이며,
+            <strong>신입 원아만 1회</strong> 납부하십니다.</p>
+          <p>가방, 체육복, 수첩 등이 포함되어 있습니다. 분실 등으로 재구매하실 때는 학부모 부담입니다.</p>
+          <p class="fa-note">※ 납부는 계좌입금(전북은행) 또는 아이행복카드 결제(보육료와 함께 결제 가능)로 하실 수 있습니다.</p>
+        </div>
+      </details>
+    </div>
+
+    <div class="faq-cat">
+      <h3>🎨 하루 일과 · 소통</h3>
+
+      <details class="faq-item">
+        <summary>특성화 프로그램은 무엇이 있나요?</summary>
+        <div class="faq-answer">
+          <p>연령에 맞춰 다양하게 운영합니다.</p>
+          <ul>
+            <li><strong>만 1·2세</strong> — 놀이통합퍼포먼스(파티숑), 문해력 프로그램, 숲체험·밧줄놀이</li>
+            <li><strong>만 3세</strong> — 아이행복프로젝트(사회정서), 독서프로그램</li>
+            <li><strong>만 4·5세</strong> — 아이행복프로젝트, 경제놀이활동(초등준비), 독서프로그램, 한글수놀이·주산놀이, 축구·바둑</li>
+          </ul>
+          <p>만 3~5세는 <strong>주 2회 원어민 영어</strong>, 주 1회 유아음악(오르프), 주 1회 유아체육, 주 1회 창의융합놀이를 함께합니다.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>아이가 하루를 어떻게 보냈는지 알 수 있나요?</summary>
+        <div class="faq-answer">
+          <p><strong>알림장</strong>으로 매일 소통합니다. 등원 시 아이 상태나 전달사항을 적어주시면
+            담임 선생님이 하원 시 그날의 이야기를 전해드립니다.</p>
+          <p>만 1·2세반은 <strong>AI 행동분석 알림장 '스토리라인'</strong>을 운영합니다. 전북 도내 최초로 도입한 시스템으로,
+            아이를 평가하거나 비교하는 것이 아니라 <strong>놀이 순간을 관찰해 기록</strong>하는 방식입니다.</p>
+          <p>등하원 시에는 <strong>전자출결시스템</strong>을 통해 보호자 휴대폰으로 자동 알림이 갑니다.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>어린이집을 직접 보거나 선생님과 상담할 수 있나요?</summary>
+        <div class="faq-answer">
+          <p>네. 서신어린이집은 <strong>부모님께 어린이집을 개방</strong>하고 있습니다.
+            보육 일과를 지켜보시거나 활동 일부에 함께 참여하실 수 있습니다.</p>
+          <p>방문·참여 시간은 <strong>담임 선생님과 미리 협의</strong>해 주세요.
+            입실하실 때는 아이들의 건강과 위생을 위해 손을 깨끗이 씻어주시기 바랍니다.</p>
+          <p>정기 개별면담 기간에는 담임 선생님과 아이의 성장에 대해 깊이 이야기 나누실 수 있습니다.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>안전관리는 어떻게 하고 있나요?</summary>
+        <div class="faq-answer">
+          <ul>
+            <li>전 보육실 <strong>CCTV 설치</strong></li>
+            <li>전 원아 <strong>상해 · 화재 · 배상보험 가입</strong></li>
+            <li>교통안전 · 성폭력예방 · 재난안전 등 <strong>매월 안전교육</strong> 실시</li>
+            <li>소방서 · 구청 등과 연결된 <strong>비상연락체계</strong> 운영</li>
+            <li>응급상황 시 즉시 119 신고 후 절차에 따라 응급처치</li>
+          </ul>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>퇴소하려면 어떻게 해야 하나요?</summary>
+        <div class="faq-answer">
+          <p>대기하시는 다른 가정을 위해 <strong>최소 한 달 전에 담임 선생님께</strong> 알려주시기 바랍니다.</p>
+          <p>보육료는 퇴소일 기준으로 <strong>일할 계산</strong>되며, 등원이 끝난 날을 퇴소일로 합니다.</p>
+          <p class="fa-note">※ 미리 연락 없이 퇴소 절차가 늦어지면, 출석하지 않아도 보육료를 부담하시게 될 수 있습니다.</p>
+        </div>
+      </details>
+    </div>
+
+    <div class="faq-tail">
+      <h3>찾으시는 답이 없으신가요?</h3>
+      <p>편하게 물어봐 주세요. 빠르고 친절하게 답변드리겠습니다.</p>
+      <div class="cta-btns">
+        <a href="https://open.kakao.com/me/seo_shin_2015" target="_blank" rel="noopener noreferrer" class="btn btn-kakao">💬 카카오톡으로 문의</a>
+        <a href="tel:063-251-5373" class="btn btn-phone">📞 063-251-5373</a>
+      </div>
     </div>
   </div>
 </section>
