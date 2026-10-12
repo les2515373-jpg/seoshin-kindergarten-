@@ -79,12 +79,13 @@
     .it { background:var(--white); border:var(--border); border-radius:14px; box-shadow:var(--shadow-sm); min-width:0; }
     .it a { display:grid; gap:5px; padding:12px 14px; text-decoration:none; height:100%; }
     .it a:hover { background:var(--mint-light); border-radius:14px; }
-    .items { grid-template-columns:repeat(auto-fill,minmax(190px,1fr)); }
-    .it a { align-content:start; }
-    .it .cv { display:block; width:calc(100% + 28px); margin:-12px -14px 6px; aspect-ratio:1/1; object-fit:cover; border-radius:14px 14px 0 0; background:var(--mint-light); max-width:none; }
-    .it .ph { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; text-align:center; font-family:'Gowun Dodum',sans-serif; color:var(--text-mid); }
-    .it .ph b { font-size:44px; font-weight:400; line-height:1; }
-    .it .ph span { font-size:14px; }
+    /* 카드: 왼쪽 작은 사진, 오른쪽 놀이 이름이 중심 */
+    .it a { grid-template-columns:64px minmax(0,1fr); column-gap:12px; align-items:start; }
+    .it a > :not(.cv) { grid-column:2; }
+    .it .cv { grid-column:1; grid-row:1 / span 3; width:64px; height:64px; object-fit:cover; border-radius:10px; background:var(--mint-light); }
+    .it .ph { display:grid; place-items:center; }
+    .it .ph b { font-size:28px; font-weight:400; line-height:1; }
+    .it .ph span { display:none; }
     .it .ph-P { background:linear-gradient(140deg,var(--mint-light),var(--peach-light)); }
     .it .ph-L { background:linear-gradient(140deg,#FFF6D6,var(--peach-light)); }
     .it .ph-N { background:linear-gradient(140deg,#EAF3FF,var(--mint-light)); }
@@ -97,7 +98,6 @@
     .note a { color:var(--mint-ink); font-weight:700; }
     .empty { margin-top:40px; text-align:center; color:var(--text-mid); }
     footer { margin-top:56px; font-size:13px; color:var(--text-mid); text-align:center; }
-    @media (max-width:600px) { .items { grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; } .it a { padding:10px 10px; } .it .cv { width:calc(100% + 20px); margin:-10px -10px 4px; } .it .t { font-size:13.5px; } .it .ph b { font-size:34px; } }
     @media (max-width:600px) { .pa-back { padding:8px 12px; font-size:13px; } .tab { padding:9px 16px; font-size:14px; } }
   </style>
 </head>
