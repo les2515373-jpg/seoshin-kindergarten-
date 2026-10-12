@@ -1062,6 +1062,16 @@
     .gallery-item:hover img { transform: scale(1.06); }
     .gallery-item:hover { transform: scale(1.04); box-shadow: var(--shadow); }
     .gallery-footer { text-align: center; }
+    .archive-banner {
+      display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap;
+      background: linear-gradient(120deg, var(--mint-light), var(--peach-light));
+      border-radius: 22px; padding: 26px 30px; margin: 8px 0 32px; box-shadow: var(--shadow-sm);
+    }
+    .archive-banner h3 { font-family: 'Gowun Dodum', sans-serif; font-weight: 400; font-size: 22px; margin-bottom: 6px; }
+    .archive-banner p { font-size: 14.5px; color: var(--text-mid); max-width: 560px; }
+    .archive-banner .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+    .archive-banner .chips span { font-size: 12.5px; background: var(--white); border-radius: 50px; padding: 3px 10px; color: var(--text-mid); }
+    @media (max-width: 600px) { .archive-banner { padding: 22px 20px; } .archive-banner .btn { width: 100%; justify-content: center; } }
 
     /* ───── NOTICE (공지사항·가정통신문) ───── */
     #notice { background: var(--white); }
@@ -2096,6 +2106,7 @@
 
     <div class="notice-more">
       <a href="letters.html" class="btn btn-mint">📚 지난 가정통신문 보기 (3월 ~ )</a>
+      <a href="play.html#letters" class="btn btn-insta">🗂️ 가정통신문 전체 모음 (2022년 ~ )</a>
       <a href="https://www.instagram.com/seo_shin_2015/" target="_blank" rel="noopener noreferrer" class="btn btn-insta">📸 인스타그램에서 더 보기</a>
     </div>
   </div>
@@ -2173,6 +2184,14 @@
       <a href="https://www.instagram.com/seo_shin_2015/" target="_blank" rel="noopener noreferrer" class="gallery-item"><img loading="lazy" decoding="async" width="760" height="950" src="images/gallery6_class5.jpg" alt="높은 하늘반(5세반) 교실"></a>
     </div>
     <p class="gallery-note">※ 실제 서신어린이집 사진으로 교체했습니다. 아동 얼굴이 뚜렷하게 나온 활동사진·가족사진은 초상권 보호를 위해 제외했습니다.</p>
+    <div class="archive-banner">
+      <div>
+        <h3>🧸 서신놀이 아카이브</h3>
+        <p>2021년부터 인스타그램에 기록해 온 서신의 놀이를 주제별, 놀이 재료별, 기간별로 찾아보세요. 가정통신문 모음도 함께 있어요.</p>
+        <div class="chips"><span>봄·여름·가을·겨울</span><span>과학 탐구</span><span>새활용</span><span>전통·명절</span><span>손끝놀이</span></div>
+      </div>
+      <a href="play.html" class="btn btn-mint">놀이 아카이브 보기 →</a>
+    </div>
     <div class="gallery-footer">
       <a href="https://www.instagram.com/seo_shin_2015/" target="_blank" rel="noopener noreferrer" class="btn btn-insta">📸 인스타그램에서 더 보기</a>
     </div>
