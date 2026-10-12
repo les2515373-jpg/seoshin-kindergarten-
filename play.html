@@ -79,6 +79,15 @@
     .it { background:var(--white); border:var(--border); border-radius:14px; box-shadow:var(--shadow-sm); min-width:0; }
     .it a { display:grid; gap:5px; padding:12px 14px; text-decoration:none; height:100%; }
     .it a:hover { background:var(--mint-light); border-radius:14px; }
+    .items { grid-template-columns:repeat(auto-fill,minmax(190px,1fr)); }
+    .it a { align-content:start; }
+    .it .cv { display:block; width:calc(100% + 28px); margin:-12px -14px 6px; aspect-ratio:1/1; object-fit:cover; border-radius:14px 14px 0 0; background:var(--mint-light); max-width:none; }
+    .it .ph { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; text-align:center; font-family:'Gowun Dodum',sans-serif; color:var(--text-mid); }
+    .it .ph b { font-size:44px; font-weight:400; line-height:1; }
+    .it .ph span { font-size:14px; }
+    .it .ph-P { background:linear-gradient(140deg,var(--mint-light),var(--peach-light)); }
+    .it .ph-L { background:linear-gradient(140deg,#FFF6D6,var(--peach-light)); }
+    .it .ph-N { background:linear-gradient(140deg,#EAF3FF,var(--mint-light)); }
     .it .t { font-weight:700; font-size:14.5px; line-height:1.45; }
     .it time { font-size:12px; color:var(--text-mid); font-variant-numeric:tabular-nums; }
     .it .tags { display:flex; flex-wrap:wrap; gap:4px; }
@@ -88,6 +97,7 @@
     .note a { color:var(--mint-ink); font-weight:700; }
     .empty { margin-top:40px; text-align:center; color:var(--text-mid); }
     footer { margin-top:56px; font-size:13px; color:var(--text-mid); text-align:center; }
+    @media (max-width:600px) { .items { grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; } .it a { padding:10px 10px; } .it .cv { width:calc(100% + 20px); margin:-10px -10px 4px; } .it .t { font-size:13.5px; } .it .ph b { font-size:34px; } }
     @media (max-width:600px) { .pa-back { padding:8px 12px; font-size:13px; } .tab { padding:9px 16px; font-size:14px; } }
   </style>
 </head>
@@ -165,6 +175,16 @@ const GROUPS={
  lang:["말·글·수","한글, 숫자와 모양, 두뇌게임, 바둑, 영어",["lang"]],
  trad:["전통·행사","명절과 옛놀이, 행사와 견학, 요리",["tradition","events","food"]]
 };
+const MGROUPS={
+ paper:["종이·테이프·실","종이, 상자, 휴지심, 테이프, 시트지, 실과 끈",["paper","tape","thread"]],
+ art:["물감·점토","물감과 그리기 도구, 점토, 흙, 반죽",["paint","clay"]],
+ sense:["물·감각재료","물, 수정토, 슬라임, 얼음, 모래",["sensory"]],
+ nature:["자연물·먹거리","나뭇잎, 열매, 꽃, 과일, 요리 재료",["nature","food"]],
+ recycle:["재활용품","계란판, 병뚜껑, 페트병, 비닐",["recycle"]],
+ toy:["공·블록·자석","볼풀공, 구슬, 풍선, 블록, 자석",["ball","blocks","magnet"]],
+ tech:["빛·소리·디지털","손전등과 거울, 악기, 태블릿과 드론",["light","sound","digital"]]
+};
+const mgroupsOf=i=>Object.keys(MGROUPS).filter(g=>MGROUPS[g][2].some(t=>i.m.includes(t)));
 const groupsOf=i=>Object.keys(GROUPS).filter(g=>GROUPS[g][2].some(t=>i.th.includes(t)));
 const MATS={
  paper:["종이·상자","습자지, 신문지, 한지, 휴지심, 골판지, 종이컵"], tape:["테이프·시트지","마스킹테이프, 시트지"],
@@ -177,7 +197,7 @@ const MATS={
 };
 const KIND={P:"놀이",L:"가정통신문",N:"서신 소식"};
 const DATA=(window.SEOSHIN_ARCHIVE||{posts:""});
-const items=DATA.posts.trim().split("\n").filter(Boolean).map(l=>{const [d,c,k,t,th,m]=l.split("|");return{d,c,k,t,y:"20"+d.slice(0,2),mo:d.slice(2,4),th:th?th.split(",").filter(x=>THEMES[x]):[],m:m?m.split(",").filter(x=>MATS[x]):[]}}).sort((a,b)=>b.d.localeCompare(a.d));
+const items=DATA.posts.trim().split("\n").filter(Boolean).map(l=>{const [d,c,k,t,th,m,cv]=l.split("|");return{d,c,k,t,cv:cv==="c",y:"20"+d.slice(0,2),mo:d.slice(2,4),th:th?th.split(",").filter(x=>THEMES[x]):[],m:m?m.split(",").filter(x=>MATS[x]):[]}}).sort((a,b)=>b.d.localeCompare(a.d));
 const fmt=d=>`20${d.slice(0,2)}.${d.slice(2,4)}.${d.slice(4,6)}`;
 const $=id=>document.getElementById(id);
 const st={kind:"P",view:"theme",pick:null,year:"",month:"",q:"",open:{}};
@@ -197,12 +217,18 @@ for(const k in KIND) $("cnt-"+k).textContent=items.filter(i=>i.k===k).length.toL
 
 function inPeriod(i){return (!st.year||i.y===st.year)&&(!st.month||i.mo===st.month)}
 function inQuery(i){if(!st.q)return true;const s=(i.t+" "+i.th.map(k=>THEMES[k][0]).join(" ")+" "+i.m.map(k=>MATS[k][0]+" "+MATS[k][1]).join(" ")).toLowerCase();return st.q.split(/\s+/).every(w=>s.includes(w))}
+// 표지가 없는 게시물(아이 얼굴이 나온 표지 등)은 묶음 그림으로 대신한다.
+const ICON={season:"🌸",explore:"🔬",eco:"♻️",arts:"🎨",body:"🤸",play:"🎭",life:"🤝",lang:"🔤",trad:"🏮"};
+function mainGroup(i){const gs=groupsOf(i);return st.view==="theme"&&st.pick&&gs.includes(st.pick)?st.pick:gs[0]}
+function phIcon(i){if(i.k==="L")return"📮";if(i.k==="N")return"📢";const g=mainGroup(i);return g?ICON[g]:"🧸"}
+function phLabel(i){if(i.k==="L")return"가정통신문";if(i.k==="N")return"서신 소식";const g=mainGroup(i);return g?GROUPS[g][0]:"서신 놀이"}
 function card(i){
-  const tags=st.kind!=="P"?[]:st.view==="mat"?i.m.map(k=>MATS[k][0]):groupsOf(i).map(g=>GROUPS[g][0]);
-  return `<li class="it"><a href="https://www.instagram.com/p/${i.c}/" target="_blank" rel="noopener noreferrer"><span class="t">${h(i.t)}</span><time>${fmt(i.d)}</time>${tags.length?`<span class="tags">${tags.map(x=>`<i>${x}</i>`).join("")}</span>`:""}</a></li>`;
+  const tags=st.kind!=="P"?[]:st.view==="mat"?mgroupsOf(i).map(g=>MGROUPS[g][0]):groupsOf(i).map(g=>GROUPS[g][0]);
+  const cover=i.cv?`<img class="cv" src="images/play/${i.c}.jpg" alt="" loading="lazy" decoding="async" width="320" height="320">`:`<span class="cv ph ph-${i.k}" aria-hidden="true"><b>${phIcon(i)}</b><span>${phLabel(i)}</span></span>`;
+  return `<li class="it"><a href="https://www.instagram.com/p/${i.c}/" target="_blank" rel="noopener noreferrer">${cover}<span class="t">${h(i.t)}</span><time>${fmt(i.d)}</time>${tags.length?`<span class="tags">${tags.map(x=>`<i>${x}</i>`).join("")}</span>`:""}</a></li>`;
 }
 function groupHTML(key,title,desc,list,limit){
-  const open=st.open[key]||(st.pick&&st.view==="mat"), shown=open?list:list.slice(0,limit);
+  const open=st.open[key], shown=open?list:list.slice(0,limit);
   return `<section class="group">${title?`<div class="gh"><h2>${title}</h2><span class="n">${list.length}</span></div>`:""}${desc?`<p class="gd">${desc}</p>`:""}<ul class="items">${shown.map(card).join("")}</ul>${shown.length<list.length?`<button type="button" class="more" data-open="${key}">${list.length-shown.length}개 더 보기</button>`:""}</section>`;
 }
 function render(){
@@ -216,28 +242,22 @@ function render(){
     $("chips").hidden=true;
     const by={};pool.forEach(i=>{const g=st.year?`${i.y}년 ${+i.mo}월`:`${i.y}년`;(by[g]=by[g]||[]).push(i)});
     html=Object.keys(by).map(g=>groupHTML(g,g,"",by[g],st.year?60:12)).join("");
-  }else if(view==="theme"){
-    const inG=(i,g)=>GROUPS[g][2].some(t=>i.th.includes(t));
-    const cnt=g=>pool.filter(i=>inG(i,g)).length;
-    const keys=Object.keys(GROUPS).filter(g=>cnt(g)>0);
-    if(st.pick&&!keys.includes(st.pick))st.pick=null;
-    $("chips").hidden=false;
-    $("chips").innerHTML=`<button type="button" class="chip" data-k="" aria-pressed="${!st.pick}">전체<span>${pool.length}</span></button>`+keys.map(g=>`<button type="button" class="chip" data-k="${g}" aria-pressed="${st.pick===g}">${GROUPS[g][0]}<span>${cnt(g)}</span></button>`).join("");
-    if(!st.pick){
-      html=keys.map(g=>groupHTML("g"+g,GROUPS[g][0],GROUPS[g][1],pool.filter(i=>inG(i,g)),8)).join("");
-    }else{
-      const subs=GROUPS[st.pick][2];
-      html=`<section class="group"><div class="gh"><h2>${GROUPS[st.pick][0]}</h2><span class="n">${cnt(st.pick)}</span></div><p class="gd">${GROUPS[st.pick][1]}</p></section>`+
-        (subs.length===1?groupHTML("s"+subs[0],"","",pool.filter(i=>i.th.includes(subs[0])),24):
-        subs.map(t=>({t,list:pool.filter(i=>i.th.includes(t))})).filter(x=>x.list.length).map(x=>groupHTML("s"+x.t,THEMES[x.t][0],"",x.list,8)).join(""));
-    }
   }else{
-    const cnt=k=>pool.filter(i=>i.m.includes(k)).length;
-    const keys=Object.keys(MATS).filter(k=>cnt(k)>0).sort((a,b)=>cnt(b)-cnt(a));
+    const GR=view==="theme"?GROUPS:MGROUPS, SUB=view==="theme"?THEMES:MATS, f=view==="theme"?"th":"m";
+    const inG=(i,g)=>GR[g][2].some(t=>i[f].includes(t));
+    const cnt=g=>pool.filter(i=>inG(i,g)).length;
+    const keys=Object.keys(GR).filter(g=>cnt(g)>0);
     if(st.pick&&!keys.includes(st.pick))st.pick=null;
     $("chips").hidden=false;
-    $("chips").innerHTML=`<button type="button" class="chip" data-k="" aria-pressed="${!st.pick}">전체<span>${pool.length}</span></button>`+keys.map(k=>`<button type="button" class="chip" data-k="${k}" aria-pressed="${st.pick===k}">${MATS[k][0]}<span>${cnt(k)}</span></button>`).join("");
-    html=(st.pick?[st.pick]:keys).map(k=>groupHTML("m"+k,MATS[k][0],MATS[k][1],pool.filter(i=>i.m.includes(k)),8)).join("");
+    $("chips").innerHTML=`<button type="button" class="chip" data-k="" aria-pressed="${!st.pick}">전체<span>${pool.length}</span></button>`+keys.map(g=>`<button type="button" class="chip" data-k="${g}" aria-pressed="${st.pick===g}">${GR[g][0]}<span>${cnt(g)}</span></button>`).join("");
+    if(!st.pick){
+      html=keys.map(g=>groupHTML(f+g,GR[g][0],GR[g][1],pool.filter(i=>inG(i,g)),8)).join("");
+    }else{
+      const subs=GR[st.pick][2];
+      html=`<section class="group"><div class="gh"><h2>${GR[st.pick][0]}</h2><span class="n">${cnt(st.pick)}</span></div><p class="gd">${GR[st.pick][1]}</p></section>`+
+        (subs.length===1?groupHTML("s"+subs[0],"","",pool.filter(i=>i[f].includes(subs[0])),24):
+        subs.map(t=>({t,list:pool.filter(i=>i[f].includes(t))})).filter(x=>x.list.length).map(x=>groupHTML("s"+f+x.t,SUB[x.t][0],"",x.list,8)).join(""));
+    }
   }
   if(st.kind==="L") html=`<div class="note">2026년 3월부터의 가정통신문은 홈페이지 <a href="letters.html">지난 가정통신문 보관함</a>에서 바로 읽을 수 있어요. 아래 목록은 인스타그램에 올린 가정통신문과 연령별 놀이예상안입니다.</div>`+html;
   $("out").innerHTML=html;
