@@ -111,19 +111,41 @@
     .use-notice ul { padding-left:18px; display:grid; gap:6px; font-size:14px; color:var(--text-mid); }
     .it img.cv { -webkit-user-drag:none; user-select:none; }
     footer { margin-top:24px; font-size:13px; color:var(--text-mid); text-align:center; }
-    @media (max-width:600px) { .pa-back { padding:8px 12px; font-size:13px; } .tab { padding:9px 16px; font-size:14px; } }
+    .pa-head p, .pa-legal { text-wrap:balance; }
+    @media (max-width:600px) {
+      .pc { display:none; }
+      .pa-nav-inner { padding:0 14px; height:56px; }
+      .pa-logo { font-size:15px; }
+      .pa-back { padding:7px 12px; font-size:13px; }
+      .pa-head { padding:30px 18px 26px; }
+      .pa-head h1 { font-size:27px; margin:12px 0 8px; }
+      .pa-head p { font-size:14.5px; }
+      .pa-stats { gap:4px 14px; font-size:13.5px; }
+      .tabs { flex-wrap:nowrap; gap:5px; margin:18px 0 12px; }
+      .tab { padding:8px 12px; font-size:14px; white-space:nowrap; }
+      .tab small { font-size:11.5px; margin-left:2px; }
+      .bar { position:static; padding:8px 0; }
+      .row { gap:6px; }
+      .lbl { display:none; }
+      select { flex:1; min-width:0; }
+      input[type="search"] { flex:1 1 100%; max-width:none; }
+      .seg { width:100%; } .seg button { flex:1; }
+      .group { margin-top:24px; }
+      .gh h2 { font-size:21px; }
+      .use-notice { padding:16px 16px; }
+    }
   </style>
 </head>
 <body>
 <nav class="pa-nav">
   <div class="pa-nav-inner">
     <a href="/play" class="pa-logo">🧸 서신어린이집 놀이 아카이브</a>
-    <a href="/" class="pa-back">서신어린이집 홈페이지</a>
+    <a href="/" class="pa-back"><span class="pc">서신어린이집 </span>홈페이지</a>
   </div>
 </nav>
 
 <header class="pa-head">
-  <span class="pa-badge">국공립 서신어린이집 · 오늘의 놀이가 내일의 배움이 됩니다</span>
+  <span class="pa-badge">국공립 서신어린이집<span class="pc"> · 오늘의 놀이가 내일의 배움이 됩니다</span></span>
   <h1>서신어린이집 놀이 아카이브</h1>
   <p>서신어린이집 인스타그램에 기록해 온 놀이를 주제, 놀이 재료, 기간별로 찾아볼 수 있어요. 카드를 누르면 사진과 이야기가 담긴 원래 게시물이 열립니다.</p>
   <div class="pa-stats" id="stats"></div>
