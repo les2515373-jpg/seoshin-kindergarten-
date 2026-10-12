@@ -209,6 +209,10 @@
     }
     .nav-links a:hover { color: var(--mint-dark); }
     .nav-links a.nav-hl { color: var(--peach-dark); font-weight: 700; }
+    .nav-links a.nav-archive { background: #2F7D5F; color: #fff; font-weight: 700; padding: 6px 12px; border-radius: 50px; }
+    .nav-links a.nav-archive:hover { background: #24664D; color: #fff; }
+    .mobile-menu a.mobile-archive { background: #2F7D5F; color: #fff; font-weight: 700; }
+    .btn-archive { background: #2F7D5F; color: #fff; }
     .nav-cta {
       background: #FEE500;
       color: #3C1E1E;
@@ -1064,13 +1068,15 @@
     .gallery-footer { text-align: center; }
     .archive-banner {
       display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap;
-      background: linear-gradient(120deg, var(--mint-light), var(--peach-light));
-      border-radius: 22px; padding: 26px 30px; margin: 8px 0 32px; box-shadow: var(--shadow-sm);
+      background: linear-gradient(120deg, #2F7D5F, #3F9A75);
+      border-radius: 22px; padding: 30px 34px; margin: 8px 0 32px; box-shadow: var(--shadow);
+      color: #fff;
     }
-    .archive-banner h3 { font-family: 'Gowun Dodum', sans-serif; font-weight: 400; font-size: 22px; margin-bottom: 6px; }
-    .archive-banner p { font-size: 14.5px; color: var(--text-mid); max-width: 560px; }
-    .archive-banner .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
-    .archive-banner .chips span { font-size: 12.5px; background: var(--white); border-radius: 50px; padding: 3px 10px; color: var(--text-mid); }
+    .archive-banner h3 { font-family: 'Gowun Dodum', sans-serif; font-weight: 400; font-size: 26px; margin-bottom: 8px; }
+    .archive-banner p { font-size: 15px; color: rgba(255,255,255,.9); max-width: 560px; }
+    .archive-banner .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+    .archive-banner .chips span { font-size: 12.5px; background: rgba(255,255,255,.18); border-radius: 50px; padding: 3px 10px; color: #fff; }
+    .archive-banner .btn { background: #FFE066; color: var(--text-dark); font-size: 16px; padding: 15px 30px; }
     @media (max-width: 600px) { .archive-banner { padding: 22px 20px; } .archive-banner .btn { width: 100%; justify-content: center; } }
 
     /* ───── NOTICE (공지사항·가정통신문) ───── */
@@ -1322,13 +1328,13 @@
     .footer-copy { font-size: 12px; color: rgba(255,255,255,.3); }
 
     /* ───── RESPONSIVE ───── */
-    @media (max-width: 1180px) {
+    @media (max-width: 1320px) {
       .nav-links { gap: 12px; }
       .nav-links a { font-size: 12.5px; }
     }
 
     /* 메뉴 항목이 많아 좁은 화면에서는 햄버거 메뉴로 전환합니다. */
-    @media (max-width: 1080px) {
+    @media (max-width: 1220px) {
       .nav-links, .nav-cta { display: none; }
       .nav-hamburger { display: block; }
     }
@@ -1450,6 +1456,7 @@
       <li><a href="#care">급식·안전</a></li>
       <li><a href="#notice">소식</a></li>
       <li><a href="#gallery">갤러리</a></li>
+      <li><a href="/play" class="nav-archive">🧸 놀이 아카이브</a></li>
       <li><a href="#admission" class="nav-hl">입소안내</a></li>
       <li><a href="#faq">FAQ</a></li>
       <li><a href="#map">오시는 길</a></li>
@@ -1470,6 +1477,7 @@
   <a href="#care"       onclick="closeMenu()">급식·안전</a>
   <a href="#notice"     onclick="closeMenu()">서신의 소식</a>
   <a href="#gallery"    onclick="closeMenu()">갤러리</a>
+  <a href="/play" class="mobile-archive">🧸 서신어린이집 놀이 아카이브</a>
   <a href="#admission"  onclick="closeMenu()">입소안내</a>
   <a href="#faq"        onclick="closeMenu()">자주 묻는 질문</a>
   <a href="#map"        onclick="closeMenu()">오시는 길</a>
@@ -1490,6 +1498,7 @@
     <div class="hero-btns">
       <a href="https://open.kakao.com/me/seo_shin_2015" target="_blank" rel="noopener noreferrer" class="btn btn-kakao">💬 카카오톡으로 문의하기</a>
       <a href="tel:063-251-5373" class="btn btn-phone">📞 전화 문의</a>
+      <a href="/play" class="btn btn-archive">🧸 서신어린이집 놀이 아카이브</a>
       <a href="https://www.instagram.com/seo_shin_2015/" target="_blank" rel="noopener noreferrer" class="btn btn-insta">📸 인스타그램 보기</a>
     </div>
   </div>
@@ -2186,11 +2195,11 @@
     <p class="gallery-note">※ 실제 서신어린이집 사진으로 교체했습니다. 아동 얼굴이 뚜렷하게 나온 활동사진·가족사진은 초상권 보호를 위해 제외했습니다.</p>
     <div class="archive-banner">
       <div>
-        <h3>🧸 서신놀이 아카이브</h3>
+        <h3>🧸 서신어린이집 놀이 아카이브</h3>
         <p>2021년부터 인스타그램에 기록해 온 서신의 놀이를 주제별, 놀이 재료별, 기간별로 찾아보세요. 가정통신문 모음도 함께 있어요.</p>
         <div class="chips"><span>봄·여름·가을·겨울</span><span>과학 탐구</span><span>새활용</span><span>전통·명절</span><span>손끝놀이</span></div>
       </div>
-      <a href="/play" class="btn btn-mint">놀이 아카이브 보기 →</a>
+      <a href="/play" class="btn">놀이 아카이브 바로가기 →</a>
     </div>
     <div class="gallery-footer">
       <a href="https://www.instagram.com/seo_shin_2015/" target="_blank" rel="noopener noreferrer" class="btn btn-insta">📸 인스타그램에서 더 보기</a>

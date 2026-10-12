@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>서신놀이 아카이브 | 국공립 서신어린이집</title>
+  <title>서신어린이집 놀이 아카이브</title>
   <meta name="description" content="국공립 서신어린이집이 인스타그램에 기록해 온 놀이를 주제별·놀이 재료별·기간별로 찾아볼 수 있는 놀이 아카이브와 가정통신문 모음입니다.">
   <link rel="canonical" href="https://seoshin-kindergarten.vercel.app/play">
   <meta name="robots" content="index, follow">
   <meta name="theme-color" content="#A8E6CF">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="국공립 서신어린이집">
-  <meta property="og:title" content="서신놀이 아카이브 | 국공립 서신어린이집">
+  <meta property="og:title" content="서신어린이집 놀이 아카이브">
   <meta property="og:description" content="서신어린이집의 놀이를 주제별·재료별·기간별로 모았습니다.">
   <meta property="og:url" content="https://seoshin-kindergarten.vercel.app/play">
   <meta property="og:image" content="https://seoshin-kindergarten.vercel.app/images/og-cover.jpg">
@@ -23,11 +23,11 @@
       --mint:#A8E6CF; --mint-light:#D4F5E9; --mint-dark:#5DBF9A; --mint-ink:#2F7D5F;
       --peach:#FFD3B6; --peach-light:#FFF0E8; --peach-dark:#E8856A;
       --yellow:#FFE066;
-      --text-dark:#3D2C2C; --text-mid:#7A6A6A; --text-light:#B0A0A0;
-      --bg-main:#FAFAFA; --white:#FFFFFF;
+      --text-dark:#2E2222; --text-mid:#5E4F4F; --text-light:#8C7C7C;
+      --bg-main:#F4F8F5; --white:#FFFFFF;
       --shadow:0 4px 16px rgba(61,44,44,0.08);
       --shadow-sm:0 2px 8px rgba(61,44,44,0.06);
-      --border:1.5px solid rgba(61,44,44,0.08);
+      --border:1.5px solid rgba(47,125,95,0.16);
     }
     * { margin:0; padding:0; box-sizing:border-box; }
     [hidden] { display:none !important; }
@@ -38,29 +38,29 @@
 
     .pa-nav { position:sticky; top:0; z-index:100; background:rgba(255,255,255,0.94); backdrop-filter:blur(12px); border-bottom:var(--border); }
     .pa-nav-inner { max-width:1100px; margin:0 auto; height:62px; padding:0 20px; display:flex; align-items:center; justify-content:space-between; gap:12px; }
-    .pa-logo { font-size:16px; font-weight:800; color:var(--mint-dark); text-decoration:none; white-space:nowrap; }
+    .pa-logo { font-size:16px; font-weight:800; color:var(--mint-ink); text-decoration:none; white-space:nowrap; }
     .pa-back { font-size:13.5px; font-weight:700; color:var(--text-mid); text-decoration:none; white-space:nowrap; padding:9px 18px; border-radius:50px; background:var(--bg-main); border:var(--border); }
     .pa-back:hover { background:var(--mint-light); color:var(--mint-ink); }
 
-    .pa-head { text-align:center; padding:48px 20px 28px; background:linear-gradient(180deg,var(--mint-light),var(--bg-main)); }
+    .pa-head { text-align:center; padding:48px 20px 36px; background:linear-gradient(135deg,#2F7D5F,#3F9A75); color:#fff; }
     .pa-badge { display:inline-block; background:var(--white); color:var(--mint-ink); font-size:13px; font-weight:700; padding:6px 16px; border-radius:50px; box-shadow:var(--shadow-sm); }
-    .pa-head h1 { font-family:'Gowun Dodum',sans-serif; font-weight:400; font-size:clamp(28px,5vw,40px); margin:14px 0 10px; line-height:1.3; }
-    .pa-head p { color:var(--text-mid); font-size:15px; max-width:620px; margin:0 auto; }
-    .pa-stats { display:flex; flex-wrap:wrap; justify-content:center; gap:8px 22px; margin-top:16px; font-size:14px; color:var(--text-mid); }
-    .pa-stats b { color:var(--text-dark); font-variant-numeric:tabular-nums; }
+    .pa-head h1 { color:#fff; font-family:'Gowun Dodum',sans-serif; font-weight:400; font-size:clamp(28px,5vw,40px); margin:14px 0 10px; line-height:1.3; }
+    .pa-head p { color:rgba(255,255,255,.92); font-size:15px; max-width:620px; margin:0 auto; }
+    .pa-stats { display:flex; flex-wrap:wrap; justify-content:center; gap:8px 22px; margin-top:16px; font-size:14px; color:rgba(255,255,255,.85); }
+    .pa-stats b { color:#fff; font-variant-numeric:tabular-nums; }
 
     .wrap { max-width:1100px; margin:0 auto; padding-inline:20px; padding-block:0 72px; }
 
-    .tabs { display:flex; gap:6px; justify-content:center; margin:8px 0 18px; flex-wrap:wrap; }
+    .tabs { display:flex; gap:6px; justify-content:center; margin:22px 0 18px; flex-wrap:wrap; }
     .tab { border:var(--border); background:var(--white); color:var(--text-mid); font-size:15px; font-weight:700; padding:10px 22px; border-radius:50px; cursor:pointer; }
-    .tab[aria-selected="true"] { background:var(--mint); color:var(--text-dark); border-color:var(--mint); }
+    .tab[aria-selected="true"] { background:var(--mint-ink); color:#fff; border-color:var(--mint-ink); }
     .tab small { font-weight:500; margin-left:4px; font-size:12.5px; }
 
     .bar { position:sticky; top:62px; z-index:50; background:var(--bg-main); padding:12px 0 10px; border-bottom:var(--border); display:grid; gap:10px; }
     .row { display:flex; flex-wrap:wrap; gap:8px; align-items:center; }
     .seg { display:inline-flex; background:var(--white); border:var(--border); border-radius:50px; padding:3px; }
     .seg button { border:0; background:transparent; color:var(--text-mid); font-size:14px; font-weight:700; padding:7px 15px; border-radius:50px; cursor:pointer; }
-    .seg button[aria-pressed="true"] { background:var(--peach); color:var(--text-dark); }
+    .seg button[aria-pressed="true"] { background:var(--yellow); color:var(--text-dark); }
     select, input[type="search"] { font-size:14.5px; padding:8px 12px; border:var(--border); border-radius:10px; background:var(--white); color:var(--text-dark); }
     input[type="search"] { flex:1; min-width:0; max-width:300px; }
     .lbl { font-size:13px; color:var(--text-mid); font-weight:600; }
@@ -100,8 +100,8 @@
     .note { margin-top:16px; background:var(--white); border:var(--border); border-radius:14px; padding:14px 16px; font-size:14px; color:var(--text-mid); }
     .note a { color:var(--mint-ink); font-weight:700; }
     .empty { margin-top:40px; text-align:center; color:var(--text-mid); }
-    .pa-legal { margin:14px auto 0 !important; font-size:13px !important; color:var(--text-mid); }
-    .pa-legal a { color:var(--peach-dark); font-weight:700; text-decoration:none; }
+    .pa-legal { margin:16px auto 0 !important; font-size:13px !important; color:rgba(255,255,255,.85) !important; }
+    .pa-legal a { color:#FFE066; font-weight:700; text-decoration:none; }
     .pa-legal a:hover { text-decoration:underline; }
     .use-notice { margin-top:56px; background:var(--white); border:var(--border); border-left:4px solid var(--peach-dark); border-radius:14px; padding:20px 22px; }
     .use-notice h2 { font-size:16px; margin-bottom:10px; }
@@ -114,14 +114,14 @@
 <body>
 <nav class="pa-nav">
   <div class="pa-nav-inner">
-    <a href="/play" class="pa-logo">🧸 서신놀이 아카이브</a>
+    <a href="/play" class="pa-logo">🧸 서신어린이집 놀이 아카이브</a>
     <a href="/" class="pa-back">서신어린이집 홈페이지</a>
   </div>
 </nav>
 
 <header class="pa-head">
   <span class="pa-badge">국공립 서신어린이집 · 오늘의 놀이가 내일의 배움이 됩니다</span>
-  <h1>서신놀이 아카이브</h1>
+  <h1>서신어린이집 놀이 아카이브</h1>
   <p>서신어린이집 인스타그램에 기록해 온 놀이를 주제, 놀이 재료, 기간별로 찾아볼 수 있어요. 카드를 누르면 사진과 이야기가 담긴 원래 게시물이 열립니다.</p>
   <div class="pa-stats" id="stats"></div>
   <p class="pa-legal">이 아카이브의 사진과 글은 아이들과 가정의 소중한 기록입니다. <a href="#notice-use">무단 저장·복제·배포와 다른 용도로 쓰는 것을 금지합니다.</a></p>
