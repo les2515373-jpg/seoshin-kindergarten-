@@ -97,7 +97,14 @@
     .note { margin-top:16px; background:var(--white); border:var(--border); border-radius:14px; padding:14px 16px; font-size:14px; color:var(--text-mid); }
     .note a { color:var(--mint-ink); font-weight:700; }
     .empty { margin-top:40px; text-align:center; color:var(--text-mid); }
-    footer { margin-top:56px; font-size:13px; color:var(--text-mid); text-align:center; }
+    .pa-legal { margin:14px auto 0 !important; font-size:13px !important; color:var(--text-mid); }
+    .pa-legal a { color:var(--peach-dark); font-weight:700; text-decoration:none; }
+    .pa-legal a:hover { text-decoration:underline; }
+    .use-notice { margin-top:56px; background:var(--white); border:var(--border); border-left:4px solid var(--peach-dark); border-radius:14px; padding:20px 22px; }
+    .use-notice h2 { font-size:16px; margin-bottom:10px; }
+    .use-notice ul { padding-left:18px; display:grid; gap:6px; font-size:14px; color:var(--text-mid); }
+    .it img.cv { -webkit-user-drag:none; user-select:none; }
+    footer { margin-top:24px; font-size:13px; color:var(--text-mid); text-align:center; }
     @media (max-width:600px) { .pa-back { padding:8px 12px; font-size:13px; } .tab { padding:9px 16px; font-size:14px; } }
   </style>
 </head>
@@ -114,6 +121,7 @@
   <h1>서신놀이 아카이브</h1>
   <p>서신어린이집 인스타그램에 기록해 온 놀이를 주제, 놀이 재료, 기간별로 찾아볼 수 있어요. 카드를 누르면 사진과 이야기가 담긴 원래 게시물이 열립니다.</p>
   <div class="pa-stats" id="stats"></div>
+  <p class="pa-legal">이 아카이브의 사진과 글은 아이들과 가정의 소중한 기록입니다. <a href="#notice-use">무단 저장·복제·배포와 다른 용도로 쓰는 것을 금지합니다.</a></p>
 </header>
 
 <div class="wrap">
@@ -142,6 +150,17 @@
 
   <main id="out"></main>
   <p class="empty" id="empty" hidden>조건에 맞는 게시물이 없어요. 기간이나 검색어를 바꿔 보세요.</p>
+
+  <section class="use-notice" id="notice-use" aria-labelledby="use-title">
+    <h2 id="use-title">자료 이용 안내</h2>
+    <ul>
+      <li>이 아카이브에 실린 사진, 글, 가정통신문 등 모든 자료의 권리는 국공립 서신어린이집에 있으며, 사진 속 아이들의 초상권은 아이와 가정에 있습니다.</li>
+      <li>서신어린이집의 놀이를 살펴보는 목적으로만 봐 주세요. 허락 없이 사진과 글을 저장·캡처·복제하거나, 다른 사이트·SNS·자료에 옮겨 싣거나, 상업적으로 쓰는 것을 금지합니다.</li>
+      <li>특히 아이들 사진을 편집·합성하거나 다른 목적으로 쓰는 일은 절대 허용하지 않습니다.</li>
+      <li>이를 어기면 저작권법, 개인정보 보호법 등 관련 법에 따라 책임을 물을 수 있습니다.</li>
+      <li>자료 이용이 필요하시면 어린이집으로 먼저 문의해 주세요. 사진 게시에 대한 의견이 있는 가정도 언제든 말씀해 주시면 바로 조치하겠습니다.</li>
+    </ul>
+  </section>
 
   <footer id="foot"></footer>
 </div>
@@ -224,7 +243,7 @@ function phIcon(i){if(i.k==="L")return"📮";if(i.k==="N")return"📢";const g=m
 function phLabel(i){if(i.k==="L")return"가정통신문";if(i.k==="N")return"서신 소식";const g=mainGroup(i);return g?GROUPS[g][0]:"서신 놀이"}
 function card(i){
   const tags=st.kind!=="P"?[]:st.view==="mat"?mgroupsOf(i).map(g=>MGROUPS[g][0]):groupsOf(i).map(g=>GROUPS[g][0]);
-  const cover=i.cv?`<img class="cv" src="images/play/${i.c}.jpg" alt="" loading="lazy" decoding="async" width="320" height="320">`:`<span class="cv ph ph-${i.k}" aria-hidden="true"><b>${phIcon(i)}</b><span>${phLabel(i)}</span></span>`;
+  const cover=i.cv?`<img class="cv" src="images/play/${i.c}.jpg" alt="" loading="lazy" decoding="async" width="160" height="160" draggable="false">`:`<span class="cv ph ph-${i.k}" aria-hidden="true"><b>${phIcon(i)}</b><span>${phLabel(i)}</span></span>`;
   return `<li class="it"><a href="https://www.instagram.com/p/${i.c}/" target="_blank" rel="noopener noreferrer">${cover}<span class="t">${h(i.t)}</span><time>${fmt(i.d)}</time>${tags.length?`<span class="tags">${tags.map(x=>`<i>${x}</i>`).join("")}</span>`:""}</a></li>`;
 }
 function groupHTML(key,title,desc,list,limit){
@@ -266,6 +285,8 @@ function render(){
 document.querySelector(".tabs").addEventListener("click",e=>{const b=e.target.closest(".tab");if(!b)return;st.kind=b.dataset.kind;st.pick=null;st.open={};save();render()});
 ["theme","mat","time"].forEach(v=>$("v-"+v).onclick=()=>{st.view=v;st.pick=null;st.open={};save();render()});
 $("chips").addEventListener("click",e=>{const b=e.target.closest(".chip");if(!b)return;st.pick=b.dataset.k||null;render();window.scrollTo({top:$("out").offsetTop-190,behavior:"smooth"})});
+// 사진 우클릭 저장을 막는다(완전한 보호는 아니지만 무단 저장을 줄이기 위해).
+$("out").addEventListener("contextmenu",e=>{if(e.target.closest("img"))e.preventDefault()});
 $("out").addEventListener("click",e=>{const b=e.target.closest(".more");if(!b)return;st.open[b.dataset.open]=true;render()});
 $("year").onchange=e=>{st.year=e.target.value;st.open={};render()};
 $("month").onchange=e=>{st.month=e.target.value;st.open={};render()};
