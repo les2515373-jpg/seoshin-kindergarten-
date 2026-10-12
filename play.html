@@ -94,6 +94,9 @@
     .it .tags { display:flex; flex-wrap:wrap; gap:4px; }
     .it .tags i { font-style:normal; font-size:11.5px; color:var(--text-mid); background:var(--peach-light); border-radius:6px; padding:0 6px; }
     .more { margin-top:10px; border:var(--border); background:var(--white); color:var(--mint-ink); font-weight:700; font-size:13.5px; padding:8px 18px; border-radius:50px; cursor:pointer; }
+    .gh-link { text-decoration:none; }
+    .gh-link:hover { color:var(--mint-ink); }
+    .back { margin-top:20px; border:0; background:none; color:var(--mint-ink); font-weight:700; font-size:14px; cursor:pointer; padding:4px 0; }
     .note { margin-top:16px; background:var(--white); border:var(--border); border-radius:14px; padding:14px 16px; font-size:14px; color:var(--text-mid); }
     .note a { color:var(--mint-ink); font-weight:700; }
     .empty { margin-top:40px; text-align:center; color:var(--text-mid); }
@@ -246,9 +249,12 @@ function card(i){
   const cover=i.cv?`<img class="cv" src="images/play/${i.c}.jpg" alt="" loading="lazy" decoding="async" width="160" height="160" draggable="false">`:`<span class="cv ph ph-${i.k}" aria-hidden="true"><b>${phIcon(i)}</b><span>${phLabel(i)}</span></span>`;
   return `<li class="it"><a href="https://www.instagram.com/p/${i.c}/" target="_blank" rel="noopener noreferrer">${cover}<span class="t">${h(i.t)}</span><time>${fmt(i.d)}</time>${tags.length?`<span class="tags">${tags.map(x=>`<i>${x}</i>`).join("")}</span>`:""}</a></li>`;
 }
-function groupHTML(key,title,desc,list,limit){
-  const open=st.open[key], shown=open?list:list.slice(0,limit);
-  return `<section class="group">${title?`<div class="gh"><h2>${title}</h2><span class="n">${list.length}</span></div>`:""}${desc?`<p class="gd">${desc}</p>`:""}<ul class="items">${shown.map(card).join("")}</ul>${shown.length<list.length?`<button type="button" class="more" data-open="${key}">${list.length-shown.length}개 더 보기</button>`:""}</section>`;
+// go가 있으면 '더 보기'가 그 묶음 페이지로 들어가고, 없으면 그 자리에서 펼친다.
+function groupHTML(key,title,desc,list,limit,go){
+  const open=st.open[key], shown=open||limit===0?list:list.slice(0,limit);
+  const more=shown.length<list.length?(go?`<button type="button" class="more" data-pick="${go}">${title} ${list.length}개 모두 보기 →</button>`:`<button type="button" class="more" data-open="${key}">${list.length-shown.length}개 더 보기</button>`):"";
+  const head=title?`<div class="gh">${go?`<h2><a href="#" class="gh-link" data-pick="${go}">${title}</a></h2>`:`<h2>${title}</h2>`}<span class="n">${list.length}</span></div>`:"";
+  return `<section class="group">${head}${desc?`<p class="gd">${desc}</p>`:""}<ul class="items">${shown.map(card).join("")}</ul>${more}</section>`;
 }
 function render(){
   document.querySelectorAll(".tab").forEach(b=>b.setAttribute("aria-selected",b.dataset.kind===st.kind));
@@ -270,12 +276,11 @@ function render(){
     $("chips").hidden=false;
     $("chips").innerHTML=`<button type="button" class="chip" data-k="" aria-pressed="${!st.pick}">전체<span>${pool.length}</span></button>`+keys.map(g=>`<button type="button" class="chip" data-k="${g}" aria-pressed="${st.pick===g}">${GR[g][0]}<span>${cnt(g)}</span></button>`).join("");
     if(!st.pick){
-      html=keys.map(g=>groupHTML(f+g,GR[g][0],GR[g][1],pool.filter(i=>inG(i,g)),8)).join("");
+      html=keys.map(g=>groupHTML(f+g,GR[g][0],GR[g][1],pool.filter(i=>inG(i,g)),6,g)).join("");
     }else{
-      const subs=GR[st.pick][2];
-      html=`<section class="group"><div class="gh"><h2>${GR[st.pick][0]}</h2><span class="n">${cnt(st.pick)}</span></div><p class="gd">${GR[st.pick][1]}</p></section>`+
-        (subs.length===1?groupHTML("s"+subs[0],"","",pool.filter(i=>i[f].includes(subs[0])),24):
-        subs.map(t=>({t,list:pool.filter(i=>i[f].includes(t))})).filter(x=>x.list.length).map(x=>groupHTML("s"+f+x.t,SUB[x.t][0],"",x.list,8)).join(""));
+      // 묶음 안으로 들어오면 그 활동을 최신순으로 한 줄로 쭉 보여 준다.
+      html=`<button type="button" class="back" data-pick="">← ${view==="theme"?"전체 주제":"전체 재료"}로</button>`+
+        groupHTML("p"+st.pick,GR[st.pick][0],GR[st.pick][1],pool.filter(i=>inG(i,st.pick)),0);
     }
   }
   if(st.kind==="L") html=`<div class="note">2026년 3월부터의 가정통신문은 홈페이지 <a href="letters.html">지난 가정통신문 보관함</a>에서 바로 읽을 수 있어요. 아래 목록은 인스타그램에 올린 가정통신문과 연령별 놀이예상안입니다.</div>`+html;
@@ -287,7 +292,11 @@ document.querySelector(".tabs").addEventListener("click",e=>{const b=e.target.cl
 $("chips").addEventListener("click",e=>{const b=e.target.closest(".chip");if(!b)return;st.pick=b.dataset.k||null;render();window.scrollTo({top:$("out").offsetTop-190,behavior:"smooth"})});
 // 사진 우클릭 저장을 막는다(완전한 보호는 아니지만 무단 저장을 줄이기 위해).
 $("out").addEventListener("contextmenu",e=>{if(e.target.closest("img"))e.preventDefault()});
-$("out").addEventListener("click",e=>{const b=e.target.closest(".more");if(!b)return;st.open[b.dataset.open]=true;render()});
+$("out").addEventListener("click",e=>{
+  const p=e.target.closest("[data-pick]");
+  if(p){e.preventDefault();st.pick=p.dataset.pick||null;render();window.scrollTo({top:$("out").offsetTop-190});return}
+  const b=e.target.closest(".more");if(!b)return;st.open[b.dataset.open]=true;render();
+});
 $("year").onchange=e=>{st.year=e.target.value;st.open={};render()};
 $("month").onchange=e=>{st.month=e.target.value;st.open={};render()};
 $("q").addEventListener("input",e=>{st.q=e.target.value.trim().toLowerCase();st.open={};render()});
