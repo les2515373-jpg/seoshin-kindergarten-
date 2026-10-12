@@ -112,6 +112,32 @@
     .it img.cv { -webkit-user-drag:none; user-select:none; }
     footer { margin-top:24px; font-size:13px; color:var(--text-mid); text-align:center; }
     .pa-head p, .pa-legal { text-wrap:balance; }
+    /* 자료 찾기 */
+    .ask { max-width:640px; margin:22px auto 6px; background:#fff; border-radius:20px; padding:18px 18px 14px; box-shadow:0 8px 24px rgba(0,0,0,.15); text-align:left; }
+    .ask-q { display:block; font-family:'Gowun Dodum',sans-serif; font-size:19px; color:var(--mint-ink); margin-bottom:10px; }
+    .ask-row { display:flex; gap:8px; }
+    .ask-row input { flex:1; min-width:0; font-size:16px; padding:12px 14px; border:2px solid var(--mint); border-radius:12px; background:#fff; color:var(--text-dark); max-width:none; }
+    .ask-row input:focus { outline:none; border-color:var(--mint-ink); }
+    .ask-row button { flex:none; border:0; background:var(--mint-ink); color:#fff; font-size:15px; font-weight:700; padding:0 20px; border-radius:12px; cursor:pointer; }
+    .ask-ex { display:flex; flex-wrap:wrap; gap:6px; margin-top:10px; }
+    .ask-ex button { border:1px solid var(--mint); background:var(--mint-light); color:var(--mint-ink); font-size:12.5px; font-weight:600; padding:4px 10px; border-radius:50px; cursor:pointer; }
+    .ask-ex button:hover { background:var(--mint); }
+    .results { margin-top:18px; }
+    .res-head h2 { font-family:'Gowun Dodum',sans-serif; font-weight:400; font-size:24px; margin-top:6px; display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+    .res-head .n { font-family:'Noto Sans KR',sans-serif; font-size:13px; font-weight:700; background:var(--yellow); border-radius:50px; padding:1px 10px; }
+    .res-labs { margin-top:6px; font-size:13.5px; color:var(--text-mid); display:flex; flex-wrap:wrap; gap:5px; align-items:center; }
+    .res-labs i { font-style:normal; background:var(--peach-light); color:var(--text-dark); border-radius:6px; padding:1px 8px; }
+    .modal { position:fixed; inset:0; z-index:200; background:rgba(20,40,30,.55); display:grid; place-items:center; padding:16px; }
+    .modal-card { position:relative; width:100%; max-width:520px; background:#fff; border-radius:22px; padding:26px 22px 18px; box-shadow:0 20px 50px rgba(0,0,0,.25); }
+    .modal-x { position:absolute; top:10px; right:12px; border:0; background:none; font-size:26px; line-height:1; color:var(--text-mid); cursor:pointer; padding:4px 8px; }
+    .modal-hi { font-size:13px; font-weight:700; color:var(--mint-ink); }
+    .modal-card h2 { font-family:'Gowun Dodum',sans-serif; font-weight:400; font-size:24px; margin:6px 0 6px; }
+    .modal-sub { font-size:14px; color:var(--text-mid); margin-bottom:14px; }
+    .modal-foot { display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap; margin-top:16px; font-size:13px; color:var(--text-mid); }
+    .modal-foot label { display:flex; align-items:center; gap:6px; cursor:pointer; }
+    .modal-skip { border:var(--border); background:var(--bg-main); color:var(--text-mid); font-weight:700; font-size:13.5px; padding:8px 14px; border-radius:50px; cursor:pointer; }
+    .fab { position:fixed; right:16px; bottom:calc(16px + env(safe-area-inset-bottom,0px)); z-index:150; border:0; background:var(--mint-ink); color:#fff; font-size:14.5px; font-weight:700; padding:12px 18px; border-radius:50px; box-shadow:0 6px 18px rgba(0,0,0,.25); cursor:pointer; }
+    .fab:hover { background:#24664D; }
     .wrap { padding-block-end:40px; }
     .site-info { background:#24664D; color:rgba(255,255,255,.88); padding:24px 20px 20px; }
     .si-inner { max-width:1100px; margin:0 auto; display:grid; gap:12px; }
@@ -149,7 +175,12 @@
       .group { margin-top:24px; }
       .gh h2 { font-size:21px; }
       .use-notice { padding:16px 16px; }
-      .site-info { padding:20px 16px 18px; }
+      .site-info { padding:20px 16px 72px; }
+      .ask { padding:14px 14px 12px; margin-top:18px; }
+      .ask-q { font-size:17px; }
+      .ask-row button { padding:0 14px; }
+      .modal-card h2 { font-size:21px; }
+      .fab { padding:10px 15px; font-size:13.5px; }
       .si-list div { grid-template-columns:70px minmax(0,1fr); gap:6px; }
       .si-maps { display:flex; margin:3px 0 0; }
 
@@ -170,11 +201,22 @@
   <span class="pa-badge">국공립 서신어린이집<span class="pc"> · 오늘의 놀이가 내일의 배움이 됩니다</span></span>
   <h1>서신어린이집 놀이 아카이브</h1>
   <p>서신어린이집 인스타그램에 기록해 온 놀이를 주제, 놀이 재료, 기간별로 찾아볼 수 있어요. 카드를 누르면 사진과 이야기가 담긴 원래 게시물이 열립니다.</p>
+  <form class="ask" id="askForm" role="search">
+    <label for="ask" class="ask-q">선생님, 어떤 자료를 찾고 계세요?</label>
+    <div class="ask-row">
+      <input id="ask" type="search" placeholder="예: 가을 놀이 추천, 영아 감각 놀이, 거미" autocomplete="off">
+      <button type="submit">찾기</button>
+    </div>
+    <div class="ask-ex" id="askEx"></div>
+  </form>
   <div class="pa-stats" id="stats"></div>
   <p class="pa-legal">이 아카이브의 사진과 글은 아이들과 가정의 소중한 기록입니다. <a href="#notice-use">무단 저장·복제·배포와 다른 용도로 쓰는 것을 금지합니다.</a></p>
 </header>
 
 <div class="wrap">
+  <section class="results" id="results" hidden aria-live="polite"></section>
+
+  <div id="browse">
   <div class="tabs" role="tablist">
     <button class="tab" role="tab" id="tab-P" data-kind="P">놀이<small id="cnt-P"></small></button>
     <button class="tab" role="tab" id="tab-L" data-kind="L">가정통신문<small id="cnt-L"></small></button>
@@ -186,7 +228,7 @@
       <span class="lbl">기간</span>
       <select id="year" aria-label="연도"></select>
       <select id="month" aria-label="월"></select>
-      <input id="q" type="search" placeholder="검색 (예: 수박, 거미, 레고)" aria-label="검색">
+
     </div>
     <div class="row" id="viewRow">
       <div class="seg" role="group" aria-label="분류 기준">
@@ -200,6 +242,7 @@
 
   <main id="out"></main>
   <p class="empty" id="empty" hidden>조건에 맞는 게시물이 없어요. 기간이나 검색어를 바꿔 보세요.</p>
+  </div>
 
   <section class="use-notice" id="notice-use" aria-labelledby="use-title">
     <h2 id="use-title">자료 이용 안내</h2>
@@ -233,6 +276,25 @@
     <p class="si-copy">© 국공립 서신어린이집. 무단 전재·재배포 금지.</p>
   </div>
 </section>
+
+<div class="modal" id="askModal" hidden role="dialog" aria-modal="true" aria-labelledby="mq">
+  <div class="modal-card">
+    <button type="button" class="modal-x" id="askClose" aria-label="닫기">×</button>
+    <p class="modal-hi">🧸 서신어린이집 놀이 아카이브</p>
+    <h2 id="mq">어떤 자료를 찾고 계세요?</h2>
+    <p class="modal-sub">고민을 짧게 적어 주세요. 관련 놀이, 가정통신문, 서신 소식을 한 번에 모아 드려요.</p>
+    <form id="askForm2" class="ask-row">
+      <input id="ask2" type="search" placeholder="예: 가을 놀이 추천" autocomplete="off">
+      <button type="submit">찾기</button>
+    </form>
+    <div class="ask-ex" id="askEx2"></div>
+    <div class="modal-foot">
+      <label><input type="checkbox" id="askNoMore"> 다음부터 이 창 열지 않기</label>
+      <button type="button" class="modal-skip" id="askSkip">둘러보기만 할게요</button>
+    </div>
+  </div>
+</div>
+<button type="button" class="fab" id="askFab">🔍 자료 찾기</button>
 
 <script src="data/archive.js"></script>
 <script>
@@ -365,9 +427,154 @@ $("out").addEventListener("click",e=>{
 });
 $("year").onchange=e=>{st.year=e.target.value;st.open={};render()};
 $("month").onchange=e=>{st.month=e.target.value;st.open={};render()};
-$("q").addEventListener("input",e=>{st.q=e.target.value.trim().toLowerCase();st.open={};render()});
+
+/* ───── 자료 찾기: "가을 놀이 추천"처럼 적으면 놀이·가정통신문·소식을 함께 찾는다 ─────
+   낱말 사전(LEX)에서 아는 말을 찾아 주제·재료·달·제목 낱말로 바꾸고, 모르는 말은 제목에서 그대로 찾는다. */
+const M=(...a)=>a;
+const LEX=[
+ // 계절·명절은 달(m)도 함께 본다. 가정통신문·소식은 달로 찾는다.
+ ["봄",{th:["spring"],mo:M(3,4,5),w:["봄","꽃","딸기","새싹","텃밭"],lab:"봄"}],
+ ["여름",{th:["summer"],mo:M(6,7,8),w:["여름","바다","수박","물놀이"],lab:"여름"}],
+ ["가을",{th:["autumn"],mo:M(9,10,11),w:["가을","추석","단풍","낙엽","도토리","알밤","김장","열매","솔방울"],lab:"가을"}],
+ ["겨울",{th:["winter"],mo:M(12,1,2),w:["겨울","눈사람","눈송이","얼음","크리스마스","스케이트"],lab:"겨울"}],
+ ["추석",{th:["tradition"],mo:M(9,10),w:["추석","한가위","송편","전통"],lab:"추석"}],["한가위",{th:["tradition"],mo:M(9,10),w:["추석","한가위"],lab:"추석"}],
+ ["설날",{th:["tradition"],mo:M(1,2),w:["설","열두띠","복주머니","윷"],lab:"설날"}],
+ ["크리스마스",{th:["winter"],mo:M(12),w:["크리스마스","산타","트리"],lab:"크리스마스"}],["성탄",{mo:M(12),w:["크리스마스","산타"],lab:"크리스마스"}],
+ ["어린이날",{th:["events"],mo:M(5),w:["어린이날"],lab:"어린이날"}],["어버이날",{th:["me"],mo:M(5),w:["어버이날","가족"],lab:"어버이날"}],
+ ["새학기",{mo:M(3),w:["새학기","적응","신학기","첫 인사","친구 얼굴","친해"],lab:"새학기 적응"}],["신학기",{mo:M(3),w:["새학기","적응","신학기"],lab:"새학기 적응"}],["적응",{mo:M(3),w:["적응","새학기"],lab:"적응"}],
+ ["졸업",{th:["events"],mo:M(2),w:["졸업","추억","발표회"],lab:"졸업"}],
+ ["장마",{th:["summer"],mo:M(6,7),w:["빗","우산","장마"],lab:"장마"}],["비오는날",{mo:M(6,7),w:["빗","우산","장마","실내","교실"],lab:"비 오는 날"}],["비 오는 날",{mo:M(6,7),w:["빗","우산","장마","실내","교실"],lab:"비 오는 날"}],
+ ["실내",{w:["교실","실내"],lab:"실내 놀이"}],["바깥",{th:["nature"],w:["바깥","숲","산책","놀이터"],lab:"바깥놀이"}],
+ // 주제
+ ["물놀이",{th:["summer","senses"],ma:["sensory"],w:["물"],lab:"물놀이"}],
+ ["과학",{th:["science"],w:["실험","원리"],lab:"과학"}],["실험",{th:["science"],w:["실험"],lab:"실험"}],["탐구",{th:["science"],lab:"탐구"}],
+ ["우주",{th:["space"],w:["우주","로켓","행성"],lab:"우주"}],["공룡",{w:["공룡","티라노","트리케라"],lab:"공룡"}],
+ ["곤충",{th:["bugs"],w:["곤충","벌","거미","개미","애벌레","나비"],lab:"곤충"}],["벌레",{th:["bugs"],w:["곤충","애벌레"],lab:"곤충"}],["동물",{th:["bugs"],w:["동물"],lab:"동물"}],
+ ["자동차",{th:["cars"],w:["자동차","세차","정비","도로"],lab:"자동차"}],["교통",{th:["cars"],w:["교통","신호"],lab:"교통"}],["공사",{th:["cars","build"],w:["공사"],lab:"공사장"}],
+ ["블록",{th:["build"],ma:["blocks"],w:["블록","블럭"],lab:"블록"}],["레고",{th:["build"],ma:["blocks"],w:["레고"],lab:"레고"}],["쌓기",{th:["build"],w:["쌓기"],lab:"쌓기"}],["건축",{th:["build"],w:["집짓기","건축"],lab:"건축"}],
+ ["역할",{th:["roles"],lab:"역할놀이"}],["가게",{th:["roles"],w:["가게"],lab:"가게놀이"}],["병원",{th:["roles"],w:["병원","의사"],lab:"병원놀이"}],["직업",{th:["roles"],lab:"직업"}],
+ ["감정",{th:["me"],w:["감정","마음"],lab:"감정"}],["마음",{th:["me"],w:["마음","감정"],lab:"마음"}],["가족",{th:["me"],w:["가족"],lab:"가족"}],
+ ["생활습관",{th:["habits"],lab:"생활습관"}],["배변",{th:["habits"],w:["배변","화장지"],lab:"배변"}],["양치",{th:["habits"],w:["양치","치카"],lab:"양치"}],["안전",{th:["habits"],w:["안전","소방","대피"],lab:"안전"}],["건강",{th:["habits"],w:["건강"],lab:"건강"}],
+ ["친구",{th:["friends"],w:["친구"],lab:"친구"}],["협동",{th:["friends"],w:["협동","함께"],lab:"협동"}],
+ ["한글",{th:["lang"],w:["한글","글자","이름"],lab:"한글"}],["글자",{th:["lang"],w:["한글","글자"],lab:"한글"}],["숫자",{th:["lang"],w:["숫자"],lab:"숫자"}],["수학",{th:["lang"],w:["숫자","모양"],lab:"수"}],["모양",{th:["lang"],w:["모양","도형"],lab:"모양"}],["영어",{th:["lang"],w:["영어"],lab:"영어"}],["바둑",{th:["lang"],w:["바둑"],lab:"바둑"}],["게임",{th:["lang","friends"],w:["게임"],lab:"게임"}],
+ ["전통",{th:["tradition"],w:["전통","민속"],lab:"전통"}],["민속",{th:["tradition"],w:["민속","투호","윷"],lab:"민속놀이"}],["옛놀이",{th:["tradition"],w:["옛","전통"],lab:"옛놀이"}],
+ ["드론",{th:["future"],ma:["digital"],w:["드론"],lab:"드론"}],["코딩",{th:["future"],ma:["digital"],w:["코딩","로봇"],lab:"코딩"}],["디지털",{th:["future"],ma:["digital"],lab:"디지털"}],["미래",{th:["future"],lab:"미래교육"}],
+ ["재활용",{th:["eco"],ma:["recycle"],w:["재활용","되살림","새활용"],lab:"재활용"}],["새활용",{th:["eco"],ma:["recycle"],w:["새활용","되살림"],lab:"새활용"}],["업사이클",{th:["eco"],ma:["recycle"],lab:"새활용"}],["환경",{th:["eco"],w:["환경","지구"],lab:"환경"}],
+ ["그림책",{th:["story"],w:["그림책","동화"],lab:"그림책"}],["동화",{th:["story"],w:["동화","그림책"],lab:"동화"}],["상상",{th:["story"],lab:"상상놀이"}],
+ ["미술",{th:["arts"],ma:["paint"],lab:"미술"}],["그리기",{th:["arts"],ma:["paint"],w:["그리"],lab:"그리기"}],["만들기",{th:["arts","hands"],w:["만들"],lab:"만들기"}],["색깔",{th:["arts"],w:["색"],lab:"색"}],["물감",{th:["arts"],ma:["paint"],w:["물감"],lab:"물감"}],
+ ["음악",{th:["arts"],ma:["sound"],w:["음악","노래","악기","소리"],lab:"음악"}],["악기",{th:["arts"],ma:["sound"],w:["악기"],lab:"악기"}],["소리",{ma:["sound"],w:["소리"],lab:"소리"}],
+ ["손끝",{th:["hands"],lab:"손끝놀이"}],["소근육",{th:["hands"],lab:"소근육"}],["가위",{th:["hands"],w:["가위","자르"],lab:"가위질"}],
+ ["신체",{th:["body"],lab:"신체놀이"}],["대근육",{th:["body"],lab:"대근육"}],["체육",{th:["body"],lab:"신체놀이"}],["움직임",{th:["body"],w:["움직임"],lab:"움직임"}],
+ ["감각",{th:["senses"],ma:["sensory"],lab:"감각놀이"}],["오감",{th:["senses"],lab:"오감"}],["촉감",{th:["senses"],ma:["sensory"],w:["촉감"],lab:"촉감"}],
+ ["영아",{th:["senses"],w:["영아"],lab:"영아"}],["0세",{w:["영아"],th:["senses"],lab:"영아"}],["1세",{w:["영아"],th:["senses"],lab:"영아"}],["2세",{w:["영아","2세"],th:["senses"],lab:"영아"}],
+ ["숲",{th:["nature"],ma:["nature"],w:["숲"],lab:"숲놀이"}],["자연물",{ma:["nature"],w:["자연물","나뭇잎","솔방울"],lab:"자연물"}],["텃밭",{th:["nature","food"],w:["텃밭","수확"],lab:"텃밭"}],["산책",{th:["nature"],w:["산책","나들이"],lab:"산책"}],
+ ["요리",{th:["food"],ma:["food"],w:["요리","쿠킹","만들기"],lab:"요리"}],["쿠킹",{th:["food"],ma:["food"],w:["쿠킹","요리"],lab:"요리"}],["견학",{th:["events"],w:["견학","체험"],lab:"견학"}],["행사",{th:["events"],lab:"행사"}],
+ // 재료
+ ["종이",{ma:["paper"],w:["종이"],lab:"종이"}],["상자",{ma:["paper"],w:["상자","박스"],lab:"상자"}],["박스",{ma:["paper"],w:["상자","박스"],lab:"상자"}],["신문지",{ma:["paper"],w:["신문지"],lab:"신문지"}],["휴지심",{ma:["paper"],w:["휴지심"],lab:"휴지심"}],
+ ["테이프",{ma:["tape"],w:["테이프"],lab:"테이프"}],["시트지",{ma:["tape"],w:["시트지"],lab:"시트지"}],["실",{ma:["thread"],w:["실","끈"],lab:"실·끈"}],["털실",{ma:["thread"],w:["털실"],lab:"털실"}],
+ ["점토",{ma:["clay"],w:["점토","클레이"],lab:"점토"}],["클레이",{ma:["clay"],w:["클레이"],lab:"클레이"}],["밀가루",{ma:["clay"],w:["밀가루"],lab:"밀가루"}],["흙",{ma:["clay"],w:["흙"],lab:"흙"}],
+ ["수정토",{ma:["sensory"],w:["수정토"],lab:"수정토"}],["슬라임",{ma:["sensory"],w:["슬라임"],lab:"슬라임"}],["얼음",{ma:["sensory"],w:["얼음"],lab:"얼음"}],["모래",{ma:["sensory"],w:["모래"],lab:"모래"}],
+ ["빛",{ma:["light"],w:["빛","그림자","손전등"],lab:"빛"}],["그림자",{ma:["light"],w:["그림자"],lab:"그림자"}],["거울",{ma:["light"],w:["거울"],lab:"거울"}],
+ ["계란판",{ma:["recycle"],w:["계란판"],lab:"계란판"}],["병뚜껑",{ma:["recycle"],w:["병뚜껑"],lab:"병뚜껑"}],["페트병",{ma:["recycle"],w:["페트병"],lab:"페트병"}],["비닐",{ma:["recycle"],w:["비닐"],lab:"비닐"}],
+ ["자석",{ma:["magnet"],w:["자석"],lab:"자석"}],["공",{ma:["ball"],w:["공"],lab:"공"}],["풍선",{ma:["ball"],w:["풍선"],lab:"풍선"}],["구슬",{ma:["ball"],w:["구슬"],lab:"구슬"}],["폼폼이",{ma:["ball"],w:["폼폼"],lab:"폼폼이"}],
+ ["나뭇잎",{ma:["nature"],w:["나뭇잎","잎"],lab:"나뭇잎"}],["과일",{ma:["nature","food"],w:["과일","귤","딸기","수박","사과"],lab:"과일"}],
+ // 종류
+ ["가정통신문",{kind:"L",lab:"가정통신문"}],["통신문",{kind:"L",lab:"가정통신문"}],["놀이예상안",{kind:"L",lab:"놀이예상안"}],["안내문",{kind:"L",lab:"안내문"}],["소식",{kind:"N",lab:"서신 소식"}],["공지",{kind:"N",lab:"서신 소식"}]
+].sort((a,b)=>b[0].length-a[0].length);
+const STOP=["좋아하는","좋아해요","좋아하","재미있는","재밌는","아이들이","아이들","아이","우리 반","우리반","우리","선생님","추천해주세요","추천해 주세요","추천해줘","추천","알려주세요","알려줘","찾아주세요","찾아줘","보여주세요","보여줘","주세요","해주세요","관련된","관련","자료","아이디어","놀이활동","활동","놀이","하기","할만한","할 만한","좋은","있을까요","있나요","있어요","싶어요","필요해요","필요","어떤","무슨","뭐","좀","그리고","같은","위한","이용한","활용한","활용"];
+const JOSA=/(으로|에서|에게|하고|이랑|랑|까지|부터|처럼|이나|나|을|를|은|는|이|가|에|의|도|로|와|과)$/;
+
+function parseAsk(raw){
+  let q=" "+raw.toLowerCase().replace(/[?!.,~·]/g," ")+" ";
+  const hits=[];
+  const mo=raw.match(/(1[0-2]|[1-9])\s*월/g);const months=new Set();
+  if(mo)mo.forEach(x=>{months.add(parseInt(x));q=q.replace(x," ")});
+  for(const [k,v] of LEX){ if(q.includes(k)){hits.push(v);q=q.split(k).join(" ")} }
+  for(const s of STOP){q=q.split(s).join(" ")}
+  const free=q.split(/\s+/).map(t=>t.replace(JOSA,"")).filter(t=>t.length>=2);
+  const th=new Set(),ma=new Set(),w=new Set(),labs=new Set();let kind=null;
+  hits.forEach(h=>{(h.th||[]).forEach(x=>th.add(x));(h.ma||[]).forEach(x=>ma.add(x));(h.w||[]).forEach(x=>w.add(x));(h.mo||[]).forEach(x=>months.add(x));if(h.kind)kind=h.kind;labs.add(h.lab)});
+  [...months].forEach(m=>{if(!hits.some(h=>(h.mo||[]).includes(m)))labs.add(m+"월")});
+  free.forEach(f=>labs.add("‘"+f+"’"));
+  return {th,ma,w,months,free,kind,labs:[...labs]};
+}
+function scoreItem(i,p){
+  const t=i.t.toLowerCase();let s=0;
+  const inMonth=p.months.size&&p.months.has(+i.mo);
+  for(const f of p.free){ if(t.includes(f)) s+=6; }
+  for(const x of p.w){ if(t.includes(x)) s+=2; }
+  if(i.k==="P"){
+    s+=i.th.filter(x=>p.th.has(x)).length*3;
+    s+=i.m.filter(x=>p.ma.has(x)).length*2;
+    if(inMonth&&s>0) s+=1;
+  }else if(i.k==="L"){
+    // 가정통신문은 그 주 놀이예상안이 함께 실리니 달로 찾는다.
+    if(inMonth) s+=3;
+  }else{
+    // 서신 소식은 제목에 낱말이 있을 때만, 같은 달이면 조금 더 앞에.
+    if(inMonth&&s>0) s+=1;
+  }
+  // 낱말 없이 달만 적었으면(예: "10월 가정통신문") 그 달 자료만
+  if(!p.th.size&&!p.ma.size&&!p.w.size&&!p.free.length&&p.months.size) s=inMonth?3:0;
+  return s;
+}
+function runAsk(raw){
+  raw=(raw||"").trim();
+  if(!raw){closeResults();return}
+  const p=parseAsk(raw);
+  const empty=!p.th.size&&!p.ma.size&&!p.w.size&&!p.free.length&&!p.months.size;
+  const scored=items.map(i=>({i,s:empty?0:scoreItem(i,p)})).filter(x=>x.s>0&&(!p.kind||x.i.k===p.kind)&&inPeriod(x.i))
+    .sort((a,b)=>b.s-a.s||b.i.d.localeCompare(a.i.d));
+  // 놀이는 가장 잘 맞는 것의 45% 이상만 남겨 엉뚱한 결과를 줄인다.
+  const topP=Math.max(0,...scored.filter(x=>x.i.k==="P").map(x=>x.s));
+  const by={P:[],L:[],N:[]};scored.forEach(x=>{if(x.i.k!=="P"||x.s>=Math.max(2,topP*0.45))by[x.i.k].push(x.i)});
+  // 가정통신문·소식은 최신순이 더 쓸모 있다.
+  by.L.sort((a,b)=>b.d.localeCompare(a.d));by.N.sort((a,b)=>b.d.localeCompare(a.d));
+  st.ask=raw;st.askBy=by;st.askOpen={};
+  $("ask").value=raw;
+  try{history.replaceState(null,"","?q="+encodeURIComponent(raw))}catch(e){}
+  drawResults(p);
+  $("browse").hidden=true;$("results").hidden=false;
+  window.scrollTo({top:$("results").offsetTop-80,behavior:"smooth"});
+}
+function drawResults(p){
+  const by=st.askBy, total=by.P.length+by.L.length+by.N.length;
+  const sec=(k,title,lim)=>{const list=by[k];if(!list.length)return"";const open=st.askOpen[k],shown=open?list:list.slice(0,lim);
+    return `<section class="group"><div class="gh"><h2>${title}</h2><span class="n">${list.length}</span></div><ul class="items">${shown.map(card).join("")}</ul>${shown.length<list.length?`<button type="button" class="more" data-ask-open="${k}">${list.length-shown.length}개 더 보기</button>`:""}</section>`};
+  $("results").innerHTML=`<div class="res-head"><button type="button" class="back" id="resBack">← 전체 목록으로</button>
+    <h2>‘${h(st.ask)}’ 찾은 자료 <span class="n">${total}</span></h2>
+    ${p.labs.length?`<p class="res-labs">이렇게 찾았어요: ${p.labs.map(l=>`<i>${h(l)}</i>`).join("")}</p>`:""}</div>`+
+    (total?sec("P","🧸 놀이",12)+sec("L","📮 가정통신문 · 놀이예상안",6)+sec("N","📢 서신 소식",6)
+      :`<p class="empty">찾은 자료가 없어요. ‘가을’, ‘거미’, ‘재활용’처럼 짧은 낱말로 다시 적어 보세요.</p>`);
+}
+function closeResults(){st.ask="";$("results").hidden=true;$("browse").hidden=false;$("ask").value="";try{history.replaceState(null,"",location.pathname+location.hash)}catch(e){}}
+$("results").addEventListener("click",e=>{
+  if(e.target.closest("#resBack")){closeResults();return}
+  const b=e.target.closest("[data-ask-open]");if(b){st.askOpen[b.dataset.askOpen]=true;drawResults(parseAsk(st.ask))}
+});
+$("results").addEventListener("contextmenu",e=>{if(e.target.closest("img"))e.preventDefault()});
+
+const EXAMPLES=["가을 놀이 추천","영아 감각 놀이","재활용 만들기","추석 전통 놀이","겨울 과학 실험","새학기 적응","10월 가정통신문","거미"];
+const exHTML=EXAMPLES.map(x=>`<button type="button" data-ex="${x}">${x}</button>`).join("");
+$("askEx").innerHTML=exHTML;$("askEx2").innerHTML=exHTML;
+$("askForm").addEventListener("submit",e=>{e.preventDefault();runAsk($("ask").value)});
+$("askEx").addEventListener("click",e=>{const b=e.target.closest("[data-ex]");if(b)runAsk(b.dataset.ex)});
+const modal=$("askModal");
+function openModal(){modal.hidden=false;$("ask2").value="";setTimeout(()=>$("ask2").focus(),50)}
+function closeModal(){modal.hidden=true;try{if($("askNoMore").checked)localStorage.setItem("seoshinAskNoPopup","1")}catch(e){}}
+$("askForm2").addEventListener("submit",e=>{e.preventDefault();closeModal();runAsk($("ask2").value)});
+$("askEx2").addEventListener("click",e=>{const b=e.target.closest("[data-ex]");if(b){closeModal();runAsk(b.dataset.ex)}});
+$("askSkip").onclick=closeModal;$("askClose").onclick=closeModal;
+modal.addEventListener("click",e=>{if(e.target===modal)closeModal()});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!modal.hidden)closeModal()});
+$("askFab").onclick=openModal;
+
 if(location.hash==="#letters")st.kind="L"; else if(location.hash==="#news")st.kind="N";
 render();
+const q0=new URLSearchParams(location.search).get("q");
+if(q0){runAsk(q0)}
+else{let skip=false;try{skip=localStorage.getItem("seoshinAskNoPopup")==="1"}catch(e){}
+  if(!skip&&!location.hash)openModal();}
 </script>
 </body>
 </html>
