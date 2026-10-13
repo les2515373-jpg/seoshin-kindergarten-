@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>지난 가정통신문 | 국공립 서신어린이집</title>
-  <meta name="description" content="국공립 서신어린이집 주간 가정통신문 「GOOD DAY, SEO SHIN」 보관함. 2026년 3월부터 발행한 가정통신문을 월별로 보실 수 있습니다.">
+  <meta name="description" content="국공립 서신어린이집 주간 가정통신문 「GOOD DAY, SEO SHIN」 보관함. 2026년 3월부터 발행한 가정통신문을 월별·주제별로 보실 수 있습니다.">
   <link rel="canonical" href="https://seoshin-kindergarten.vercel.app/letters.html">
   <meta name="robots" content="index, follow">
   <meta name="theme-color" content="#A8E6CF">
@@ -87,44 +87,42 @@
     }
     .lt-monthnav-inner {
       max-width:1100px; margin:0 auto;
-      display:flex; gap:9px; flex-wrap:wrap; justify-content:center;
+      display:flex; gap:14px; align-items:center; justify-content:space-between; flex-wrap:wrap;
     }
-    .lt-monthnav a {
-      font-size:13.5px; font-weight:700; text-decoration:none;
+    .lt-chips { display:flex; gap:7px; flex-wrap:wrap; }
+    .lt-chips button {
+      font-family:inherit; cursor:pointer;
+      font-size:13px; font-weight:700;
       color:var(--text-mid); background:var(--white);
       border:var(--border); border-radius:50px;
-      padding:9px 20px; transition:all .2s;
+      padding:8px 16px; transition:all .2s;
     }
-    .lt-monthnav a:hover { background:var(--mint); color:var(--text-dark); border-color:transparent; }
+    .lt-chips button:hover { background:var(--mint-light); color:var(--mint-dark); }
+    .lt-chips button.on { background:var(--mint); color:var(--text-dark); border-color:transparent; }
+    .lt-search { position:relative; flex:0 1 300px; }
+    .lt-search input {
+      width:100%; font-family:inherit; font-size:14px;
+      padding:10px 16px 10px 38px; border-radius:50px;
+      border:1.5px solid rgba(61,44,44,0.14); background:var(--white); color:var(--text-dark);
+    }
+    .lt-search input:focus { outline:none; border-color:var(--mint-dark); box-shadow:0 0 0 3px var(--mint-light); }
+    .lt-search::before { content:'🔍'; position:absolute; left:14px; top:50%; transform:translateY(-50%); font-size:13px; }
+    .lt-quick { max-width:1100px; margin:10px auto 0; font-size:12.5px; color:var(--text-light); display:flex; gap:6px; flex-wrap:wrap; align-items:center; }
+    .lt-quick button {
+      font-family:inherit; cursor:pointer; font-size:12px; font-weight:600;
+      background:none; border:0; color:var(--mint-dark); padding:2px 4px; text-decoration:underline; text-underline-offset:3px;
+    }
+    .lt-empty { text-align:center; padding:60px 20px; color:var(--text-mid); font-size:15px; line-height:1.8; }
 
-    .lt-wrap { max-width:1100px; margin:0 auto; padding:52px 24px 72px; }
-    .lt-month { margin-bottom:56px; scroll-margin-top:132px; }
+    .lt-wrap { max-width:1100px; margin:0 auto; padding:44px 24px 72px; }
+    .lt-month { margin-bottom:52px; }
     .lt-month h2 {
       font-family:'Gowun Dodum','Noto Sans KR',sans-serif;
       font-size:25px; font-weight:700; color:var(--mint-dark);
       padding-bottom:14px; margin-bottom:24px;
       border-bottom:2px solid var(--mint-light);
     }
-    .lt-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:20px; }
-    .lt-card {
-      background:var(--white); border:var(--border); border-radius:20px;
-      overflow:hidden; box-shadow:var(--shadow-sm);
-      transition:transform .2s, box-shadow .2s;
-    }
-    .lt-card:hover { transform:translateY(-3px); box-shadow:var(--shadow); }
-    .lt-thumb { display:block; aspect-ratio:108/153; overflow:hidden; background:var(--bg-main); }
-    .lt-thumb img { width:100%; height:100%; object-fit:cover; object-position:top center; display:block; }
-    .lt-meta { padding:15px 17px 17px; }
-    .lt-meta h3 { font-size:15px; font-weight:700; margin-bottom:4px; }
-    .lt-meta .ld { font-size:12px; font-weight:600; color:var(--text-light); margin-bottom:12px; }
-    .lt-pages { display:flex; gap:8px; }
-    .lt-pages a {
-      flex:1; text-align:center; font-size:12.5px; font-weight:700;
-      padding:8px 0; border-radius:50px;
-      background:var(--mint-light); color:var(--mint-dark);
-      text-decoration:none; transition:background .2s, color .2s;
-    }
-    .lt-pages a:hover { background:var(--mint); color:var(--text-dark); }
+    .lt-month h2 small { font-family:'Noto Sans KR',sans-serif; font-size:13px; font-weight:600; color:var(--text-light); margin-left:10px; }
 
     .lt-note {
       max-width:760px; margin:0 auto;
@@ -142,17 +140,21 @@
     .lt-foot a:hover { transform:translateY(-2px); box-shadow:var(--shadow); }
 
     @media (max-width:768px) {
-      .lt-head { padding:46px 20px 28px; }
+      .lt-head { padding:40px 20px 24px; }
       .lt-head h1 { font-size:25px; }
-      .lt-wrap { padding:36px 18px 56px; }
-      .lt-grid { grid-template-columns:1fr 1fr; gap:12px; }
-      .lt-meta { padding:12px 13px 14px; }
-      .lt-meta h3 { font-size:13.5px; }
-      .lt-pages a { font-size:11.5px; padding:7px 0; }
+      .lt-head p { font-size:14px; }
+      .lt-monthnav { padding:10px 16px; }
+      .lt-monthnav-inner { gap:10px; }
+      .lt-search { flex:1 1 100%; order:-1; }
+      .lt-chips { flex-wrap:nowrap; overflow-x:auto; margin:0 -16px; padding:0 16px 2px; scrollbar-width:none; width:calc(100% + 32px); }
+      .lt-chips::-webkit-scrollbar { display:none; }
+      .lt-chips button { flex:none; font-size:12.5px; padding:7px 14px; }
+      .lt-quick { display:none; }
+      .lt-wrap { padding:28px 16px 56px; }
       .lt-month h2 { font-size:21px; }
-      .lt-monthnav a { font-size:12.5px; padding:8px 16px; }
     }
   </style>
+  <link rel="stylesheet" href="letters.css">
 </head>
 <body>
 
@@ -166,244 +168,26 @@
 <header class="lt-head">
   <div class="lt-badge">서신 소식</div>
   <h1>지난 가정통신문</h1>
-  <p>매주 발행하는 「GOOD DAY, SEO SHIN」을 월별로 모았습니다.<br>표지를 누르면 크게 보실 수 있어요.</p>
+  <p>매주 발행하는 가정통신문 <strong id="lt-count"></strong>호를 모두 모았습니다.<br>월별로 보거나 부모교육 주제로 찾아보세요. 표지를 누르면 크게 넘겨 볼 수 있어요.</p>
 </header>
 
 <div class="lt-monthnav">
   <div class="lt-monthnav-inner">
-    <a href="#m2026-07">2026년 7월</a>
-    <a href="#m2026-06">2026년 6월</a>
-    <a href="#m2026-05">2026년 5월</a>
-    <a href="#m2026-04">2026년 4월</a>
-    <a href="#m2026-03">2026년 3월</a>
+    <div class="lt-chips" id="lt-chips" aria-label="월별 보기"></div>
+    <label class="lt-search"><input type="search" id="lt-q" placeholder="주제로 찾기 (예: 채소, 식중독)" aria-label="가정통신문 주제 검색"></label>
+  </div>
+  <div class="lt-quick">자주 찾는 주제:
+    <button type="button" data-q="채소 토마토 애호박 파프리카 고구마순 아욱 달걀 보양식 당류 배달음식">음식·영양</button>
+    <button type="button" data-q="예방 건강 미세먼지 식중독">건강·위생</button>
+    <button type="button" data-q="수줍음 감정 들을까 호기심 스마트폰 부모의 용기">아이 마음·대화법</button>
+    <button type="button" data-q="전주 행사 숲놀이터">가볼 만한 곳·행사</button>
   </div>
 </div>
 
 <main class="lt-wrap">
-
-  <!-- ═══════════ 2026년 7월 ═══════════ -->
-  <section class="lt-month" id="m2026-07">
-    <h2>2026년 7월</h2>
-    <div class="lt-grid">
-      <div class="lt-card">
-        <a href="images/letters/letter-2026-07-w5-1.jpg" target="_blank" rel="noopener noreferrer" class="lt-thumb">
-          <img src="images/letters/letter-2026-07-w5-1.jpg" alt="2026년 7월 5주~8월 1주 가정통신문" loading="lazy"></a>
-        <div class="lt-meta"><h3>7월 5주 ~ 8월 1주</h3><p class="ld">2026.07.27 ~ 08.08</p>
-          <div class="lt-pages">
-            <a href="images/letters/letter-2026-07-w5-1.jpg" target="_blank" rel="noopener noreferrer">1면</a>
-            <a href="images/letters/letter-2026-07-w5-2.jpg" target="_blank" rel="noopener noreferrer">2면</a>
-          </div></div>
-      </div>
-      <div class="lt-card">
-        <a href="images/letters/letter-2026-07-w4-1.jpg" target="_blank" rel="noopener noreferrer" class="lt-thumb">
-          <img src="images/letters/letter-2026-07-w4-1.jpg" alt="2026년 7월 4주 가정통신문" loading="lazy"></a>
-        <div class="lt-meta"><h3>7월 네 번째 주</h3><p class="ld">2026.07.20 ~ 07.25</p>
-          <div class="lt-pages">
-            <a href="images/letters/letter-2026-07-w4-1.jpg" target="_blank" rel="noopener noreferrer">1면</a>
-            <a href="images/letters/letter-2026-07-w4-2.jpg" target="_blank" rel="noopener noreferrer">2면</a>
-          </div></div>
-      </div>
-      <div class="lt-card">
-        <a href="images/letters/letter-2026-07-w3-1.jpg" target="_blank" rel="noopener noreferrer" class="lt-thumb">
-          <img src="images/letters/letter-2026-07-w3-1.jpg" alt="2026년 7월 3주 가정통신문" loading="lazy"></a>
-        <div class="lt-meta"><h3>7월 세 번째 주</h3><p class="ld">2026.07.13 ~ 07.18</p>
-          <div class="lt-pages">
-            <a href="images/letters/letter-2026-07-w3-1.jpg" target="_blank" rel="noopener noreferrer">1면</a>
-            <a href="images/letters/letter-2026-07-w3-2.jpg" target="_blank" rel="noopener noreferrer">2면</a>
-          </div></div>
-      </div>
-      <div class="lt-card">
-        <a href="images/letters/letter-2026-07-w2-1.jpg" target="_blank" rel="noopener noreferrer" class="lt-thumb">
-          <img src="images/letters/letter-2026-07-w2-1.jpg" alt="2026년 7월 2주 가정통신문" loading="lazy"></a>
-        <div class="lt-meta"><h3>7월 두 번째 주</h3><p class="ld">2026.07.06 ~ 07.11</p>
-          <div class="lt-pages">
-            <a href="images/letters/letter-2026-07-w2-1.jpg" target="_blank" rel="noopener noreferrer">1면</a>
-            <a href="images/letters/letter-2026-07-w2-2.jpg" target="_blank" rel="noopener noreferrer">2면</a>
-          </div></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════ 2026년 6월 ═══════════ -->
-  <section class="lt-month" id="m2026-06">
-    <h2>2026년 6월</h2>
-    <div class="lt-grid">
-      <div class="lt-card">
-        <a href="images/letters/letter-2026-06-w4-1.jpg" target="_blank" rel="noopener noreferrer" class="lt-thumb">
-          <img src="images/letters/letter-2026-06-w4-1.jpg" alt="2026년 6월 4주 가정통신문" loading="lazy"></a>
-        <div class="lt-meta"><h3>6월 네 번째 주</h3><p class="ld">2026.06.22 ~ 06.27</p>
-          <div class="lt-pages">
-            <a href="images/letters/letter-2026-06-w4-1.jpg" target="_blank" rel="noopener noreferrer">1면</a>
-            <a href="images/letters/letter-2026-06-w4-2.jpg" target="_blank" rel="noopener noreferrer">2면</a>
-          </div></div>
-      </div>
-      <div class="lt-card">
-        <a href="images/letters/letter-2026-06-w3-1.jpg" target="_blank" rel="noopener noreferrer" class="lt-thumb">
-          <img src="images/letters/letter-2026-06-w3-1.jpg" alt="2026년 6월 3주 가정통신문" loading="lazy"></a>
-        <div class="lt-meta"><h3>6월 세 번째 주</h3><p class="ld">2026.06.15 ~ 06.20</p>
-          <div class="lt-pages">
-            <a href="images/letters/letter-2026-06-w3-1.jpg" target="_blank" rel="noopener noreferrer">1면</a>
-            <a href="images/letters/letter-2026-06-w3-2.jpg" target="_blank" rel="noopener noreferrer">2면</a>
-          </div></div>
-      </div>
-      <div class="lt-card">
-        <a href="images/letters/letter-2026-06-w2-1.jpg" target="_blank" rel="noopener noreferrer" class="lt-thumb">
-          <img src="images/letters/letter-2026-06-w2-1.jpg" alt="2026년 6월 2주 가정통신문" loading="lazy"></a>
-        <div class="lt-meta"><h3>6월 두 번째 주</h3><p class="ld">2026.06.08 ~ 06.13</p>
-          <div class="lt-pages">
-            <a href="images/letters/letter-2026-06-w2-1.jpg" target="_blank" rel="noopener noreferrer">1면</a>
-            <a href="images/letters/letter-2026-06-w2-2.jpg" target="_blank" rel="noopener noreferrer">2면</a>
-          </div></div>
-      </div>
-      <div class="lt-card">
-        <a href="images/letters/letter-2026-06-w1-1.jpg" target="_blank" rel="noopener noreferrer" class="lt-thumb">
-          <img src="images/letters/letter-2026-06-w1-1.jpg" alt="2026년 6월 1주 가정통신문" loading="lazy"></a>
-        <div class="lt-meta"><h3>6월 첫 번째 주</h3><p class="ld">2026.06.01 ~ 06.06</p>
-          <div class="lt-pages">
-            <a href="images/letters/letter-2026-06-w1-1.jpg" target="_blank" rel="noopener noreferrer">1면</a>
-            <a href="images/letters/letter-2026-06-w1-2.jpg" target="_blank" rel="noopener noreferrer">2면</a>
-          </div></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════ 2026년 5월 ═══════════ -->
-  <section class="lt-month" id="m2026-05">
-    <h2>2026년 5월</h2>
-    <div class="lt-grid">
-      <div class="lt-card">
-        <a href="images/letters/letter-2026-05-w4-1.jpg" target="_blank" rel="noopener noreferrer" class="lt-thumb">
-          <img src="images/letters/letter-2026-05-w4-1.jpg" alt="2026년 5월 4주 가정통신문" loading="lazy"></a>
-        <div class="lt-meta"><h3>5월 네 번째 주</h3><p class="ld">2026.05.25 ~ 05.30</p>
-          <div class="lt-pages">
-            <a href="images/letters/letter-2026-05-w4-1.jpg" target="_blank" rel="noopener noreferrer">1면</a>
-            <a href="images/letters/letter-2026-05-w4-2.jpg" target="_blank" rel="noopener noreferrer">2면</a>
-          </div></div>
-      </div>
-      <div class="lt-card">
-        <a href="images/letters/letter-2026-05-w3-1.jpg" target="_blank" rel="noopener noreferrer" class="lt-thumb">
-          <img src="images/letters/letter-2026-05-w3-1.jpg" alt="2026년 5월 3주 가정통신문" loading="lazy"></a>
-        <div class="lt-meta"><h3>5월 세 번째 주</h3><p class="ld">2026.05.18 ~ 05.23</p>
-          <div class="lt-pages">
-            <a href="images/letters/letter-2026-05-w3-1.jpg" target="_blank" rel="noopener noreferrer">1면</a>
-            <a href="images/letters/letter-2026-05-w3-2.jpg" target="_blank" rel="noopener noreferrer">2면</a>
-          </div></div>
-      </div>
-      <div class="lt-card">
-        <a href="images/letters/letter-2026-05-w2-1.jpg" target="_blank" rel="noopener noreferrer" class="lt-thumb">
-          <img src="images/letters/letter-2026-05-w2-1.jpg" alt="2026년 5월 2주 가정통신문" loading="lazy"></a>
-        <div class="lt-meta"><h3>5월 두 번째 주</h3><p class="ld">2026.05.11 ~ 05.16</p>
-          <div class="lt-pages">
-            <a href="images/letters/letter-2026-05-w2-1.jpg" target="_blank" rel="noopener noreferrer">1면</a>
-            <a href="images/letters/letter-2026-05-w2-2.jpg" target="_blank" rel="noopener noreferrer">2면</a>
-          </div></div>
-      </div>
-      <div class="lt-card">
-        <a href="images/letters/letter-2026-05-w1-1.jpg" target="_blank" rel="noopener noreferrer" class="lt-thumb">
-          <img src="images/letters/letter-2026-05-w1-1.jpg" alt="2026년 5월 1주 가정통신문" loading="lazy"></a>
-        <div class="lt-meta"><h3>5월 첫 번째 주</h3><p class="ld">2026.05.04 ~ 05.09</p>
-          <div class="lt-pages">
-            <a href="images/letters/letter-2026-05-w1-1.jpg" target="_blank" rel="noopener noreferrer">1면</a>
-            <a href="images/letters/letter-2026-05-w1-2.jpg" target="_blank" rel="noopener noreferrer">2면</a>
-          </div></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════ 2026년 4월 ═══════════ -->
-  <section class="lt-month" id="m2026-04">
-    <h2>2026년 4월</h2>
-    <div class="lt-grid">
-      <div class="lt-card">
-        <a href="images/letters/letter-2026-04-w5-1.jpg" target="_blank" rel="noopener noreferrer" class="lt-thumb">
-          <img src="images/letters/letter-2026-04-w5-1.jpg" alt="2026년 4월 5주 가정통신문" loading="lazy"></a>
-        <div class="lt-meta"><h3>4월 다섯 번째 주</h3><p class="ld">2026.04.27 ~ 05.02</p>
-          <div class="lt-pages">
-            <a href="images/letters/letter-2026-04-w5-1.jpg" target="_blank" rel="noopener noreferrer">1면</a>
-            <a href="images/letters/letter-2026-04-w5-2.jpg" target="_blank" rel="noopener noreferrer">2면</a>
-          </div></div>
-      </div>
-      <div class="lt-card">
-        <a href="images/letters/letter-2026-04-w4-1.jpg" target="_blank" rel="noopener noreferrer" class="lt-thumb">
-          <img src="images/letters/letter-2026-04-w4-1.jpg" alt="2026년 4월 4주 가정통신문" loading="lazy"></a>
-        <div class="lt-meta"><h3>4월 네 번째 주</h3><p class="ld">2026.04.20 ~ 04.25</p>
-          <div class="lt-pages">
-            <a href="images/letters/letter-2026-04-w4-1.jpg" target="_blank" rel="noopener noreferrer">1면</a>
-            <a href="images/letters/letter-2026-04-w4-2.jpg" target="_blank" rel="noopener noreferrer">2면</a>
-          </div></div>
-      </div>
-      <div class="lt-card">
-        <a href="images/letters/letter-2026-04-w3-1.jpg" target="_blank" rel="noopener noreferrer" class="lt-thumb">
-          <img src="images/letters/letter-2026-04-w3-1.jpg" alt="2026년 4월 3주 가정통신문" loading="lazy"></a>
-        <div class="lt-meta"><h3>4월 세 번째 주</h3><p class="ld">2026.04.13 ~ 04.18</p>
-          <div class="lt-pages">
-            <a href="images/letters/letter-2026-04-w3-1.jpg" target="_blank" rel="noopener noreferrer">1면</a>
-            <a href="images/letters/letter-2026-04-w3-2.jpg" target="_blank" rel="noopener noreferrer">2면</a>
-          </div></div>
-      </div>
-      <div class="lt-card">
-        <a href="images/letters/letter-2026-04-w2-1.jpg" target="_blank" rel="noopener noreferrer" class="lt-thumb">
-          <img src="images/letters/letter-2026-04-w2-1.jpg" alt="2026년 4월 2주 가정통신문" loading="lazy"></a>
-        <div class="lt-meta"><h3>4월 두 번째 주</h3><p class="ld">2026.04.06 ~ 04.11</p>
-          <div class="lt-pages">
-            <a href="images/letters/letter-2026-04-w2-1.jpg" target="_blank" rel="noopener noreferrer">1면</a>
-            <a href="images/letters/letter-2026-04-w2-2.jpg" target="_blank" rel="noopener noreferrer">2면</a>
-          </div></div>
-      </div>
-      <div class="lt-card">
-        <a href="images/letters/letter-2026-04-w1-1.jpg" target="_blank" rel="noopener noreferrer" class="lt-thumb">
-          <img src="images/letters/letter-2026-04-w1-1.jpg" alt="2026년 4월 1주 가정통신문" loading="lazy"></a>
-        <div class="lt-meta"><h3>4월 첫 번째 주</h3><p class="ld">2026.03.30 ~ 04.04</p>
-          <div class="lt-pages">
-            <a href="images/letters/letter-2026-04-w1-1.jpg" target="_blank" rel="noopener noreferrer">1면</a>
-            <a href="images/letters/letter-2026-04-w1-2.jpg" target="_blank" rel="noopener noreferrer">2면</a>
-          </div></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════ 2026년 3월 ═══════════ -->
-  <section class="lt-month" id="m2026-03">
-    <h2>2026년 3월</h2>
-    <div class="lt-grid">
-      <div class="lt-card">
-        <a href="images/letters/letter-2026-03-w4-1.jpg" target="_blank" rel="noopener noreferrer" class="lt-thumb">
-          <img src="images/letters/letter-2026-03-w4-1.jpg" alt="2026년 3월 4주 가정통신문" loading="lazy"></a>
-        <div class="lt-meta"><h3>3월 네 번째 주</h3><p class="ld">2026.03.23 ~ 03.28</p>
-          <div class="lt-pages">
-            <a href="images/letters/letter-2026-03-w4-1.jpg" target="_blank" rel="noopener noreferrer">1면</a>
-            <a href="images/letters/letter-2026-03-w4-2.jpg" target="_blank" rel="noopener noreferrer">2면</a>
-          </div></div>
-      </div>
-      <div class="lt-card">
-        <a href="images/letters/letter-2026-03-w3-1.jpg" target="_blank" rel="noopener noreferrer" class="lt-thumb">
-          <img src="images/letters/letter-2026-03-w3-1.jpg" alt="2026년 3월 3주 가정통신문" loading="lazy"></a>
-        <div class="lt-meta"><h3>3월 세 번째 주</h3><p class="ld">2026.03.16 ~ 03.21</p>
-          <div class="lt-pages">
-            <a href="images/letters/letter-2026-03-w3-1.jpg" target="_blank" rel="noopener noreferrer">1면</a>
-            <a href="images/letters/letter-2026-03-w3-2.jpg" target="_blank" rel="noopener noreferrer">2면</a>
-          </div></div>
-      </div>
-      <div class="lt-card">
-        <a href="images/letters/letter-2026-03-w2-1.jpg" target="_blank" rel="noopener noreferrer" class="lt-thumb">
-          <img src="images/letters/letter-2026-03-w2-1.jpg" alt="2026년 3월 2주 가정통신문" loading="lazy"></a>
-        <div class="lt-meta"><h3>3월 두 번째 주</h3><p class="ld">2026.03.09 ~ 03.14</p>
-          <div class="lt-pages">
-            <a href="images/letters/letter-2026-03-w2-1.jpg" target="_blank" rel="noopener noreferrer">1면</a>
-            <a href="images/letters/letter-2026-03-w2-2.jpg" target="_blank" rel="noopener noreferrer">2면</a>
-          </div></div>
-      </div>
-      <div class="lt-card">
-        <a href="images/letters/letter-2026-03-w1-1.jpg" target="_blank" rel="noopener noreferrer" class="lt-thumb">
-          <img src="images/letters/letter-2026-03-w1-1.jpg" alt="2026년 3월 1주 가정통신문" loading="lazy"></a>
-        <div class="lt-meta"><h3>3월 첫 번째 주</h3><p class="ld">2026.03.02 ~ 03.07</p>
-          <div class="lt-pages">
-            <a href="images/letters/letter-2026-03-w1-1.jpg" target="_blank" rel="noopener noreferrer">1면</a>
-            <a href="images/letters/letter-2026-03-w1-2.jpg" target="_blank" rel="noopener noreferrer">2면</a>
-          </div></div>
-      </div>
-    </div>
-  </section>
+  <div id="lt-list"></div>
+  <p class="lt-empty" id="lt-empty" hidden>찾으시는 가정통신문이 없어요.<br>다른 낱말로 검색해 보시거나 '전체'를 눌러 주세요.</p>
+  <noscript><p class="lt-empty">가정통신문 목록을 보려면 브라우저의 자바스크립트를 켜 주세요.</p></noscript>
 
   <p class="lt-note">
     ※ 아이들의 개인정보 보호를 위해 <strong>이름과 얼굴은 가려서</strong> 게시하고 있습니다.<br>
@@ -415,5 +199,16 @@
   <a href="/#notice">← 홈페이지로 돌아가기</a>
 </div>
 
+<script src="letters-data.js"></script>
+<script src="letters.js"></script>
+<script>
+  renderLetterArchive({
+    list: document.getElementById('lt-list'),
+    nav: document.getElementById('lt-chips'),
+    search: document.getElementById('lt-q'),
+    empty: document.getElementById('lt-empty'),
+    count: document.getElementById('lt-count')
+  });
+</script>
 </body>
 </html>

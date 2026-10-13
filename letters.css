@@ -1,0 +1,145 @@
+/* 가정통신문 카드 · 최신호 · 크게 보기(뷰어) — index.html 과 letters.html 이 함께 씁니다 */
+
+/* ── 카드 ── */
+.lc-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:20px; }
+.lc-grid-3 { grid-template-columns:repeat(3,1fr); }
+.lc-card {
+  background:var(--white); border:var(--border); border-radius:20px;
+  overflow:hidden; box-shadow:var(--shadow-sm);
+  transition:transform .2s, box-shadow .2s;
+  display:flex; flex-direction:column;
+}
+.lc-card:hover { transform:translateY(-3px); box-shadow:var(--shadow); }
+.lc-thumb { position:relative; display:block; aspect-ratio:108/120; overflow:hidden; background:var(--bg-main); }
+.lc-thumb img { width:100%; height:100%; object-fit:cover; object-position:top center; display:block; transition:transform .35s; }
+.lc-card:hover .lc-thumb img { transform:scale(1.03); }
+.lc-new {
+  position:absolute; top:10px; left:10px;
+  background:var(--peach-dark); color:#fff;
+  font-size:11px; font-weight:800; letter-spacing:.5px;
+  padding:4px 10px; border-radius:50px; box-shadow:0 2px 6px rgba(0,0,0,.15);
+}
+.lc-meta { padding:15px 17px 17px; display:flex; flex-direction:column; flex:1; }
+.lc-meta h3 { font-size:15px; font-weight:700; margin-bottom:3px; color:var(--text-dark); }
+.lc-date { font-size:12px; font-weight:600; color:var(--text-light); margin-bottom:10px; }
+.lc-topic {
+  font-size:13px; line-height:1.55; color:var(--text-mid); margin-bottom:14px; flex:1;
+}
+.lc-topic span {
+  display:inline-block; font-size:10.5px; font-weight:800; color:var(--mint-dark);
+  background:var(--mint-light); border-radius:4px; padding:1px 6px; margin-right:6px; vertical-align:1px;
+}
+.lc-pages { display:flex; gap:6px; }
+.lc-pages a {
+  flex:1; text-align:center; font-size:12px; font-weight:700;
+  padding:8px 0; border-radius:50px; white-space:nowrap;
+  background:var(--mint-light); color:var(--mint-dark);
+  text-decoration:none; transition:background .2s, color .2s;
+}
+.lc-pages a:hover { background:var(--mint); color:var(--text-dark); }
+
+/* ── 홈페이지 최신호 ── */
+.lf-feature {
+  display:grid; grid-template-columns:1.25fr 1fr; gap:36px; align-items:center;
+  background:linear-gradient(145deg, var(--mint-light), var(--peach-light));
+  border-radius:28px; padding:32px;
+}
+.lf-pages { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+.lf-pages a {
+  position:relative; display:block; border-radius:14px; overflow:hidden;
+  background:#fff; box-shadow:var(--shadow); aspect-ratio:1080/1528;
+  transition:transform .2s;
+}
+.lf-pages a:hover { transform:translateY(-4px) rotate(-.4deg); }
+.lf-pages img { width:100%; height:100%; object-fit:cover; display:block; }
+.lf-pages span {
+  position:absolute; left:8px; bottom:8px;
+  background:rgba(61,44,44,.78); color:#fff; font-size:11.5px; font-weight:700;
+  padding:4px 10px; border-radius:50px;
+}
+.lf-badge {
+  display:inline-block; background:#fff; color:var(--peach-dark);
+  font-size:13px; font-weight:800; padding:7px 16px; border-radius:50px;
+  box-shadow:var(--shadow-sm); margin-bottom:16px;
+}
+.lf-info h3 {
+  font-family:'Gowun Dodum','Noto Sans KR',sans-serif;
+  font-size:30px; font-weight:700; line-height:1.3; margin-bottom:6px; color:var(--text-dark);
+}
+.lf-date { font-size:14px; font-weight:600; color:var(--text-mid); margin-bottom:20px; }
+.lf-topic {
+  background:rgba(255,255,255,.75); border-radius:16px; padding:14px 18px;
+  font-size:15px; line-height:1.6; color:var(--text-dark); margin-bottom:22px;
+}
+.lf-topic b { display:block; font-size:12px; color:var(--mint-dark); margin-bottom:3px; }
+.lf-read {
+  font-family:inherit; font-size:15px; font-weight:700; cursor:pointer;
+  border:0; border-radius:50px; padding:14px 28px;
+  background:var(--text-dark); color:#fff; transition:transform .2s, box-shadow .2s;
+}
+.lf-read:hover { transform:translateY(-2px); box-shadow:var(--shadow); }
+.lf-sub {
+  font-family:'Gowun Dodum','Noto Sans KR',sans-serif;
+  font-size:19px; font-weight:700; color:var(--mint-dark);
+  margin:40px 4px 16px; padding-bottom:10px; border-bottom:var(--border);
+}
+
+/* ── 크게 보기 ── */
+.lv {
+  position:fixed; inset:0; z-index:10000; display:none;
+  background:rgba(30,24,24,.97); color:#fff;
+  flex-direction:column;
+}
+.lv.on { display:flex; }
+.lv-bar {
+  display:flex; align-items:center; gap:14px; padding:12px 18px;
+  background:rgba(0,0,0,.25);
+}
+.lv-title { flex:1; min-width:0; }
+.lv-title b { display:block; font-size:15px; }
+.lv-title span { display:block; font-size:12.5px; opacity:.72; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.lv-tabs { display:flex; background:rgba(255,255,255,.12); border-radius:50px; padding:3px; }
+.lv-tabs button {
+  font-family:inherit; font-size:13px; font-weight:700; cursor:pointer;
+  border:0; background:none; color:#fff; padding:7px 16px; border-radius:50px; opacity:.75;
+}
+.lv-tabs button.on { background:var(--mint); color:var(--text-dark); opacity:1; }
+.lv-x {
+  font-size:20px; line-height:1; cursor:pointer; border:0; color:#fff;
+  background:rgba(255,255,255,.12); width:40px; height:40px; border-radius:50%;
+}
+.lv-stage { flex:1; overflow:auto; text-align:center; padding:16px 70px; -webkit-overflow-scrolling:touch; }
+.lv-stage img { max-width:min(100%, 860px); height:auto; border-radius:6px; box-shadow:0 10px 40px rgba(0,0,0,.5); background:#fff; }
+.lv-nav {
+  position:absolute; top:50%; transform:translateY(-50%);
+  width:52px; height:52px; border-radius:50%; border:0; cursor:pointer;
+  background:rgba(255,255,255,.16); color:#fff; font-size:34px; line-height:1;
+}
+.lv-nav:hover:not(:disabled) { background:rgba(255,255,255,.3); }
+.lv-nav:disabled { opacity:.2; cursor:default; }
+.lv-prev { left:12px; } .lv-next { right:12px; }
+.lv-foot { display:flex; justify-content:space-between; gap:12px; padding:10px 18px 14px; font-size:12.5px; }
+.lv-hint { opacity:.6; }
+.lv-orig { color:var(--mint); text-decoration:none; font-weight:700; }
+
+@media (max-width:1000px) {
+  .lc-grid { grid-template-columns:repeat(3,1fr); }
+  .lf-feature { grid-template-columns:1fr; gap:24px; }
+}
+@media (max-width:768px) {
+  .lc-grid, .lc-grid-3 { grid-template-columns:1fr 1fr; gap:12px; }
+  .lc-meta { padding:12px 13px 14px; }
+  .lc-meta h3 { font-size:13.5px; }
+  .lc-topic { font-size:12px; }
+  .lc-pages { flex-direction:column; }
+  .lc-pages a { font-size:11.5px; padding:7px 0; }
+  .lf-feature { padding:18px; border-radius:22px; }
+  .lf-info h3 { font-size:24px; }
+  .lf-read { width:100%; }
+  .lv-bar { padding:10px 12px; gap:8px; }
+  .lv-title b { font-size:13.5px; }
+  .lv-tabs button { padding:6px 12px; }
+  .lv-stage { padding:10px 6px 70px; }
+  .lv-nav { top:auto; bottom:52px; transform:none; width:46px; height:46px; font-size:28px; background:rgba(255,255,255,.22); }
+  .lv-hint { display:none; }
+}
