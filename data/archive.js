@@ -1,7 +1,7 @@
 // 서신놀이 아카이브 데이터. 한 줄 = 날짜(YYMMDD)|게시물코드|종류(P놀이 L가정통신문 N소식)|제목|주제|재료
 // 7번째 칸 c = images/play/코드.jpg 표지(가로 160px)가 있음. 새 게시물은 맨 아래에 같은 형식으로 추가하고 updated 날짜를 바꾸면 됩니다.
 window.SEOSHIN_ARCHIVE = {
-updated: "2026-10-12",
+updated: "2026-10-20",
 posts: `
 211119|CWcWDEWBUhH|P|우리의 권리를 생각하는 놀이|me,friends||c
 211119|CWcX8H6Bpla|N|서신의 하루|||c
@@ -1170,5 +1170,13 @@ posts: `
 261006|DeLc4hLkxh3|P|되살림놀이터 RE:PLAY 병뚜껑 놀이 10가지|eco,lang|recycle|c
 261007|DeOH4XPk_Ik|P|되살림놀이터 RE:PLAY 상자 놀이 10가지|eco,build|paper,recycle|c
 261010|DeTp17tEQBA|L|2026년 10월 2주 가정통신문|||c
+261012|DeYrKIhET96|P|되살림놀이터 RE:PLAY 종이 놀이 10가지|eco,build,arts|paper,recycle|c
+261013|DebWSiSkTsZ|P|되살림놀이터 RE:PLAY 페트병 놀이|eco,science,tradition|recycle,sensory|c
+261014|DedmwDOzD5B|P|서신음악회와 우리끼리 운동회|events,arts,body|sound|c
+261015|Defv8aDn4Tx|P|되살림놀이터 RE:PLAY 플라스틱 놀이|eco,arts,build|recycle|c
+261016|Deiq1kQM_Ge|N|서신어린이집 운영문서 자동화 시작|||c
+261016|DejL5-rH937|P|되살림놀이터 RE:PLAY 비닐 패션쇼|eco,lang,arts|recycle,light|c
+261017|DelzuVuH01l|P|되살림놀이터 RE:PLAY 폐가전 분해 탐험|eco,science,cars|recycle,paint|c
+261019|Dep7b_2NjwI|N|서신어린이집 놀이 아카이브 소개|||c
 `
 };
