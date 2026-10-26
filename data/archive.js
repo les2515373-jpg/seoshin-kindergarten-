@@ -1,7 +1,7 @@
 // 서신놀이 아카이브 데이터. 한 줄 = 날짜(YYMMDD)|게시물코드|종류(P놀이 L가정통신문 N소식)|제목|주제|재료
 // 7번째 칸 c = images/play/코드.jpg 표지(가로 160px)가 있음. 새 게시물은 맨 아래에 같은 형식으로 추가하고 updated 날짜를 바꾸면 됩니다.
 window.SEOSHIN_ARCHIVE = {
-updated: "2026-10-23",
+updated: "2026-10-26",
 posts: `
 211119|CWcWDEWBUhH|P|우리의 권리를 생각하는 놀이|me,friends||c
 211119|CWcX8H6Bpla|N|서신의 하루|||c
@@ -1180,5 +1180,8 @@ posts: `
 261019|Dep7b_2NjwI|N|서신어린이집 놀이 아카이브 소개|||c
 261020|DetBNBfR5x0|P|도토리 굴리고 담고 나눠 주기|autumn,science,hands|nature,paper|c
 261021|DevDfQZuUZZ|P|도토리 수 세기와 도토리나무|autumn,lang,build|nature,blocks|c
+261023|De1Lw95H5Vi|L|2026년 10월 4주 가정통신문|||c
+261024|De35-O8Hx9v|P|불 끄고 만난 야광 빛놀이|science,senses|light,sensory,paint|c
+261025|De6VoEEnwPT|P|사탕 무지개와 색 팽이 놀이|science,arts|food,paper,blocks|c
 `
 };
