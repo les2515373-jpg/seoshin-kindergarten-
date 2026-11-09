@@ -1192,5 +1192,7 @@ posts: `
 261106|DfY4lS_IViX|P|얼룩말·기린 무늬 찢기와 휴지심 꽃 도장(영아)|bugs,hands,arts|paper,paint|c
 261108|DfeZ8GDIYwU|L|2026년 11월 2주 가정통신문|||c
 261109|DfgoFu9oQUX|P|골판지 미로 까꿍 놀이(영아)|body,senses,friends|paper|c
+261026|De8saaXn17l|P|도토리·솔방울로 만나는 가을 교실|autumn,science,lang|nature|c
+261027|De_BZXRn561|P|도토리·밤·솔방울로 하는 수학놀이|autumn,lang|nature,blocks|c
 `
 };
