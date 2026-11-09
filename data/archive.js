@@ -1,7 +1,7 @@
 // 서신놀이 아카이브 데이터. 한 줄 = 날짜(YYMMDD)|게시물코드|종류(P놀이 L가정통신문 N소식)|제목|주제|재료
 // 7번째 칸 c = images/play/코드.jpg 표지(가로 160px)가 있음. 새 게시물은 맨 아래에 같은 형식으로 추가하고 updated 날짜를 바꾸면 됩니다.
 window.SEOSHIN_ARCHIVE = {
-updated: "2026-10-26",
+updated: "2026-11-09",
 posts: `
 211119|CWcWDEWBUhH|P|우리의 권리를 생각하는 놀이|me,friends||c
 211119|CWcX8H6Bpla|N|서신의 하루|||c
@@ -1183,5 +1183,14 @@ posts: `
 261023|De1Lw95H5Vi|L|2026년 10월 4주 가정통신문|||c
 261024|De35-O8Hx9v|P|불 끄고 만난 야광 빛놀이|science,senses|light,sensory,paint|c
 261025|De6VoEEnwPT|P|사탕 무지개와 색 팽이 놀이|science,arts|food,paper,blocks|c
+261028|DfBuE9tHzM9|P|키다리 기린 밥 주기 신체놀이(영아)|bugs,body|blocks,ball|c
+261029|DfD9a_pNuas|N|"아무것도 안 했어"의 하루 되감기|||c
+261030|DfGu48htWtT|N|아이 말을 찰떡같이 알아듣는 선생님|||c
+261102|DfOEafwJWgp|N|주머니 탐정: 아이 주머니 속 놀이 흔적|||c
+261104|DfTpaK9ISW9|P|종이벽 찢어 숨은 색 찾기(영아)|senses,hands|paper|c
+261105|DfWTmdnIfB_|P|하얀 종이 숲 까꿍 놀이(영아)|senses,body|paper|c
+261106|DfY4lS_IViX|P|얼룩말·기린 무늬 찢기와 휴지심 꽃 도장(영아)|bugs,hands,arts|paper,paint|c
+261108|DfeZ8GDIYwU|L|2026년 11월 2주 가정통신문|||c
+261109|DfgoFu9oQUX|P|골판지 미로 까꿍 놀이(영아)|body,senses,friends|paper|c
 `
 };
