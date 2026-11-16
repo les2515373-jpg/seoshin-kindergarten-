@@ -1,7 +1,7 @@
 // 서신놀이 아카이브 데이터. 한 줄 = 날짜(YYMMDD)|게시물코드|종류(P놀이 L가정통신문 N소식)|제목|주제|재료
 // 7번째 칸 c = images/play/코드.jpg 표지(가로 160px)가 있음. 새 게시물은 맨 아래에 같은 형식으로 추가하고 updated 날짜를 바꾸면 됩니다.
 window.SEOSHIN_ARCHIVE = {
-updated: "2026-11-09",
+updated: "2026-11-16",
 posts: `
 211119|CWcWDEWBUhH|P|우리의 권리를 생각하는 놀이|me,friends||c
 211119|CWcX8H6Bpla|N|서신의 하루|||c
@@ -1194,5 +1194,11 @@ posts: `
 261109|DfgoFu9oQUX|P|골판지 미로 까꿍 놀이(영아)|body,senses,friends|paper|c
 261026|De8saaXn17l|P|도토리·솔방울로 만나는 가을 교실|autumn,science,lang|nature|c
 261027|De_BZXRn561|P|도토리·밤·솔방울로 하는 수학놀이|autumn,lang|nature,blocks|c
+261110|DfjaIjmIdSL|P|휴지심 줄놀이(영아)|body,eco,senses|paper,thread|c
+261111|Dfl-osCoSbp|P|종이 모래놀이터(영아)|senses|paper|c
+261112|DfoaTqOofEv|P|종이 띠 자르고 붙이기(영아)|hands,arts|paper,tape|c
+261113|Dfqu4hMobvA|P|흙물감으로 그린 벽화|autumn,arts,nature|clay,paint|c
+261114|DftAHUIoQ99|L|2026년 11월 3주 가정통신문|||c
+261115|DfwOeMWIR5f|P|흙 점토와 가을 자연물 놀이|autumn,science,arts|clay,nature|c
 `
 };
