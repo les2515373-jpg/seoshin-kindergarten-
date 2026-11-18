@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>서신어린이집 선생님 이야기</title>
+<link rel="icon" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jua&display=swap">
+<link rel="stylesheet" href="https://hangeul.pstatic.net/hangeul_static/css/nanum-barun-pen.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+:root{
+  --bg:#ffffff; --tint:#eef7ff; --ink:#1d3557; --ink-soft:#55677d; --ink-faint:#a3b1c2;
+  --rule:#d6e7f7; --blue:#2a8be2; --red:#f0483e; --sun:#ffd43b; --heartbg:#fff8dc;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Pretendard,system-ui,sans-serif;font-size:16.5px;line-height:1.7;word-break:keep-all;transition:background .5s}
+body.heart{background:var(--heartbg)}
+.page{max-width:540px;margin:0 auto;padding:0 24px 130px}
+
+/* 물길: 맨 위 진행 표시 */
+.river{position:sticky;top:0;z-index:5;padding:14px 24px 6px;margin:0 -24px;background:var(--bg);transition:background .5s}
+body.heart .river{background:var(--heartbg)}
+.river svg{display:block;width:100%;height:auto;overflow:visible}
+.river .bed{fill:none;stroke:var(--rule);stroke-width:3;stroke-linecap:round}
+.river .flow{fill:none;stroke:var(--blue);stroke-width:3;stroke-linecap:round;transition:stroke-dasharray .7s ease}
+.river .sunmark{fill:var(--sun);stroke:#fff;stroke-width:2;transition:cx .7s ease,cy .7s ease}
+.river p{margin:2px 0 0;font-size:13px;color:var(--ink-soft);display:flex;justify-content:space-between}
+
+.step{display:none}
+.step.show{display:block}
+
+/* 첫 장 */
+.hero{position:relative;margin:4px -24px 0;background:#3c96e0;color:#fff;overflow:hidden;border-radius:0 0 30px 30px}
+.hero .sky{position:absolute;left:0;top:0;width:100%;height:auto;pointer-events:none}
+.hero .to{position:relative;margin:0;padding:26px 24px 0;font-weight:700;font-size:15px}
+.hero h1{position:relative;font-size:44px;line-height:1.2;margin:8px 24px 0;color:#fff}
+.hero .under{display:block;width:190px;height:14px;margin:4px 0 0 22px;position:relative}
+.photo{position:relative;margin-top:min(25vw,135px)}
+.photo img{display:block;width:100%;aspect-ratio:1091/1010;object-fit:cover;object-position:top;-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 9%);mask-image:linear-gradient(to bottom,transparent 0,#000 9%)}
+.photo svg{position:absolute;left:0;top:0;width:100%;height:100%;overflow:visible;pointer-events:none}
+.doodle{fill:none;stroke:#fff;stroke-linecap:round;stroke-linejoin:round}
+.s{display:block;text-wrap:pretty}
+.name-mark{display:flex;align-items:center;gap:8px;font-weight:700;font-size:15px;margin-top:22px;color:var(--blue)}
+.name-mark svg{width:34px;height:20px}
+h1{font-family:Jua,Pretendard,sans-serif;font-weight:400;font-size:36px;line-height:1.3;margin:10px 0 0;color:var(--blue)}
+.letter{font-family:NanumBarunpen,Pretendard,sans-serif;font-size:19px;line-height:2;margin:30px 0 0;
+  background-image:linear-gradient(to bottom,transparent 37px,var(--rule) 37px);background-size:100% 38px}
+.letter p{margin:0;padding-bottom:38px}
+.letter .sign{text-align:right;padding-bottom:0}
+.promise{margin:30px -24px 0;padding:18px 24px;list-style:none;background:var(--tint)}
+.promise li{padding:5px 0 5px 24px;font-size:15.5px;position:relative}
+.promise li::before{content:"";position:absolute;left:4px;top:15px;width:9px;height:9px;border-radius:50%;background:var(--blue)}
+.promise li:nth-child(2)::before{background:var(--red)}
+.promise li:nth-child(3)::before{background:var(--sun)}
+.q.who{margin-top:30px;border-top:0}
+
+/* 장 머리 */
+.chapter{padding-top:22px}
+h2{font-family:Jua,Pretendard,sans-serif;font-weight:400;font-size:32px;line-height:1.4;margin:0;display:inline;background:linear-gradient(var(--sun),var(--sun)) no-repeat 0 88%/100% 34%}
+.lead{margin:12px 0 0;color:var(--ink-soft);font-size:15.5px}
+.where{margin:12px 0 0;font-size:13.5px;color:var(--ink-soft);display:flex;align-items:center;gap:7px}
+.where i{width:9px;height:9px;border-radius:50%;background:var(--blue);flex:none}
+body.heart .where i{background:var(--red)}
+
+/* 질문 */
+.q{margin-top:36px;padding-top:22px;border-top:2px solid var(--rule)}
+body.heart .q{border-top-color:#f3e3a6}
+.q h3{font-weight:700;font-size:19px;line-height:1.5;margin:0;letter-spacing:-.01em}
+.q .hint{margin:5px 0 0;color:var(--ink-soft);font-size:14.5px}
+.q .how-many{display:inline-block;margin:9px 0 0;padding:2px 10px;font-size:13.5px;font-weight:700;color:var(--blue);background:var(--tint);border-radius:6px}
+.q .how-many.one{color:var(--ink-soft);background:#f1f3f6}
+body.heart .q .how-many{color:#c2362d;background:#ffe9e4}
+body.heart .q .how-many.one{color:var(--ink-soft);background:#f6efd0}
+.opts{list-style:none;margin:10px 0 0;padding:0}
+.opts button{width:100%;display:flex;align-items:center;gap:13px;text-align:left;font:inherit;color:inherit;background:none;border:0;padding:10px 0;min-height:48px;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.opts .box{flex:none;width:25px;height:25px;border:2.5px solid var(--blue);border-radius:4px;background:#fff;display:grid;place-items:center;transition:background .15s}
+body.heart .opts .box{border-color:var(--red)}
+.opts.one .box{border-radius:50%}
+.opts .box svg{width:16px;height:16px;opacity:0;transform:scale(.6);transition:opacity .15s,transform .15s}
+.opts button[aria-pressed=true] .box{background:var(--sun)}
+.opts button[aria-pressed=true] .box svg{opacity:1;transform:none}
+.opts button[aria-pressed=true] .txt{font-weight:700}
+.opts button:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.ages{display:grid;grid-template-columns:repeat(2,1fr);gap:0 14px}
+.write{display:block;width:100%;margin-top:12px;font-family:NanumBarunpen,Pretendard,sans-serif;font-size:19px;line-height:38px;color:var(--ink);
+  border:0;border-radius:0;padding:0;resize:none;overflow:hidden;outline:none;min-height:76px;background-color:transparent;
+  background-image:linear-gradient(to bottom,transparent 36px,var(--ink-faint) 36px,var(--ink-faint) 37px,transparent 37px);background-size:100% 38px}
+.write.short{min-height:38px}
+.write::placeholder{color:var(--ink-faint);font-family:Pretendard,sans-serif;font-size:15px}
+.write:focus{background-image:linear-gradient(to bottom,transparent 35px,var(--blue) 35px,var(--blue) 37px,transparent 37px)}
+input.write{height:38px;min-height:38px}
+.err{color:var(--red);font-size:14.5px;margin:8px 0 0;display:none}
+.half{margin:44px 0 0;font-family:NanumBarunpen,sans-serif;font-size:19px;color:var(--blue)}
+
+/* 아래 단추 */
+.bar{pointer-events:none;position:fixed;left:0;right:0;bottom:0;padding:26px 24px calc(16px + env(safe-area-inset-bottom));background:linear-gradient(to top,#fff 62%,rgba(255,255,255,0))}
+body.heart .bar{background:linear-gradient(to top,var(--heartbg) 62%,rgba(255,248,220,0))}
+.bar div{pointer-events:auto;max-width:540px;margin:0 auto;display:flex;gap:10px}
+.btn{font:inherit;font-weight:700;border:0;border-radius:14px;min-height:56px;padding:0 20px;cursor:pointer}
+.btn.go{flex:1;background:var(--blue);color:#fff;font-size:17.5px}
+.btn.go:active{background:#1f74c4}
+.btn.back{background:none;color:var(--ink-soft);padding:0 14px;font-weight:500}
+.saved{font-size:12.5px;color:var(--ink-faint);text-align:center;margin:6px 0 0;min-height:18px}
+
+/* 마지막 장 */
+.send{margin-top:30px;border-top:2px solid var(--rule);padding-top:22px}
+.btn.kakao{width:100%;background:var(--red);color:#fff;font-size:17.5px}
+.btn.copy{width:100%;background:#fff;border:2.5px solid var(--blue);color:var(--blue);margin-top:10px}
+.done{display:none;margin-top:14px;font-size:15px;padding:12px 14px;background:var(--tint)}
+.done.bad{background:#ffecea}
+.how{font-size:14.5px;color:var(--ink-soft);padding-left:20px;margin:18px 0 0}
+.how li{margin-bottom:5px}
+.code{font-size:10.5px;line-height:1.4;color:var(--ink-faint);max-height:44px;overflow:hidden;word-break:break-all;margin:16px 0 0}
+body.last .bar{position:static;background:none;padding-top:0}
+body.last .page{padding-bottom:20px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="river" aria-hidden="true">
+    <svg viewBox="0 0 300 26">
+      <path class="bed" id="bed" d="M2 14 q12.3 -11 24.6 0 t24.6 0 t24.6 0 t24.6 0 t24.6 0 t24.6 0 t24.6 0 t24.6 0 t24.6 0 t24.6 0 t24.6 0 t24.6 0" pathLength="100"/>
+      <path class="flow" id="flow" d="M2 14 q12.3 -11 24.6 0 t24.6 0 t24.6 0 t24.6 0 t24.6 0 t24.6 0 t24.6 0 t24.6 0 t24.6 0 t24.6 0 t24.6 0 t24.6 0" pathLength="100" stroke-dasharray="0 100"/>
+    </svg>
+    <p><span id="here"></span><span id="left"></span></p>
+  </div>
+
+  <section class="step" data-step="0">
+    <div class="hero">
+      <svg class="sky doodle" viewBox="0 0 375 250" aria-hidden="true" stroke-width="2.6">
+        <circle cx="318" cy="58" r="21"/>
+        <path d="M318 22v-10M318 94v10M282 58h-10M354 58h10M293 33l-7-7M343 33l7-7M293 83l-7 7M343 83l7 7"/>
+        <path d="M222 118q8-17 25-10q12-14 28-2q17-3 17 13q10 2 8 12h-82q-8-10 4-13z"/>
+        <path d="M250 196l44-17-14 40-9-15z M271 204l23-25"/>
+        <path d="M244 200q-34 12-52-8t-44 4" stroke-dasharray="2 9"/>
+        <path d="M196 60l3 8 8 3-8 3-3 8-3-8-8-3 8-3z" stroke-width="2.2"/>
+        <path d="M340 160l2 6 6 2-6 2-2 6-2-6-6-2 6-2z" stroke-width="2.2"/>
+      </svg>
+      <p class="to">서신의 귀한 선생님께</p>
+      <h1>선생님,<br>올 한 해<br>고마웠어요</h1>
+      <svg class="under" viewBox="0 0 190 14" aria-hidden="true"><path d="M3 9q16-9 31 0t31 0t31 0t31 0t31 0t29-2" fill="none" stroke="#ffd43b" stroke-width="5" stroke-linecap="round"/></svg>
+      <div class="photo">
+        <img src="images/teacher-talk-top.jpg" alt="파란 하늘 아래 서신어린이집">
+        <svg class="doodle" viewBox="0 0 1091 1010" aria-hidden="true" stroke-width="8">
+          <path d="M150 80q30-70 20-150M150 80q70-60 130-160M150 80q110-40 230-60"/>
+          <circle cx="165" cy="-128" r="58"/><circle cx="302" cy="-134" r="60"/><circle cx="436" cy="6" r="56"/>
+          <path d="M146-140v10M184-140v10M148-112q17 14 34 0M283-146v10M321-146v10M285-118q17 14 34 0M417-6v10M455-6v10M419 22q17 14 34 0" stroke-width="7"/>
+          <path d="M700 150q14-26 34-8q20-18 34 8q6 30-34 54q-40-24-34-54z"/>
+          <path d="M860 96l6 16 16 6-16 6-6 16-6-16-16-6 16-6z M560 70l5 12 12 5-12 5-5 12-5-12-12-5 12-5z" stroke-width="6"/>
+          <path d="M930 150q16-30 46-20q22-24 50-4q30-4 30 22" />
+        </svg>
+      </div>
+    </div>
+    <div class="letter">
+      <p class="poem"><span class="s">아이가 울기 시작하면</span><span class="s">선생님은 왜 우는지 먼저 알아채요.</span></p>
+      <p class="poem"><span class="s">말보다 표정을 먼저 읽고,</span><span class="s">놀이 속에서 배움을 찾아내요.</span><span class="s">오래 배우고, 오래 곁에 있었던</span><span class="s">선생님이라서 할 수 있는 일이에요.</span></p>
+      <p class="poem"><span class="s">서신 친구들은 아침에 오면</span><span class="s">선생님 얼굴부터 찾아요.</span><span class="s">넘어지면 선생님한테 달려가고요.</span></p>
+      <p class="poem"><span class="s">부모님이 마음 놓고 출근하시는 것도,</span><span class="s">서신이 이렇게 든든한 것도</span><span class="s">다 선생님 덕분이에요.</span></p>
+      <p class="poem"><span class="s">혼자 꾹 참은 날도 있었을 거예요.</span><span class="s">힘들어도 웃어 준 날도 있었고요.</span><span class="s">그 마음까지 다 고맙습니다.</span></p>
+      <p class="poem"><span class="s">그래서 내년을 정하기 전에</span><span class="s">선생님 이야기를 먼저 듣고 싶었어요.</span><span class="s">편한 마음으로 이야기해 주세요.</span></p>
+      <p class="sign">원장 드림</p>
+    </div>
+    <ul class="promise">
+      <li>10분이면 돼요. 거의 다 고르기만 하면 돼요.</li>
+      <li>쓰다가 닫아도 이 휴대폰에 그대로 남아 있어요.</li>
+      <li>다 쓴 글은 원장만 볼 수 있어요.</li>
+    </ul>
+    <div class="q who">
+      <h3><label for="name">선생님 이름</label></h3>
+      <input class="write short" type="text" id="name" data-k="name" autocomplete="name">
+      <p class="err" id="nameErr">이름만 적어 주시면 넘어갈 수 있어요.</p>
+    </div>
+    <div class="q" id="clsQ"></div>
+  </section>
+
+  <div id="chapters"></div>
+
+  <section class="step" data-step="5">
+    <div class="chapter">
+      <h1 id="thanks" style="margin-top:8px">고맙습니다.</h1>
+    </div>
+    <div class="letter">
+      <p class="poem"><span class="s">끝까지 적어 주셔서 고맙습니다.</span><span class="s">한 줄도 빠짐없이 읽을게요.</span><span class="s">면담 때 이어서 이야기 나눠요.</span></p>
+      <p class="poem"><span class="s">선생님 같은 분이 서신에 계셔서</span><span class="s">저는 참 든든해요.</span></p>
+      <p class="poem"><span class="s">내년에는 선생님이 하고 싶은 보육을</span><span class="s">마음껏 하실 수 있게</span><span class="s">제가 먼저 움직일게요.</span></p>
+      <p class="sign">한 해 동안 정말 고마웠어요. 원장 드림.</p>
+    </div>
+    <div class="send">
+      <button class="btn kakao" id="share" type="button">원장님께 보내기</button>
+      <button class="btn copy" id="copy" type="button">글 복사하기</button>
+      <div class="done" id="done"></div>
+      <ol class="how">
+        <li>보내기를 누르고 카카오톡에서 원장님을 골라 주세요.</li>
+        <li>버튼이 안 눌리면 글 복사하기를 누르고, 원장님 카톡 방에 붙여 넣어 주세요.</li>
+        <li>글자가 암호처럼 보여도 괜찮아요. 원장님 컴퓨터에서는 제대로 보여요.</li>
+      </ol>
+      <div class="code" id="code" aria-hidden="true"></div>
+    </div>
+  </section>
+</div>
+
+<div class="bar"><div>
+  <button class="btn back" id="back" type="button">이전</button>
+  <button class="btn go" id="next" type="button"></button>
+</div><p class="saved" id="saved"></p></div>
+
+<script src="teacher-talk-q.js"></script>
+<script>
+(function(){
+  var PUB='MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEApw/xrnGAWalSV8KjiQ4k2a/wdcl2pPw6KUj41SHpZc0LrQ6sw2AB6dPDnlMdJEVel4nq/5yL5G4mzgEgHCh5i6c8QpnR4YEqrS4x9FW2G2BVnHGQBcf0c1HXxSEXdNGMl0pAxc0qEMSm+q1kfwQDHAuMnkAaDKCxbtIa5XaTrAtJGNPppAleYT4ljteSF6dS++VeM60Lp/vB0Vqvc4Bb6lzMZp4TOMhBLJL5GOqTK/GaQGHKdy2IzdEwjue6OhwTES3pVXsvW1tTvRR9SO7OtWPAWklIcMki5ZNsg1iaVxA7FhdFy4/tmgK1b1wCYwfABz8qaZApX9kmgrKK0Nj88wIDAQAB';
+  var KEY='seoshin-talk-2027-v3', T=window.TALK, LAST=T.sections.length+1;
+  var data={}, step=0;
+  try{var s=JSON.parse(localStorage.getItem(KEY)||'{}');data=s.data||{};step=Math.min(s.step||0,LAST);}catch(e){}
+  var $=function(q){return document.querySelector(q)}, $$=function(q){return [].slice.call(document.querySelectorAll(q))};
+  function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]});}
+  var TICK='<svg viewBox="0 0 16 16"><path d="M3 8.5l3.2 3.2L13 4.8" fill="none" stroke="#1d3557" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  var DOT='<svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="4.5" fill="#1d3557"/></svg>';
+
+  function lines(s){return esc(s).split(/(?<=[.?!])\s+/).map(function(x){return '<span class="s">'+x+'</span>'}).join('');}
+  function optsHtml(it){
+    var one=it.type==='one', list=it.ages?T.roles.concat(['어디든 좋아요']):it.opts;
+    return '<ul class="opts'+(one?' one':'')+(it.ages?' ages':'')+'" data-k="'+it.k+'"'+(one?' data-one':'')+'>'+list.map(function(o){
+      return '<li><button type="button" aria-pressed="false"><span class="box">'+(one?DOT:TICK)+'</span><span class="txt">'+esc(o)+'</span></button></li>';
+    }).join('')+'</ul>';
+  }
+  function itemHtml(it){
+    var h='<div class="q"'+(it.required?' data-req="'+it.k+'"':'')+'><h3>'+esc(it.q)+'</h3>'+(it.hint?'<p class="hint">'+lines(it.hint)+'</p>':'')+(it.type==='check'?'<p class="how-many">여러 개 골라도 돼요</p>':it.type==='one'?'<p class="how-many one">하나만 골라 주세요</p>':'');
+    if(it.type==='text')h+='<textarea class="write" data-k="'+it.k+'" rows="2" aria-label="'+esc(it.q)+'"></textarea>';
+    else{h+=optsHtml(it);if(it.more)h+='<textarea class="write short" data-k="'+it.k+'_t" rows="1" placeholder="'+esc(it.more)+'" aria-label="'+esc(it.more)+'"></textarea>';}
+    if(it.required)h+='<p class="err">이 질문만은 골라 주세요.</p>';
+    return h+'</div>';
+  }
+  $('#clsQ').innerHTML='<h3>올해 맡은 반이나 일</h3><p class="how-many one">하나만 골라 주세요</p>'+optsHtml({k:'cls',type:'one',opts:T.roles}).replace('class="opts one"','class="opts one ages"');
+  $('#chapters').innerHTML=T.sections.map(function(sec,i){
+    return '<section class="step" data-step="'+(i+1)+'"'+(sec.heart?' data-heart':'')+'><div class="chapter"><h2>'+esc(sec.title)+'</h2><p class="lead">'+lines(sec.lead)+'</p>'+
+      '<p class="where"><i></i>'+(sec.heart?'원장만 읽어요. 면담 기록지에는 적지 않아요.':'면담 기록지에 적혀요.')+'</p></div>'+
+      sec.items.map(itemHtml).join('')+(i===0?'<p class="half">선생님 한 분 한 분의 이야기가 서신에는 참 귀해요. 고맙습니다.</p>':'')+'</section>';
+  }).join('');
+
+  $$('.letter p:not(.poem), .promise li, .how li').forEach(function(el){el.innerHTML=lines(el.textContent.trim());});
+  function save(){try{localStorage.setItem(KEY,JSON.stringify({data:data,step:step}));$('#saved').textContent='이 휴대폰에 저장됐어요';}catch(e){}}
+  function grow(t){if(t.tagName!=='TEXTAREA')return;t.style.height='auto';t.style.height=Math.max(t.scrollHeight,38)+'px';}
+  $$('.write[data-k]').forEach(function(el){
+    if(data[el.dataset.k])el.value=data[el.dataset.k];
+    el.addEventListener('input',function(){data[el.dataset.k]=el.value;grow(el);save();});
+  });
+  $$('.opts[data-k]').forEach(function(box){
+    var k=box.dataset.k, one=box.hasAttribute('data-one'), btns=[].slice.call(box.querySelectorAll('button'));
+    var cur=data[k]||(one?'':[]);
+    btns.forEach(function(b){
+      var t=b.querySelector('.txt').textContent;
+      b.setAttribute('aria-pressed',one?cur===t:cur.indexOf(t)>-1);
+      b.addEventListener('click',function(){
+        if(one){var was=b.getAttribute('aria-pressed')==='true';btns.forEach(function(x){x.setAttribute('aria-pressed','false')});b.setAttribute('aria-pressed',!was);data[k]=was?'':t;}
+        else{b.setAttribute('aria-pressed',b.getAttribute('aria-pressed')!=='true');data[k]=btns.filter(function(x){return x.getAttribute('aria-pressed')==='true'}).map(function(x){return x.querySelector('.txt').textContent});}
+        save();
+      });
+    });
+  });
+
+  // 물길 위의 해
+  var bed=$('#bed'), flow=$('#flow'), svg=bed.ownerSVGElement, sun=document.createElementNS('http://www.w3.org/2000/svg','circle');
+  sun.setAttribute('class','sunmark');sun.setAttribute('r','6');svg.appendChild(sun);
+  var names=['인사'].concat(T.sections.map(function(s){return s.title})).concat(['보내기']);
+  function river(){
+    var p=step/LAST, pt=bed.getPointAtLength(bed.getTotalLength()*Math.max(p,.02));
+    flow.setAttribute('stroke-dasharray',(p*100)+' 100');
+    sun.setAttribute('cx',pt.x);sun.setAttribute('cy',pt.y-1);
+    $('#here').textContent=names[step];
+    $('#left').textContent=step===0?'':step===LAST?'다 왔어요':(LAST-step)+'쪽 남았어요';
+  }
+  function show(){
+    $$('.step').forEach(function(s){s.classList.toggle('show',+s.dataset.step===step)});
+    var cur=$('.step.show');
+    document.body.classList.toggle('heart',cur.hasAttribute('data-heart'));document.body.classList.toggle('last',step===LAST);
+    $('#back').style.display=step===0?'none':'';
+    $('#next').style.display=step===LAST?'none':'';
+    $('#next').textContent=step===0?'시작할게요':step===LAST-1?'다 썼어요':'다음으로';
+    $$('.step.show .write').forEach(grow);
+    river();window.scrollTo(0,0);
+    if(step===LAST)prepare();
+  }
+  $('#next').addEventListener('click',function(){
+    if(step===0&&!(data.name||'').trim()){$('#nameErr').style.display='block';$('#name').focus();return;}
+    $('#nameErr').style.display='none';
+    var miss=$$('.step.show [data-req]').filter(function(el){return !data[el.dataset.req]})[0];
+    $$('.step.show [data-req] .err').forEach(function(e){e.style.display='none'});
+    if(miss){miss.querySelector('.err').style.display='block';miss.scrollIntoView({block:'center'});return;}
+    step++;save();show();
+  });
+  $('#back').addEventListener('click',function(){step--;save();show();});
+
+  // 잠그기
+  function b64d(s){var b=atob(s),u=new Uint8Array(b.length);for(var i=0;i<b.length;i++)u[i]=b.charCodeAt(i);return u;}
+  function b64u(u){var s='';for(var i=0;i<u.length;i+=8192)s+=String.fromCharCode.apply(null,u.subarray(i,i+8192));return btoa(s).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');}
+  async function deflate(u){
+    if(typeof CompressionStream==='undefined')return null;
+    try{var cs=new CompressionStream('deflate-raw');var w=cs.writable.getWriter();w.write(u);w.close();return new Uint8Array(await new Response(cs.readable).arrayBuffer());}catch(e){return null;}
+  }
+  async function lock(){
+    var body=Object.assign({},data,{v:2,sent:new Date().toISOString()});
+    var plain=new TextEncoder().encode(JSON.stringify(body));
+    var z=await deflate(plain);var flag=z?1:0;if(z)plain=z;
+    var pub=await crypto.subtle.importKey('spki',b64d(PUB),{name:'RSA-OAEP',hash:'SHA-256'},false,['encrypt']);
+    var aes=await crypto.subtle.generateKey({name:'AES-GCM',length:256},true,['encrypt']);
+    var iv=crypto.getRandomValues(new Uint8Array(12));
+    var ct=new Uint8Array(await crypto.subtle.encrypt({name:'AES-GCM',iv:iv},aes,plain));
+    var raw=new Uint8Array(await crypto.subtle.exportKey('raw',aes));
+    var wk=new Uint8Array(await crypto.subtle.encrypt({name:'RSA-OAEP'},pub,raw));
+    var out=new Uint8Array(1+wk.length+12+ct.length);
+    out[0]=flag;out.set(wk,1);out.set(iv,1+wk.length);out.set(ct,13+wk.length);
+    return 'SEOSHIN1.'+b64u(out)+'.END';
+  }
+  var message='';
+  function done(t,bad){var d=$('#done');d.textContent=t;d.style.display='block';d.classList.toggle('bad',!!bad);}
+  async function prepare(){
+    $('#thanks').innerHTML='고맙습니다,<br>'+esc((data.name||'').trim())+' 선생님.';
+    $('#done').style.display='none';
+    try{var token=await lock();message='[서신 선생님 이야기]\n원장님, 면담 글 보내 드려요.\n\n'+token;$('#code').textContent=token;}
+    catch(e){message='';$('#code').textContent='';done('이 브라우저에서는 글을 잠글 수 없어요. 크롬이나 사파리로 이 주소를 다시 열어 주세요. 쓴 글은 그대로 남아 있어요.',true);}
+  }
+  async function copy(){
+    try{await navigator.clipboard.writeText(message);}
+    catch(e){var ta=document.createElement('textarea');ta.value=message;document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove();}
+  }
+  var COPIED='글을 복사했어요. 카카오톡에서 원장님 방을 열고 붙여 넣어 보내 주세요.';
+  $('#share').addEventListener('click',async function(){
+    if(!message)return;
+    if(navigator.share){
+      try{await navigator.share({text:message});done('보내셨다면 끝이에요. 원장님이 글을 받으면 면담 날짜를 알려 드릴게요.');return;}
+      catch(e){if(e&&e.name==='AbortError')return;}
+    }
+    await copy();done(COPIED);
+  });
+  $('#copy').addEventListener('click',async function(){if(!message)return;await copy();done(COPIED);});
+
+  show();
+})();
+</script>
+</body>
+</html>
