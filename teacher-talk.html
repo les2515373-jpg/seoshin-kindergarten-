@@ -201,13 +201,12 @@ body.last .page{padding-bottom:20px}
       <p class="sign">한 해 동안 정말 고마웠어요. 원장 드림.</p>
     </div>
     <div class="send">
-      <button class="btn kakao" id="share" type="button">원장님께 카톡으로 보내기</button>
-      <button class="btn copy" id="copy" type="button">글 복사하기</button>
+      <button class="btn kakao" id="share" type="button">원장님께 보내기</button>
+      <button class="btn copy" id="copy" type="button" style="display:none">글 복사하기</button>
       <div class="done" id="done"></div>
       <ol class="how">
-        <li>보내기를 누르면 글이 복사돼요.</li>
-        <li>카카오톡에서 원장님과의 채팅방에 붙여 넣어 보내 주세요.</li>
-        <li>글자가 암호처럼 보여도 괜찮아요. 원장님 컴퓨터에서는 제대로 보여요.</li>
+        <li>보내기를 누르면 원장님께 바로 전해져요.</li>
+        <li>글은 잠긴 채로 전해져서 원장님만 열어 볼 수 있어요.</li>
       </ol>
       <div class="code" id="code" aria-hidden="true"></div>
     </div>
@@ -330,7 +329,7 @@ body.last .page{padding-bottom:20px}
   function done(t,bad){var d=$('#done');d.textContent=t;d.style.display='block';d.classList.toggle('bad',!!bad);}
   async function prepare(){
     $('#thanks').innerHTML='고맙습니다,<br>'+esc((data.name||'').trim())+' 선생님.';
-    $('#done').style.display='none';
+    $('#done').style.display='none';var sb=$('#share');sb.disabled=false;sb.style.opacity='';sb.textContent='원장님께 보내기';$('.how').style.display='';
     try{var token=await lock();message='[서신 선생님 이야기]\n원장님, 면담 글 보내 드려요.\n\n'+token;$('#code').textContent=token;}
     catch(e){message='';$('#code').textContent='';done('이 브라우저에서는 글을 잠글 수 없어요. 크롬이나 사파리로 이 주소를 다시 열어 주세요. 쓴 글은 그대로 남아 있어요.',true);}
   }
@@ -344,17 +343,31 @@ body.last .page{padding-bottom:20px}
     if(INKAKAO) h='<b>글을 복사했어요.</b><span class="s">1. 왼쪽 위 X(또는 뒤로)를 눌러 카카오톡으로 돌아가요.</span><span class="s">2. 원장님과의 채팅방을 열어요.</span><span class="s">3. 글 쓰는 칸을 길게 눌러 붙여넣기 하고 보내면 끝이에요.</span>';
     else if(PHONE) h='<b>글을 복사했어요.</b><span class="s">1. 아래 버튼으로 카카오톡을 열어요.</span><span class="s">2. 원장님과의 채팅방에서 글 쓰는 칸을 길게 눌러 붙여넣기 하고 보내면 끝이에요.</span><a class="btn kakao open" href="kakaotalk://launch">카카오톡 열기</a>';
     else h='<b>글을 복사했어요.</b><span class="s">1. 컴퓨터의 카카오톡에서 원장님과의 채팅방을 열어요.</span><span class="s">2. Ctrl 과 V 를 함께 눌러 붙여 넣고 보내면 끝이에요.</span>';
-    var d=$('#done');d.innerHTML=h;d.style.display='block';d.classList.remove('bad');d.scrollIntoView({block:'center'});
+    var d=$('#done');d.innerHTML=h;d.style.display='block';d.classList.remove('bad');d.scrollIntoView({block:'center'});$('#copy').style.display='';
   }
+  function sid(){
+    var k='seoshin-talk-sid',v='';
+    try{v=localStorage.getItem(k)||'';}catch(e){}
+    if(!/^[0-9a-f]{32}$/.test(v)){var a=crypto.getRandomValues(new Uint8Array(16));v=[].map.call(a,function(x){return ('0'+x.toString(16)).slice(-2)}).join('');try{localStorage.setItem(k,v);}catch(e){}}
+    return v;
+  }
+  var sending=false;
   $('#share').addEventListener('click',async function(){
-    if(!message)return;
-    // 붙여넣기도 할 수 있게 먼저 복사해 둔다(기다리지 않는다: 공유 창은 누른 직후에만 열린다)
-    var copied=copy();
-    if(PHONE&&!INKAKAO&&navigator.share){
-      try{await navigator.share({text:message});done('카카오톡에서 원장님을 골라 보내셨다면 끝이에요. 고맙습니다.');return;}
-      catch(e){if(e&&e.name==='AbortError'){await copied;steps();return;}}
-    }
-    await copied;steps();
+    if(!message||sending)return;
+    var btn=this,label=btn.textContent;sending=true;btn.textContent='보내는 중이에요';
+    try{
+      var token=message.slice(message.indexOf('SEOSHIN1.'));
+      var r=await fetch('/api/talk',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({action:'submit',sid:sid(),token:token})});
+      if(!r.ok)throw new Error('send '+r.status);
+      btn.textContent='원장님께 전해졌어요';btn.disabled=true;btn.style.opacity='.75';
+      var d=$('#done');d.innerHTML='<b>원장님께 잘 전해졌어요.</b><span class="s">이제 창을 닫으셔도 돼요.</span><span class="s">고치고 싶은 곳이 있으면 이전으로 돌아가 고친 뒤 다시 보내 주세요. 나중에 보낸 글로 바뀌어요.</span>';
+      d.style.display='block';d.classList.remove('bad');d.scrollIntoView({block:'center'});
+      $('.how').style.display='none';$('#copy').style.display='none';
+    }catch(err){
+      btn.textContent=label;
+      await copy();steps();
+      var d2=$('#done');d2.insertAdjacentHTML('afterbegin','<b>지금은 바로 보내지지 않았어요.</b><span class="s">인터넷을 확인하고 한 번 더 눌러 보거나, 아래처럼 카카오톡으로 보내 주세요.</span><br>');
+    }finally{sending=false;}
   });
   $('#copy').addEventListener('click',async function(){if(!message)return;await copy();steps();});
 

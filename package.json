@@ -1,0 +1,8 @@
+{
+  "name": "seoshin-kindergarten-site",
+  "private": true,
+  "description": "Static site. The only code is api/talk.js (teacher interview mailbox).",
+  "dependencies": {
+    "@vercel/blob": "latest"
+  }
+}
