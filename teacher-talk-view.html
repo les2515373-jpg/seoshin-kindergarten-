@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>교사 면담 · 원장님 보기</title>
+<link rel="icon" href="favicon.svg">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jua&display=swap">
+<link rel="stylesheet" href="https://hangeul.pstatic.net/hangeul_static/css/nanum-barun-pen.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+:root{--ink:#1d3557;--ink-soft:#55677d;--ink-faint:#a3b1c2;--rule:#d6e7f7;--blue:#2a8be2;--red:#f0483e;--sun:#ffd43b;--tint:#eef7ff;--heartbg:#fff8dc}
+*{box-sizing:border-box}
+body{margin:0;background:#fff;color:var(--ink);font-family:Pretendard,system-ui,sans-serif;font-size:16px;line-height:1.65;word-break:keep-all}
+.page{max-width:560px;margin:0 auto;padding:0 20px 60px}
+.bar{background:#3c96e0;color:#fff;margin:0 -20px;padding:20px 20px 22px;border-radius:0 0 24px 24px}
+.bar small{font-weight:700;font-size:13.5px}
+.bar h1{font-family:Jua,sans-serif;font-weight:400;font-size:30px;line-height:1.25;margin:2px 0 0}
+h2{font-family:Jua,sans-serif;font-weight:400;font-size:22px;margin:26px 0 8px;display:table;padding:0 4px;background:linear-gradient(var(--sun),var(--sun)) no-repeat 0 88%/100% 36%}
+.lock{margin-top:26px}
+.lock label{display:block;font-weight:700;margin-bottom:6px}
+.lock input{width:100%;font:inherit;font-size:18px;border:2px solid var(--rule);border-radius:12px;padding:12px 14px}
+.lock input:focus{outline:none;border-color:var(--blue)}
+.btn{font:inherit;font-weight:700;border:0;border-radius:14px;min-height:54px;padding:0 20px;cursor:pointer;background:var(--blue);color:#fff;font-size:17px;width:100%;margin-top:12px}
+.btn.line{background:#fff;color:var(--blue);border:2px solid var(--blue);min-height:44px;font-size:15px}
+.msg{margin:10px 0 0;font-size:14.5px;color:var(--ink-soft);min-height:22px}
+.msg.bad{color:var(--red)}
+.tally{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}
+.tally span{background:var(--tint);border-radius:99px;padding:3px 12px;font-size:14px}
+.tally b{font-family:Jua,sans-serif;font-weight:400;color:var(--blue);margin-left:5px;font-size:16px}
+.tally .lab{background:none;padding-left:0;color:var(--ink-soft)}
+.people{list-style:none;margin:14px 0 0;padding:0}
+.people button{width:100%;display:flex;align-items:center;gap:10px;text-align:left;font:inherit;color:inherit;background:none;border:0;border-bottom:1px solid var(--rule);padding:14px 2px;cursor:pointer}
+.people .nm{font-weight:700;font-size:17px}
+.people small{color:var(--ink-soft);font-size:13.5px}
+.people .st{margin-left:auto;font-weight:700;font-size:14px;white-space:nowrap}
+.back{background:none;border:0;font:inherit;color:var(--blue);font-weight:700;padding:14px 0 0;cursor:pointer}
+.who{font-family:Jua,sans-serif;font-size:28px;margin:6px 0 0}
+.sub{color:var(--ink-soft);font-size:14px;margin:0}
+.qa{margin:0;padding:11px 0;border-bottom:1px solid var(--rule)}
+.qa dt{color:var(--ink-soft);font-size:14px}
+.qa dd{margin:2px 0 0}
+.picks span{display:inline-block;margin:0 10px 2px 0;padding:0 3px;background:linear-gradient(var(--sun),var(--sun)) no-repeat 0 85%/100% 42%}
+.said{font-family:NanumBarunpen,sans-serif;font-size:19px;white-space:pre-wrap;line-height:1.7}
+.none{color:var(--ink-faint);font-size:14px}
+.heart{background:var(--heartbg);margin:22px -20px 0;padding:2px 20px 16px}
+.heart .qa{border-bottom-color:#f1e2a8}
+.heart .qa dt{color:var(--ink);font-weight:600;font-size:15px}
+.note{font-size:13.5px;color:var(--ink-soft);margin:0 0 4px}
+.foot{margin-top:30px;font-size:13px;color:var(--ink-faint)}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="bar"><small>서신어린이집</small><h1>교사 면담, 원장님 보기</h1></div>
+
+  <section id="lock" class="lock">
+    <label for="pw">원장님 비밀번호</label>
+    <input id="pw" type="password" autocomplete="current-password" enterkeyhint="go">
+    <button class="btn" id="unlock" type="button">열기</button>
+    <p class="msg" id="lockMsg">원장님 컴퓨터에서 정한 비밀번호를 넣어 주세요. 이 화면을 닫으면 다시 잠깁니다.</p>
+  </section>
+
+  <section id="listView" hidden>
+    <h2>받은 글</h2>
+    <div class="tally" id="tally1"></div>
+    <div class="tally" id="tally2"></div>
+    <ul class="people" id="people"></ul>
+    <button class="btn line" id="refresh" type="button">새로 고침</button>
+    <p class="foot">면담 일시와 나눈 이야기는 원장님 컴퓨터 화면에서 적습니다.</p>
+  </section>
+
+  <section id="oneView" hidden>
+    <button class="back" id="back" type="button">‹ 목록으로</button>
+    <div id="one"></div>
+  </section>
+</div>
+<script src="teacher-talk-q.js"></script>
+<script>
+(function(){
+  var T=window.TALK, $=function(q){return document.querySelector(q)};
+  var keys=null, priv=null, people=[];
+  function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]});}
+  function hex(u){return [].map.call(u,function(x){return ('0'+x.toString(16)).slice(-2)}).join('');}
+  function unhex(h){var u=new Uint8Array(h.length/2);for(var i=0;i<u.length;i++)u[i]=parseInt(h.substr(i*2,2),16);return u;}
+  function b64d(s){var b=atob(s),u=new Uint8Array(b.length);for(var i=0;i<b.length;i++)u[i]=b.charCodeAt(i);return u;}
+  function b64ud(s){s=s.replace(/-/g,'+').replace(/_/g,'/');while(s.length%4)s+='=';return b64d(s);}
+  async function api(body){var r=await fetch('/api/talk',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(body)});var j=await r.json().catch(function(){return{}});if(!r.ok){var e=new Error(j.error||('http '+r.status));e.status=r.status;throw e;}return j;}
+
+  async function derive(pass){
+    var s=await api({action:'salt'});
+    var base=await crypto.subtle.importKey('raw',new TextEncoder().encode(pass),'PBKDF2',false,['deriveBits']);
+    var bits=new Uint8Array(await crypto.subtle.deriveBits({name:'PBKDF2',hash:'SHA-256',salt:unhex(s.salt),iterations:s.iter},base,512));
+    return {wrap:bits.slice(0,32),list:hex(bits.slice(32))};
+  }
+  async function inflate(u){var ds=new DecompressionStream('deflate-raw');var w=ds.writable.getWriter();w.write(u);w.close();return new Uint8Array(await new Response(ds.readable).arrayBuffer());}
+  async function openLetter(token){
+    var m=/SEOSHIN1\.([A-Za-z0-9_-]+)\.END/.exec(token);if(!m)throw new Error('letter');
+    var buf=b64ud(m[1]),flag=buf[0],wk=buf.slice(1,257),iv=buf.slice(257,269),ct=buf.slice(269);
+    var raw=await crypto.subtle.decrypt({name:'RSA-OAEP'},priv,wk);
+    var aes=await crypto.subtle.importKey('raw',raw,'AES-GCM',false,['decrypt']);
+    var plain=new Uint8Array(await crypto.subtle.decrypt({name:'AES-GCM',iv:iv},aes,ct));
+    if(flag===1)plain=await inflate(plain);
+    return JSON.parse(new TextDecoder().decode(plain));
+  }
+  async function load(){
+    var r=await api({action:'list',key:keys.list,withKey:!priv});
+    if(!priv){
+      var aes=await crypto.subtle.importKey('raw',keys.wrap,'AES-GCM',false,['decrypt']);
+      var der=await crypto.subtle.decrypt({name:'AES-GCM',iv:unhex(r.iv)},aes,b64d(r.wrapped));
+      priv=await crypto.subtle.importKey('pkcs8',der,{name:'RSA-OAEP',hash:'SHA-256'},false,['decrypt']);
+    }
+    var byName={};
+    for(var i=0;i<r.items.length;i++){
+      try{var a=await openLetter(r.items[i].token);var k=String(a.name||'').trim();if(!k)continue;
+        if(!byName[k]||String(byName[k].sent)<String(a.sent))byName[k]=a;}catch(e){}
+    }
+    people=Object.keys(byName).sort(function(x,y){return x.localeCompare(y,'ko')}).map(function(k){return byName[k]});
+    renderList();
+  }
+  function stayShort(s){return !s?'안 고름':s.indexOf('네')===0?'계속':s.indexOf('고민')>-1?'고민 중':'어려움';}
+  var stayColor={'계속':'#2a8be2','고민 중':'#c98a00','어려움':'#f0483e','안 고름':'#a3b1c2'};
+  function chips(o,order){return order.filter(function(k){return o[k]}).map(function(k){return '<span>'+esc(k)+'<b>'+o[k]+'</b></span>'}).join('');}
+  function renderList(){
+    var stay={},first={};
+    people.forEach(function(a){var s=stayShort(a.stay);stay[s]=(stay[s]||0)+1;var d=a.d1||'안 고름';first[d]=(first[d]||0)+1;});
+    $('#tally1').innerHTML=people.length?'<span class="lab">계속 근무</span>'+chips(stay,['계속','고민 중','어려움','안 고름']):'';
+    $('#tally2').innerHTML=people.length?'<span class="lab">1지망</span>'+chips(first,(T.roles||[]).concat(['어디든 좋아요','안 고름'])):'';
+    $('#people').innerHTML=people.length?people.map(function(a,i){var s=stayShort(a.stay);
+      return '<li><button data-i="'+i+'"><span><span class="nm">'+esc(a.name)+'</span><br><small>'+esc(a.cls||'')+(a.d1?' → 희망 '+esc(a.d1):'')+'</small></span><span class="st" style="color:'+stayColor[s]+'">'+s+'</span></button></li>'}).join('')
+      :'<li style="padding:18px 2px;color:var(--ink-soft)">아직 받은 글이 없습니다.</li>';
+    $('#lock').hidden=true;$('#oneView').hidden=true;$('#listView').hidden=false;
+  }
+  function row(label,picks,text){
+    picks=[].concat(picks||[]).filter(Boolean);var has=text&&String(text).trim();
+    var dd=(picks.length?'<div class="picks">'+picks.map(function(x){return'<span>'+esc(x)+'</span>'}).join('')+'</div>':'')+(has?'<div class="said">'+esc(text)+'</div>':'');
+    return '<dl class="qa"><dt>'+esc(label)+'</dt><dd>'+(dd||'<span class="none">적지 않음</span>')+'</dd></dl>';
+  }
+  function rows(sec,a){return sec.items.map(function(it){return it.type==='text'?row(it.q,null,a[it.k]):row(it.q,a[it.k],a[it.k+'_t'])}).join('');}
+  function renderOne(a){
+    var d=a.sent?new Date(a.sent):null;
+    $('#one').innerHTML='<p class="who">'+esc(a.name)+' 선생님</p><p class="sub">'+esc(a.cls||'')+(d?', '+(d.getMonth()+1)+'월 '+d.getDate()+'일에 보냄':'')+'</p>'+
+      T.sections.map(function(s){return s.heart?'<div class="heart"><h2>'+esc(s.title)+'</h2><p class="note">원장님만 보는 글입니다. 보관용 기록지에는 들어가지 않습니다.</p>'+rows(s,a)+'</div>':'<h2>'+esc(s.title)+'</h2>'+rows(s,a)}).join('');
+    $('#listView').hidden=true;$('#oneView').hidden=false;window.scrollTo(0,0);
+  }
+  $('#people').addEventListener('click',function(e){var b=e.target.closest('button');if(b)renderOne(people[+b.dataset.i]);});
+  $('#back').addEventListener('click',function(){$('#oneView').hidden=true;$('#listView').hidden=false;});
+  $('#refresh').addEventListener('click',function(){var b=this;b.textContent='가져오는 중';load().catch(function(){}).then(function(){b.textContent='새로 고침';});});
+  async function unlock(){
+    var m=$('#lockMsg'),pass=$('#pw').value;if(!pass)return;
+    m.className='msg';m.textContent='여는 중입니다.';
+    try{keys=await derive(pass);await load();$('#pw').value='';}
+    catch(e){keys=null;priv=null;m.className='msg bad';
+      m.textContent=e.message==='not set up'?'아직 비밀번호를 정하지 않았습니다. 원장님 컴퓨터의 교사 면담 화면에서 먼저 정해 주세요.':(e.status===403||e.name==='OperationError')?'비밀번호가 맞지 않습니다.':'열지 못했습니다. 인터넷을 확인하고 다시 눌러 주세요.';}
+  }
+  $('#unlock').addEventListener('click',unlock);
+  $('#pw').addEventListener('keydown',function(e){if(e.key==='Enter')unlock();});
+})();
+</script>
+</body>
+</html>
