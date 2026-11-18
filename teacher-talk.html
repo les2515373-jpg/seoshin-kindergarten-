@@ -118,6 +118,8 @@ body.heart .bar{background:linear-gradient(to top,var(--heartbg) 62%,rgba(255,24
 .btn.copy{width:100%;background:#fff;border:2.5px solid var(--blue);color:var(--blue);margin-top:10px}
 .done{display:none;margin-top:14px;font-size:15px;padding:12px 14px;background:var(--tint)}
 .done.bad{background:#ffecea}
+.done b{display:block;font-size:16.5px;margin-bottom:4px}
+.done .open{display:flex;align-items:center;justify-content:center;margin-top:12px;text-decoration:none;background:#fee500;color:#3a1d1d}
 .how{font-size:14.5px;color:var(--ink-soft);padding-left:20px;margin:18px 0 0}
 .how li{margin-bottom:5px}
 .code{font-size:10.5px;line-height:1.4;color:var(--ink-faint);max-height:44px;overflow:hidden;word-break:break-all;margin:16px 0 0}
@@ -197,12 +199,12 @@ body.last .page{padding-bottom:20px}
       <p class="sign">한 해 동안 정말 고마웠어요. 원장 드림.</p>
     </div>
     <div class="send">
-      <button class="btn kakao" id="share" type="button">원장님께 보내기</button>
+      <button class="btn kakao" id="share" type="button">원장님께 카톡으로 보내기</button>
       <button class="btn copy" id="copy" type="button">글 복사하기</button>
       <div class="done" id="done"></div>
       <ol class="how">
-        <li>보내기를 누르고 카카오톡에서 원장님을 골라 주세요.</li>
-        <li>버튼이 안 눌리면 글 복사하기를 누르고, 원장님 카톡 방에 붙여 넣어 주세요.</li>
+        <li>보내기를 누르면 글이 복사돼요.</li>
+        <li>카카오톡에서 원장님과의 채팅방에 붙여 넣어 보내 주세요.</li>
         <li>글자가 암호처럼 보여도 괜찮아요. 원장님 컴퓨터에서는 제대로 보여요.</li>
       </ol>
       <div class="code" id="code" aria-hidden="true"></div>
@@ -334,16 +336,25 @@ body.last .page{padding-bottom:20px}
     try{await navigator.clipboard.writeText(message);}
     catch(e){var ta=document.createElement('textarea');ta.value=message;document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove();}
   }
-  var COPIED='글을 복사했어요. 카카오톡에서 원장님 방을 열고 붙여 넣어 보내 주세요.';
+  var UA=navigator.userAgent, PHONE=/Android|iPhone|iPad|iPod/i.test(UA), INKAKAO=/KAKAOTALK/i.test(UA);
+  function steps(){
+    var h;
+    if(INKAKAO) h='<b>글을 복사했어요.</b><span class="s">1. 왼쪽 위 X(또는 뒤로)를 눌러 카카오톡으로 돌아가요.</span><span class="s">2. 원장님과의 채팅방을 열어요.</span><span class="s">3. 글 쓰는 칸을 길게 눌러 붙여넣기 하고 보내면 끝이에요.</span>';
+    else if(PHONE) h='<b>글을 복사했어요.</b><span class="s">1. 아래 버튼으로 카카오톡을 열어요.</span><span class="s">2. 원장님과의 채팅방에서 글 쓰는 칸을 길게 눌러 붙여넣기 하고 보내면 끝이에요.</span><a class="btn kakao open" href="kakaotalk://launch">카카오톡 열기</a>';
+    else h='<b>글을 복사했어요.</b><span class="s">1. 컴퓨터의 카카오톡에서 원장님과의 채팅방을 열어요.</span><span class="s">2. Ctrl 과 V 를 함께 눌러 붙여 넣고 보내면 끝이에요.</span>';
+    var d=$('#done');d.innerHTML=h;d.style.display='block';d.classList.remove('bad');d.scrollIntoView({block:'center'});
+  }
   $('#share').addEventListener('click',async function(){
     if(!message)return;
-    if(navigator.share){
-      try{await navigator.share({text:message});done('보내셨다면 끝이에요. 원장님이 글을 받으면 면담 날짜를 알려 드릴게요.');return;}
-      catch(e){if(e&&e.name==='AbortError')return;}
+    // 붙여넣기도 할 수 있게 먼저 복사해 둔다(기다리지 않는다: 공유 창은 누른 직후에만 열린다)
+    var copied=copy();
+    if(PHONE&&!INKAKAO&&navigator.share){
+      try{await navigator.share({text:message});done('카카오톡에서 원장님을 골라 보내셨다면 끝이에요. 고맙습니다.');return;}
+      catch(e){if(e&&e.name==='AbortError'){await copied;steps();return;}}
     }
-    await copy();done(COPIED);
+    await copied;steps();
   });
-  $('#copy').addEventListener('click',async function(){if(!message)return;await copy();done(COPIED);});
+  $('#copy').addEventListener('click',async function(){if(!message)return;await copy();steps();});
 
   show();
 })();
