@@ -48,6 +48,9 @@ h2{font-family:Jua,sans-serif;font-weight:400;font-size:22px;margin:26px 0 8px;d
 .heart .qa{border-bottom-color:#f1e2a8}
 .heart .qa dt{color:var(--ink);font-weight:600;font-size:15px}
 .note{font-size:13.5px;color:var(--ink-soft);margin:0 0 4px}
+.alarm{margin-top:26px;background:var(--tint);border-radius:16px;padding:16px 18px}
+.alarm b{font-size:17px}
+.alarm p{margin:4px 0 0;font-size:14.5px;color:var(--ink-soft)}
 .foot{margin-top:30px;font-size:13px;color:var(--ink-faint)}
 [hidden]{display:none!important}
 </style>
@@ -69,6 +72,7 @@ h2{font-family:Jua,sans-serif;font-weight:400;font-size:22px;margin:26px 0 8px;d
     <div class="tally" id="tally2"></div>
     <ul class="people" id="people"></ul>
     <button class="btn line" id="refresh" type="button">새로 고침</button>
+    <div class="alarm"><b>새 글 알림</b><p id="nMsg">선생님이 글을 보내면 이 휴대폰에 알림이 오게 할 수 있어요.</p><button class="btn" id="notify" type="button">알림 받기</button><button class="btn line" id="ntest" type="button" hidden>알림 시험해 보기</button></div>
     <p class="foot">면담 일시와 나눈 이야기는 원장님 컴퓨터 화면에서 적습니다.</p>
   </section>
 
@@ -81,7 +85,7 @@ h2{font-family:Jua,sans-serif;font-weight:400;font-size:22px;margin:26px 0 8px;d
 <script>
 (function(){
   var T=window.TALK, $=function(q){return document.querySelector(q)};
-  var keys=null, priv=null, people=[];
+  var keys=null, priv=null, people=[], pushKey=null;
   function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]});}
   function hex(u){return [].map.call(u,function(x){return ('0'+x.toString(16)).slice(-2)}).join('');}
   function unhex(h){var u=new Uint8Array(h.length/2);for(var i=0;i<u.length;i++)u[i]=parseInt(h.substr(i*2,2),16);return u;}
@@ -107,6 +111,7 @@ h2{font-family:Jua,sans-serif;font-weight:400;font-size:22px;margin:26px 0 8px;d
   }
   async function load(){
     var r=await api({action:'list',key:keys.list,withKey:!priv});
+    if(r.pushKey)pushKey=r.pushKey;
     if(!priv){
       var aes=await crypto.subtle.importKey('raw',keys.wrap,'AES-GCM',false,['decrypt']);
       var der=await crypto.subtle.decrypt({name:'AES-GCM',iv:unhex(r.iv)},aes,b64d(r.wrapped));
@@ -131,7 +136,7 @@ h2{font-family:Jua,sans-serif;font-weight:400;font-size:22px;margin:26px 0 8px;d
     $('#people').innerHTML=people.length?people.map(function(a,i){var s=stayShort(a.stay);
       return '<li><button data-i="'+i+'"><span><span class="nm">'+esc(a.name)+'</span><br><small>'+esc(a.cls||'')+(a.d1?' → 희망 '+esc(a.d1):'')+'</small></span><span class="st" style="color:'+stayColor[s]+'">'+s+'</span></button></li>'}).join('')
       :'<li style="padding:18px 2px;color:var(--ink-soft)">아직 받은 글이 없습니다.</li>';
-    $('#lock').hidden=true;$('#oneView').hidden=true;$('#listView').hidden=false;
+    $('#lock').hidden=true;$('#oneView').hidden=true;$('#listView').hidden=false;pushShow();
   }
   function row(label,picks,text){
     picks=[].concat(picks||[]).filter(Boolean);var has=text&&String(text).trim();
@@ -148,6 +153,38 @@ h2{font-family:Jua,sans-serif;font-weight:400;font-size:22px;margin:26px 0 8px;d
   $('#people').addEventListener('click',function(e){var b=e.target.closest('button');if(b)renderOne(people[+b.dataset.i]);});
   $('#back').addEventListener('click',function(){$('#oneView').hidden=true;$('#listView').hidden=false;});
   $('#refresh').addEventListener('click',function(){var b=this;b.textContent='가져오는 중';load().catch(function(){}).then(function(){b.textContent='새로 고침';});});
+  var canPush=('serviceWorker' in navigator)&&('PushManager' in window)&&('Notification' in window);
+  async function pushShow(){
+    var m=$('#nMsg'),b=$('#notify'),tb=$('#ntest');
+    if(!canPush){m.textContent='이 화면에서는 알림을 쓸 수 없어요. 카카오톡 안이 아니라 크롬이나 삼성 인터넷에서 이 주소를 열어 주세요.';b.hidden=true;return;}
+    var reg=await navigator.serviceWorker.getRegistration('/teacher-talk-sw.js').catch(function(){return null});
+    var sub=reg?await reg.pushManager.getSubscription().catch(function(){return null}):null;
+    if(sub&&Notification.permission==='granted'){m.textContent='알림이 켜져 있어요. 선생님이 글을 보내면 이 휴대폰에 알림이 와요.';b.textContent='알림 끄기';b.dataset.on='1';tb.hidden=false;}
+    else{m.textContent='선생님이 글을 보내면 이 휴대폰에 알림이 오게 할 수 있어요.';b.textContent='알림 받기';b.dataset.on='';tb.hidden=true;}
+  }
+  $('#notify').addEventListener('click',async function(){
+    var m=$('#nMsg');
+    try{
+      if(this.dataset.on==='1'){
+        var rg=await navigator.serviceWorker.getRegistration('/teacher-talk-sw.js');var sb=rg&&await rg.pushManager.getSubscription();
+        if(sb){await api({action:'unsubscribe',key:keys.list,sub:{endpoint:sb.endpoint}}).catch(function(){});await sb.unsubscribe();}
+        await pushShow();return;
+      }
+      if(!pushKey){m.textContent='원장님 컴퓨터에서 교사 면담 화면을 한 번 켠 뒤 다시 눌러 주세요.';return;}
+      var perm=await Notification.requestPermission();
+      if(perm!=='granted'){m.textContent='알림이 막혀 있어요. 휴대폰 설정에서 이 사이트의 알림을 허용한 뒤 다시 눌러 주세요.';return;}
+      var reg=await navigator.serviceWorker.register('/teacher-talk-sw.js');await navigator.serviceWorker.ready;
+      var sub=await reg.pushManager.getSubscription();
+      if(!sub)sub=await reg.pushManager.subscribe({userVisibleOnly:true,applicationServerKey:b64ud(pushKey)});
+      await api({action:'subscribe',key:keys.list,sub:{endpoint:sub.endpoint}});
+      await pushShow();
+    }catch(e){m.textContent='알림을 켜지 못했어요. 크롬이나 삼성 인터넷에서 다시 해 보세요.';}
+  });
+  $('#ntest').addEventListener('click',async function(){
+    var m=$('#nMsg');
+    try{var r=await api({action:'test',key:keys.list});m.textContent=r.sent?'시험 알림을 보냈어요. 잠시 뒤 알림이 뜨는지 봐 주세요.':'알림을 보내지 못했어요. 알림을 껐다가 다시 켜 보세요.';}
+    catch(e){m.textContent='알림을 보내지 못했어요.';}
+  });
   async function unlock(){
     var m=$('#lockMsg'),pass=$('#pw').value;if(!pass)return;
     m.className='msg';m.textContent='여는 중입니다.';
