@@ -1,7 +1,7 @@
 // 서신놀이 아카이브 데이터. 한 줄 = 날짜(YYMMDD)|게시물코드|종류(P놀이 L가정통신문 N소식)|제목|주제|재료
 // 7번째 칸 c = images/play/코드.jpg 표지(가로 160px)가 있음. 새 게시물은 맨 아래에 같은 형식으로 추가하고 updated 날짜를 바꾸면 됩니다.
 window.SEOSHIN_ARCHIVE = {
-updated: "2026-11-17",
+updated: "2026-11-24",
 posts: `
 211119|CWcWDEWBUhH|P|우리의 권리를 생각하는 놀이|me,friends||c
 211119|CWcX8H6Bpla|N|서신의 하루|||c
@@ -1202,5 +1202,11 @@ posts: `
 261115|DfwOeMWIR5f|P|흙 점토와 가을 자연물 놀이|autumn,science,arts|clay,nature|c
 261116|DfyfqphIfNs|P|맨발로 꾹꾹 흙 놀이터|autumn,senses,body|clay|c
 261117|Df1PpGUodX6|P|자음판에 한글 모으기|lang,friends|paper|c
+261118|Df33iQoBtw4|N|교사면담 안내 영상|||c
+261119|Df6Z3ZLh1IN|N|홈페이지 가정통신문 보관함 소개|||c
+261120|Df8-7S7BE1E|N|서신어린이집 홈페이지 소개|||c
+261121|Df_g8hABUpK|P|책상 뒤집어 빙글빙글 돌기|body,science,friends|blocks|c
+261123|DgEE-jSsY7_|P|나무 틀로 만드는 요리조리 상상놀이터|build,story,body|thread,magnet|c
+261124|DgG8GQ6Ogd8|P|투명 관과 손 선풍기로 하는 바람 놀이|science,friends|ball|c
 `
 };
